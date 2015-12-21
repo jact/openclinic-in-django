@@ -1,0 +1,38 @@
+{% extends 'base_medical.html' %}
+{% load i18n static %}
+
+{% block title %}{{ patient }} ({% trans 'Clinic history' %}){% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
+    <script>$.endlessPaginate();</script>
+{% endblock extrahead %}
+
+{% block content %}
+    <h1>{% trans 'Clinic history' %}</h1>
+
+    <div class="row">
+        {% include 'includes/patient_info.html' %}
+    </div>
+
+    <div class="controls">
+        <a class="btn btn-primary btn-lg" href="{% url 'patient_history_antecedents' patient.id %}"><span class="fa fa-history"></span> {% trans 'Antecedents' %}</a>
+    </div>
+
+    <h2 id="results">{% trans 'Closed medical problems' %}</h2>
+
+    {% if object_list %}
+        <p class="alert alert-info">
+            {% blocktrans count object_list|length as counter %}
+            There is only one element.
+            {% plural %}
+            There are {{ counter }} elements.
+            {% endblocktrans %}
+        </p>
+
+        {% include 'includes/problem_list.html' %}
+    {% else %}
+        <p class="alert alert-warning">{% trans 'No closed medical problems defined for this patient.' %}</p>
+    {% endif %}
+{% endblock %}

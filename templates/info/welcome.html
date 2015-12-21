@@ -1,0 +1,58 @@
+{% extends 'info/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans 'Welcome' %}{% endblock title %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1>{% trans 'Welcome to OpenClinic' %}</h1>
+
+        <p>{% trans 'OpenClinic is an easy to use, open source, medical records system.' %}</p>
+
+        <p>{% trans 'When you select any of the following sections you will be prompted to login.' %}</p>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2>
+                        <a href="{% url 'medical_records' %}">{% trans 'Medical Records' %}</a>
+                    </h2>
+                </div>
+
+                <div class="panel-body">
+                    <p>{% blocktrans %}Use this section to manage your patient's medical records.{% endblocktrans %}</p>
+
+                    <p>{% blocktrans %}Patient's Administration:{% endblocktrans %}</p>
+
+                    <ul>
+                        <li>{% trans 'Search, new, delete, edit' %}</li>
+                        <li>{% trans 'Medical tests' %}</li>
+                        <li>{% trans 'Clinic History' %}</li>
+                        <li>{% trans 'Problem Reports' %}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2>
+                        <a href="{% url 'admin:index' %}">{% trans 'Admin' %}</a>
+                    </h2>
+                </div>
+
+                <div class="panel-body">
+                    <p>{% trans 'Use this section to manage administrative settings.' %}</p>
+
+                    <ul>
+                        <li>{% trans 'Staff members' %}</li>
+                        <li>{% trans 'System users' %}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

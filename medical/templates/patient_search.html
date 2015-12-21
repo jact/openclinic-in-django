@@ -1,0 +1,9 @@
+{% extends 'advanced_search.html' %}
+
+{% block content %}
+    {{ block.super }}
+
+    {% if object_list %}
+        {% include 'includes/patient_list.html' %}
+    {% endif %}
+{% endblock %}

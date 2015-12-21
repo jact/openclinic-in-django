@@ -1,0 +1,13 @@
+{% load i18n %}
+{% load el_pagination_tags %}
+
+{% paginate object_list %}
+{% get_pages %}
+
+{% for problem in object_list %}
+    {% include 'includes/problem_info.html' %}
+{% empty %}
+    <p class="alert alert-warning">{%trans 'No medical problems found.' %}</p>
+{% endfor %}
+
+{% show_more %}

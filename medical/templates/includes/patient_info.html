@@ -1,0 +1,31 @@
+{% load i18n %}
+
+{% if patient %}
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    {% if forloop %}
+                    <div class="col-xs-2 text-right">
+                        {{ forloop.counter0|add:pages.current_start_index }}.
+                    </div>
+                    {% endif %}
+                    <div class="col-xs-10">
+                        <a href="{% url 'patient_detail' patient.id patient|slugify %}">{{ patient }}</a>
+                        {% if patient.gender %}
+                            <br />
+                            {% trans 'gender'|capfirst %}: {{ patient.gender_description }}
+                        {% endif %}
+                        {% if patient.age %}
+                            <br />
+                            {% trans 'Age' %}: {{ patient.age }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer text-center">
+                {% include 'includes/patient_actions.html' %}
+            </div>
+        </div>
+    </div>
+{% endif %}

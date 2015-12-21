@@ -1,0 +1,142 @@
+{% extends 'info/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans 'Readme' %}{% endblock title %}
+
+{% block content %}
+    <h1>{% trans 'Readme' %}</h1>
+
+    <p>{% trans 'Welcome to OpenClinic!' %}</p>
+
+    <p>{% trans 'First of all, thanks a lot to download this software, I hope that you can enjoy it.' %}</p>
+
+    <p>{% blocktrans %}OpenClinic is free software, released under GNU GPL Licence version 3.0 (see <a href="/info/license">LICENSE</a> file for details).{% endblocktrans %}</p>
+
+    <h2 id="intro"><a href="#top" title="To top of the page">{% trans 'Introduction' %}</a></h2>
+
+    <p>{% blocktrans %}OpenClinic is an easy to use, open source, medical records system written in Django.{% endblocktrans %} {% blocktrans %}It has been mainly thougth for private clinics, surgeries and private doctors.{% endblocktrans %} {% blocktrans %}It is platform independent and it has multilanguage architecture.{% endblocktrans %}</p>
+
+    <p>{% trans 'Currently OpenClinic has the following sections:' %}</p>
+
+    <ul>
+        <li>{% trans 'Medical Records' %}
+          <p>{% blocktrans %}Use this section to manage your patient's medical records.{% endblocktrans %}</p>
+
+          <p>{% blocktrans %}Patient's Administration:{% endblocktrans %}</p>
+
+          <ul>
+            <li>{% trans 'Search, new, delete, edit' %}</li>
+
+            <li>{% trans 'Social Data' %}</li>
+
+            <li>{% trans 'Clinic History' %}</li>
+
+            <li>{% trans 'Problem Reports' %}</li>
+          </ul>
+        </li>
+
+        <li>{% trans 'Admin' %}
+          <p>{% trans 'Use this section to manage administrative settings.' %}</p>
+
+          <ul>
+            <li>{% trans 'Staff members' %}</li>
+
+            <li>{% trans 'System Users' %}</li>
+          </ul>
+        </li>
+    </ul>
+
+    <h2 id="require"><a href="#top" title="To top of the page">{% trans 'Requirements' %}</a></h2>
+
+    <ul>
+        <li>
+          Django 1.8
+        </li>
+
+        <li>
+          SQLite
+        </li>
+
+        <li>
+          {% trans 'a web server prepared to execute Django code' %},
+        </li>
+
+        <li>
+          {% trans 'and, of course, a web browser (with enabled JavaScript)' %}.
+        </li>
+    </ul>
+
+    <p>{% blocktrans %}For more details, see <a href="/info/install">Install instructions</a>.{% endblocktrans %}</p>
+
+    <h2 id="feature"><a href="#top" title="To top of the page">{% trans 'Features' %}</a></h2>
+
+    <ul>
+        <li>{% trans 'Environment: Web Environment' %}</li>
+
+        <li>{% trans 'Intended Audience: Education, Healthcare industry' %}</li>
+
+        <li>{% trans 'License' %}: <a href="/info/license">GNU General Public License (GPL)</a></li>
+
+        <li>{% trans 'Natural Language: English, Spanish' %}</li>
+
+        <li>{% trans 'Operating System: OS Independent' %}</li>
+
+        <li>{% trans 'Programming Language: Python' %}</li>
+
+        <li>{% trans 'Topic: Dynamic Content' %}</li>
+    </ul>
+
+    <h2 id="language"><a href="#top" title="To top of the page">{% trans 'Multilingual Support' %}</a></h2>
+
+    <p>{% trans 'OpenClinic offers multilingual support, so anyone who wants to contribute a language can create a new .po file (portable object) and enjoy his/her own language. Every language that it send to me will be included in the next release.' %}</p>
+
+    <h2 id="down"><a href="#top" title="To top of the page">{% trans 'Download' %}</a></h2>
+
+    <p>{% blocktrans %}You can get the newest version at <a href="https://github.com/jact/openclinic-in-django">GitHub</a>.{% endblocktrans %}</p>
+
+    <h2 id="devel"><a href="#top" title="To top of the page">{% trans 'Developers Information' %}</a></h2>
+
+    <p>[jact] - Jose Antonio Chavarría &lt;<a href="mailto:CUT-THIS.openclinic&#64;gmail.com">openclinic at gmail dot com</a>&gt;</p>
+
+    <ul>
+        <li>{% trans 'principal developer of OpenClinic project' %}</li>
+
+        <li>{% blocktrans %}person in charge of OpenClinic's maintenance service since autumn 2002{% endblocktrans %}</li>
+
+        <li>{% trans 'person in charge of the project' %} <cite><a href="http://sourceforge.net/project/showfiles.php?group_id=70742">Control y Seguimiento de Historias Clínicas: Diseño e implementación</a></cite></li>
+    </ul>
+
+    <p>[eco] - Emilio M. Cazcarra &lt;<a href="mailto:CUT-THIS.eco3d&#64;yahoo.es">eco3d at yahoo dot es</a>&gt;</p>
+
+    <ul>
+        <li>{% trans 'person in charge of the project' %} <cite><a href="http://sourceforge.net/project/showfiles.php?group_id=70742">Control y Seguimiento de Historias Clínicas: Diseño del sistema seguro</a></cite></li>
+    </ul>
+
+    <h2 id="bye"><a href="#top" title="To top of the page">{%trans 'Farewell' %}</a></h2>
+
+    <p>{% blocktrans %}Please, enjoy OpenClinic and remember that this is <a href="http://www.gnu.org/licenses/old-licenses/gpl-3.0.en.html">free GPL software</a>.{% endblocktrans %}</p>
+
+    <p>{% blocktrans %}OpenClinic isn't perfect, but your <a href="https://github.com/jact/openclinic-in-django/issues">suggestions, feedback and bug reports</a> can help us to have a very well done medical records system!{% endblocktrans %}</p>
+{% endblock content %}
+
+{% block internal_navigation %}
+    <aside id="internal">
+        <h2>{% trans 'Internal contents' %}</h2>
+
+        <ul>
+            <li><a href="#intro">{% trans 'Introduction' %}</a></li>
+
+            <li><a href="#require">{% trans 'Requirements' %}</a></li>
+
+            <li><a href="#feature">{% trans 'Features' %}</a></li>
+
+            <li><a href="#language">{% trans 'Multilingual Support' %}</a></li>
+
+            <li><a href="#down">{% trans 'Download' %}</a></li>
+
+            <li><a href="#devel">{% trans 'Developers Information' %}</a></li>
+
+            <li><a href="#bye">{% trans 'Farewell' %}</a></li>
+        </ul>
+    </aside>
+{% endblock internal_navigation %}

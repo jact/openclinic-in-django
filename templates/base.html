@@ -1,0 +1,123 @@
+{% spaceless %}
+<!doctype html>
+{% load i18n static setting activelink %}
+<html lang="{% setting LANGUAGE_CODE %}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+    <head>
+        <meta charset="utf-8" />
+
+        <title>{% block title %}{% endblock title %} | {% setting APP_NAME %} [{% setting CLINIC_NAME %}]</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <meta http-equiv="imagetoolbar" content="no" />
+
+        <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+
+        <meta name="author" content="{% setting APP_AUTHOR %}" />
+
+        <meta name="copyright" content="2002-{% now 'Y' %} {% setting APP_AUTHOR %}" />
+
+        <meta name="description" content="{% trans 'OpenClinic is an easy to use, open source, medical records system written in Django' %}" />
+
+        {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock blockbots %}
+
+        <link rel="shortcut icon" type="image/png" href="{% static 'img/miniopc.png' %}" />
+        <link rel="bookmark icon" type="image/png" href="{% static 'img/miniopc.png' %}" />
+
+        {% block style %}
+            {# bootstrap #}
+            <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+            <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}" />
+            <link rel="stylesheet" href="{% static 'bootstrap/css/font-awesome.min.css' %}" />
+            {# end bootstrap #}
+
+            <link rel="stylesheet" href="{% static 'css/openclinic.css?20151214' %}" title="OpenClinic" />
+            <link rel="stylesheet" href="{% static 'css/print.css?20151214' %}" media="print" />
+        {% endblock style %}
+
+        {% block extrastyle %}{% endblock extrastyle %}
+    </head>
+
+    <body id="top">
+        <header class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">{% trans 'Toggle navigation' %}</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a accesskey="1" class="navbar-brand" href="{% url 'bootstrap' %}" title="{% setting APP_NAME %}"><span class="sr-only">{% setting APP_NAME %}</span></a>
+                </div>
+
+                <div class="collapse navbar-collapse">
+                    {% block tabs %}
+                        <ul class="nav navbar-nav">
+                            <li{% ifstartswith 'info' %} class="active"{% endifstartswith %}><a href="{% url 'bootstrap' %}"><span class="fa fa-home"></span> {% trans 'Home' %}</a></li>
+                            <li{% ifcontains 'medical_records' %} class="active"{% endifcontains %}><a href="{% url 'medical_records' %}"><span class="fa fa-user-md"></span> {% trans 'Medical Records' %}</a></li>
+                            {% if user.is_active and user.is_staff %}
+                                <li><a href="{% url 'admin:index' %}"><span class="fa fa-gears"></span> {% trans 'Admin' %}</a></li>
+                            {% endif %}
+                        </ul>
+                    {% endblock tabs %}
+
+                    {% block toggle_login %}
+                        {% include 'includes/toggle_login.html' %}
+                    {% endblock toggle_login %}
+                </div>
+            </div>
+        </header>
+
+        <hr />
+
+        <article id="main" class="container row">
+            <section id="content" class="col-md-9">
+                {% block messages %}
+                    {% if messages %}
+                        <ul class="messages list-unstyled">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message|safe }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endblock messages %}
+
+                {% block content %}{% endblock content %}
+                <hr />
+            </section>
+
+            <nav class="col-md-3">
+                {% block navigation %}{% endblock navigation %}
+
+                <aside>
+                    <div id="clinic_info" class="vcard contact panel panel-info">
+                        <div class="fn org panel-heading">
+                            <a class="url" href="{% setting CLINIC_URL %}">{% setting CLINIC_NAME %}</a>
+                        </div>
+
+                        <div class="panel-body">
+                            <p>{% trans 'Clinic hours' %}: {% setting CLINIC_HOURS %}</p>
+
+                            <address class="adr">
+                                <p>{% trans 'Clinic address' %}: <span class="street-address">{% setting CLINIC_ADDRESS %}</span></p>
+                                <p>{% trans 'Clinic phone' %}: <span class="tel value">{% setting CLINIC_PHONE %}</span></p>
+                            </address>
+                        </div>
+                    </div>
+                </aside>
+
+                {% block internal_navigation %}{% endblock internal_navigation %}
+            </nav>
+        </article>
+
+        <hr />
+
+        {% include 'includes/footer.html' %}
+
+        <script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+        {% block extrahead %}{% endblock extrahead %}
+    </body>
+</html>
+{% endspaceless %}

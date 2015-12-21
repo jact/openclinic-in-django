@@ -1,0 +1,52 @@
+{% extends 'base_medical.html' %}
+{% load i18n static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/print.css?20151214' %}" media="screen, print" />
+{% endblock style %}
+
+{% block title %}{{ patient }} [{% now 'Y-m-d H:i:s' %}]{% endblock %}
+
+{% block content %}
+    <h1>{% trans 'Patient' %}</h1>
+
+    <p>{% trans 'first name'|capfirst %}: <strong>{{ patient.first_name }}</strong></p>
+
+    <p>{% trans 'last name'|capfirst %}: <strong>{{ patient.last_name }}</strong></p>
+
+    {% if patient.last_name_optional %}
+        <p>{% trans 'last name optional'|capfirst %}: <strong>{{ patient.last_name_optional }}</strong></p>
+    {% endif %}
+
+    {% include 'includes/patient_detail.html' %}
+
+    <h1>{% trans 'Medical problems' %}</h1>
+
+    {% for problem in problem_list %}
+        <hr />
+        {% include 'includes/problem_detail.html' %}
+    {% empty %}
+        <p class="alert alert-warning">{%trans 'No medical problems found.' %}</p>
+    {% endfor %}
+
+    <h1>{% trans 'Antecedents' %}</h1>
+
+    {% include 'includes/history_antecedents_detail.html' %}
+
+    <h1>{% trans 'Closed medical problems' %}</h1>
+
+    {% for problem in closed_problem_list %}
+        <hr />
+        {% include 'includes/problem_detail.html' %}
+    {% empty %}
+        <p class="alert alert-warning">{% trans 'No closed medical problems defined for this patient.' %}</p>
+    {% endfor %}
+{% endblock content %}
+
+{% block extrahead %}
+    <script type="text/javascript">
+        if (typeof(window.print) != 'undefined') {
+            window.print();
+        }
+    </script>
+{% endblock extrahead %}

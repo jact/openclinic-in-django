@@ -1,0 +1,36 @@
+{% load i18n %}
+
+{% if user.is_authenticated %}
+    <div class="col-sm-1 col-md-1">
+        <form action="{% url 'patient_search' %}" method="get" class="navbar-form navbar-left" role="search">
+            <div class="input-group">
+                <label for="search-patient" class="sr-only">{% trans 'Patient' %}:</label>
+                <input type="text" id="search-patient" name="q" size="15" placeholder="{% trans 'Patient' %}" class="input-sm" title="{% trans 'Patient' %}" />
+
+                <div class="input-group-btn">
+                    <button class="btn btn-default btn-sm" type="submit" title="{% trans 'Search' %}">
+                        <span class="fa fa-search"></span>
+                        <span class="sr-only">{% trans 'Search' %}</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <ul class="nav navbar-nav navbar-right navbar-user">
+        <li class="dropdown">
+            <a class="dropdown-toggle" id="dropuser" data-toggle="dropdown" href="#"><i class="fa fa-user"></i> {{ user.username }} <b class="caret"></b></a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropuser">
+                <li><a href="{% url 'admin:password_change' %}"><i class="fa fa-gear"></i> {% trans 'Password change' %}</a></li>
+                <li><a href="{% url 'openclinic_logout' %}"><i class="fa fa-power-off"></i> {% trans 'Logout' %}</a></li>
+            </ul>
+        </li>
+    </ul>
+{% else %}
+    <form class="navbar-form pull-right form-inline" action="{% url 'openclinic_login' %}" method="post" accept-charset="utf-8">
+        {% csrf_token %}
+        <input class="form-control input-sm" type="text" placeholder="{% trans 'Username' %}" name="username" />
+        <input class="form-control input-sm" type="password" placeholder="{% trans 'Password' %}" name="password" />
+        <button type="submit" class="btn btn-sm btn-primary">{% trans 'Login' %}</button>
+    </form>
+{% endif %}

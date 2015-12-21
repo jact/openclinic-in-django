@@ -1,0 +1,34 @@
+{% extends 'info/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans 'Install Instructions' %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans 'Install Instructions' %}</h1>
+
+    <ol>
+        <li>
+          <p>{% blocktrans %}Download project from <a href="https://github.com/jact/openclinic-in-django/">GitHub</a> and decompress file.{% endblocktrans %}</p>
+        </li>
+
+        <li>
+          <p>{% blocktrans %}Execute these commands in a terminal from project directory:{% endblocktrans %}</p>
+
+<pre class="sqlcode"><code>
+$ <kbd>pip install -r requirements/production.txt</kbd>
+
+$ <kbd>python manage.py migrate</kbd>
+
+$ <kbd>python manage.py runserver</kbd>
+</code></pre>
+        </li>
+
+        <li>
+          <p>{% blocktrans %}Access your new <a href="/">clinic system</a>. Enter <code><kbd>admin</kbd></code> for both, the login and password whenever you are prompted to sign on.{% endblocktrans %}</p>
+        </li>
+
+        <li>
+            <p>{% blocktrans %}It's advisable to change the admin user's password.{% endblocktrans %}</p>
+        </li>
+    </ol>
+{% endblock content %}

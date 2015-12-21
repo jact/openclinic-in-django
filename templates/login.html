@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block title %}{% trans 'Login' %}{% endblock %}
+
+{% block toggle_login %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans 'Login' %}</h1>
+
+    <form action="{% url 'openclinic_login' %}" method="post" accept-charset="utf-8" role="form" class="form-md">
+        {% csrf_token %}
+        <fieldset class="panel panel-primary">
+            <div class="panel-body">
+                {{ form|crispy }}
+                <input type="hidden" name="next" value="{{ next }}" />
+                <p class="text-center">
+                    <input class="btn btn-primary btn-lg" type="submit" value="{% trans 'Login' %}" />
+                </p>
+            </div>
+        </fieldset>
+    </form>
+{% endblock content %}

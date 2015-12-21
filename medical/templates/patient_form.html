@@ -1,0 +1,32 @@
+{% extends 'base_medical.html' %}
+{% load i18n crispy_forms_tags admin_static %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'datepicker/css/datepicker.css' %}" />
+    <script src="{% static 'datepicker/js/bootstrap-datepicker.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.dateinput').datepicker({format: 'yyyy-mm-dd'});
+        });
+    </script>
+    {{ form.media }}
+{% endblock %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+
+    {% if form.errors %}
+        <p class="alert alert-danger">
+            {% blocktrans %}Please correct the error {{ form.errors|pluralize }} below.{% endblocktrans %}
+        </p>
+    {% endif %}
+
+    <p class="alert alert-info">{% trans 'Fields with * are required.' %}</p>
+
+    <form action="." method="post">
+        {% crispy form %}
+    </form>
+{% endblock content %}

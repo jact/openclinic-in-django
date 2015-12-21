@@ -1,0 +1,14 @@
+{% extends 'base_medical.html' %}
+{% load i18n static %}
+
+{% block title %}{{ patient }}{% endblock %}
+
+{% block content %}
+    <h1>{% trans 'Patient' %} {{ patient }}</h1>
+
+    <div class="row">
+        {% include 'includes/patient_actions.html' %}
+    </div>
+
+    {% include 'includes/patient_detail.html' %}
+{% endblock %}

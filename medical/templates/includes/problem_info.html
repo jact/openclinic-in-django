@@ -1,0 +1,36 @@
+{% load i18n %}
+
+{% if problem %}
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    {% if forloop %}
+                    <div class="col-xs-2 text-right">
+                        {{ forloop.counter0|add:pages.current_start_index }}.
+                    </div>
+                    {% endif %}
+                    <div class="col-xs-10">
+                        <a href="{% url 'problem_detail' problem.id %}">{{ problem.wording|truncatechars:20 }}</a>
+                        {% if not patient %}
+                            <br />
+                            {% trans 'Patient' %}: <a href="{% url 'patient_redirect_detail' problem.patient.id %}">{{ problem.patient }}</a>
+                        {% endif %}
+                        <br />
+                        {% trans 'order number'|capfirst %}: <strong class="badge">{{ problem.order_number }}</strong>
+                        <br />
+                        {% trans 'last update'|capfirst %}: {{ problem.modified|date:'Y-m-d H:i:s' }}
+                        <br />
+                        {% trans 'opening date'|capfirst %}: {{ problem.created|date:'Y-m-d H:i:s' }}
+                        {% if problem.closing_date %}
+                            <br /><span class="label label-danger">{% trans 'closing date'|capfirst %}: <strong>{{ problem.closing_date|date:'Y-m-d' }}</strong></span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer text-center">
+                {% include 'includes/problem_actions.html' %}
+            </div>
+        </div>
+    </div>
+{% endif %}

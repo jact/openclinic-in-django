@@ -1,0 +1,22 @@
+{% extends 'base_medical.html' %}
+{% load i18n crispy_forms_tags %}
+
+{% block title %}{{ patient }} ({% trans 'Medical tests' %}){% endblock %}
+
+{% block content %}
+    <h1>{% trans 'Patient' %}</h1>
+
+    <div class="row">
+        {% include 'includes/patient_info.html' %}
+    </div>
+
+    <h2>{% trans 'Medical tests' %}</h2>
+
+    <div class="row">
+        {% for test in object_list %}
+            {% include 'includes/test_info.html' %}
+        {% empty %}
+            <p class="alert alert-warning">{%trans 'No medical tests defined for this patient.' %}</p>
+        {% endfor %}
+    </div>
+{% endblock content %}

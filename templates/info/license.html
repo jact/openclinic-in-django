@@ -1,0 +1,12 @@
+{% extends 'info/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans 'License' %}{% endblock %}
+
+{% block content %}
+<h1>{% trans 'License' %}</h1>
+
+<pre>
+{% include 'info/LICENSE' %}
+</pre>
+{% endblock content %}

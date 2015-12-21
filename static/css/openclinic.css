@@ -1,0 +1,136 @@
+@font-face {
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Russo One'), local('RussoOne-Regular'), url('../fonts/Russo_One/RussoOne-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Ruda';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Ruda'), local('Ruda-Regular'), url('../fonts/Ruda/Ruda-Regular.ttf') format('truetype');
+}
+
+article p, article li {
+    font-family: 'Ruda', "lucida sans unicode", "Trebuchet MS", trebuchet, verdana, helvetica, arial, sans-serif;
+}
+
+header *, footer *, h1, h2, h3, h4 {
+    font-family: 'Russo One', "Trebuchet MS", serif;
+}
+
+pre {
+    font-family: "Lucida Sans Typewriter", "Courier New", monospace;
+}
+
+.navbar-brand {
+    background-image: url('../img/openclinic-1.png');
+    width: 291px;
+    height: 58px;
+}
+
+#clinic_info {
+    clear: both;
+}
+
+footer * {
+    text-align: center;
+}
+
+article {
+    margin-top: 1em;
+}
+
+footer {
+    background: #377CA8;
+    color: #fff;
+    padding-top: 2em;
+}
+
+footer a {
+    background: inherit;
+    color: #F7EED4;
+}
+
+footer a:hover {
+    color: #dadada;
+}
+
+html, body {
+    background: #F0F5FA;
+    color: #000;
+    font-size: 12pt;
+}
+
+#skip_navigation, hr {
+    display: none;
+    visibility: hidden;
+}
+
+.jumbotron {
+    background-color: transparent !important;
+}
+
+header .navbar-nav .active a {
+    background: #3C84C1 !important;
+}
+
+article nav .list-group-item a {
+    display: block;
+}
+
+article nav .list-group li.active a {
+    color: #fff;
+}
+
+article section form {
+    margin-bottom: 2em;
+}
+
+.form-md {
+    width: 400px;
+}
+
+.endless_container {
+    margin: 1em 0 2em;
+}
+
+.patient-actions {
+    list-style-type: none;
+    font-size: 140%;
+    margin: 0;
+    padding: 0;
+}
+
+.patient-actions li {
+    display: inline;
+    padding: 0 12px;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 220px;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 220px;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+    padding: 60px 15px 0;
+}

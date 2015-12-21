@@ -1,0 +1,16 @@
+{% extends 'base_medical.html' %}
+{% load i18n %}
+
+{% block title %}{{ patient }} ({% trans 'Antecedents' %}){% endblock %}
+
+{% block content %}
+    <h1>{% trans 'Patient' %}</h1>
+
+    <div class="row">
+        {% include 'includes/patient_info.html' %}
+    </div>
+
+    <h1>{% trans 'Antecedents' %} <a href="{% url 'patient_history_antecedents_change' patient.id %}" title="{% trans 'Update' %}"><span class="fa fa-edit"></span></a></h1>
+
+    {% include 'includes/history_antecedents_detail.html' %}
+{% endblock %}

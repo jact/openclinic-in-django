@@ -1,0 +1,20 @@
+[
+    {
+        "model": "medical.staff",
+        "pk": 1,
+        "fields": {
+            "first_name": "admin",
+            "last_name": "admin",
+            "username": "admin",
+            "is_staff": "True",
+            "is_superuser": "True",
+            "password": "pbkdf2_sha256$10000$CiEZb3EwbQPB$NizcakX0KIMiLdkWtaPMN88npp2CRM/PZGg2dOlY9Cw=",
+            "collegiate_number": "12345",
+            "tin": "12345",
+            "last_name_optional": "admin",
+            "address": "asdfasdf",
+            "phone_contact": "969696969",
+            "staff_type": "D"
+        }
+    }
+]

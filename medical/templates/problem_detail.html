@@ -1,0 +1,20 @@
+{% extends 'base_medical.html' %}
+{% load i18n %}
+
+{% block title %}{{ patient }} [{{ problem.wording|truncatechars:20 }}]{% endblock %}
+
+{% block content %}
+    <h1>{% trans 'Patient' %}</h1>
+
+    <div class="row">
+        {% include 'includes/patient_info.html' %}
+    </div>
+
+    <h1>{% trans 'Medical problem' %}: {{ problem.wording|truncatechars:20 }}</h1>
+
+    <div class="row">
+        {% include 'includes/problem_actions.html' %}
+    </div>
+
+    {% include 'includes/problem_detail.html' %}
+{% endblock %}

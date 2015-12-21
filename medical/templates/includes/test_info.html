@@ -1,0 +1,30 @@
+{% load i18n %}
+
+{% if test %}
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    {% if forloop %}
+                    <div class="col-xs-2 text-right">
+                        {{ forloop.counter }}.
+                    </div>
+                    {% endif %}
+                    <div class="col-xs-10">
+                        {% trans 'created'|capfirst %}: {{ test.created|date:'Y-m-d H:i:s' }}
+                        <br />{% trans 'document'|capfirst %}: <strong>{{ test.filename }}</strong>
+                        {% if test.document_type %}
+                            <br />{% trans 'MIME type' %}: <strong>{{ test.document_type }}</strong>
+                        {% endif %}
+                        {% if not problem %}
+                            <br />{% trans 'Medical problem' %}: <a href="{% url 'problem_detail' test.problem.id %}">{{ test.problem.wording|truncatechars:20 }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer text-center">
+                {% include 'includes/test_actions.html' %}
+            </div>
+        </div>
+    </div>
+{% endif %}

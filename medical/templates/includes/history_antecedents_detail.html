@@ -1,0 +1,77 @@
+{% load i18n %}
+
+{% if history %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">{% trans 'Personal antecedents' %}</h2>
+        </div>
+        <div class="panel-body">
+            {% if history.medical_intolerance %}
+                <p>{% trans 'medical intolerance'|capfirst %}: <strong>{{ history.medical_intolerance }}</strong></p>
+            {% endif %}
+
+            {% if history.birth_growth %}
+                <p>{% trans 'birth and growth'|capfirst %}: <strong>{{ history.birth_growth }}</strong></p>
+            {% endif %}
+
+            {% if history.growth_sexuality %}
+                <p>{% trans 'growth and sexuality'|capfirst %}: <strong>{{ history.growth_sexuality }}</strong></p>
+            {% endif %}
+
+            {% if history.feed %}
+                <p>{% trans 'feed'|capfirst %}: <strong>{{ history.feed }}</strong></p>
+            {% endif %}
+
+            {% if history.habits %}
+                <p>{% trans 'habits'|capfirst %}: <strong>{{ history.habits }}</strong></p>
+            {% endif %}
+
+            {% if history.peristaltic_conditions %}
+                <p>{% trans 'peristaltic conditions'|capfirst %}: <strong>{{ history.peristaltic_conditions }}</strong></p>
+            {% endif %}
+
+            {% if history.psychological_conditions %}
+                <p>{% trans 'psychological conditions'|capfirst %}: <strong>{{ history.psychological_conditions }}</strong></p>
+            {% endif %}
+
+            {% if history.children_complaint %}
+                <p>{% trans 'children complaint'|capfirst %}: <strong>{{ history.children_complaint }}</strong></p>
+            {% endif %}
+
+            {% if history.veneral_disease %}
+                <p>{% trans 'veneral disease'|capfirst %}: <strong>{{ history.veneral_disease }}</strong></p>
+            {% endif %}
+
+            {% if history.accident_surgical_operation %}
+                <p>{% trans 'accidents and surgical operations'|capfirst %}: <strong>{{ history.accident_surgical_operation }}</strong></p>
+            {% endif %}
+
+            {% if history.mental_illness %}
+                <p>{% trans 'mental illness'|capfirst %}: <strong>{{ history.mental_illness }}</strong></p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">{% trans 'Family antecedents' %}</h2>
+        </div>
+        <div class="panel-body">
+            {% if history.parents_status_health %}
+                <p>{% trans 'parents status health'|capfirst %}: <strong>{{ history.parents_status_health }}</strong></p>
+            {% endif %}
+
+            {% if history.brothers_status_health %}
+                <p>{% trans 'brothers status health'|capfirst %}: <strong>{{ history.brothers_status_health }}</strong></p>
+            {% endif %}
+
+            {% if history.spouse_childs_status_health %}
+                <p>{% trans 'spouse and childs status health'|capfirst %}: <strong>{{ history.spouse_childs_status_health }}</strong></p>
+            {% endif %}
+
+            {% if history.family_illness %}
+                <p>{% trans 'family illness'|capfirst %}: <strong>{{ history.family_illness }}</strong></p>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

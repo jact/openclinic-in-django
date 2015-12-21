@@ -1,0 +1,36 @@
+body {
+    background: #fff;
+    color: #000;
+    font-family: "Trebuchet MS", trebuchet, verdana, helvetica, arial, sans-serif !important;
+    font-size: 10pt !important;
+    line-height: 160%;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border-bottom: 1px solid #000;
+}
+
+img {
+    border: none;
+}
+
+h1 {
+    font-size: 180%;
+}
+
+acronym:after {
+    content: " (" attr(title) ")";
+}
+
+a[href^="http"]:after, a[href^="mailto"]:after {
+    content: " (link: " attr(href) ")";
+}
+
+#skip_navigation, nav *, aside *, #logos, #hosting_links, header, footer, body > hr {
+    display: none;
+    visibility: hidden;
+}

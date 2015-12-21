@@ -1,0 +1,10 @@
+{% load i18n %}
+
+<ul role="menu" class="patient-actions">
+    <li>
+        <a href="{{ test.document.url }}" title="{% trans 'View' %}"><span class="fa fa-eye"></span> <span class="sr-only">{% trans 'View' %}</span></a>
+    </li>
+    <li>
+        <a href="{% url 'problem_test_delete' test.id %}" title="{% trans 'Delete test' %}" class="btn btn-danger"><span class="fa fa-trash-o"></span> <span class="sr-only">{% trans 'Delete test' %}</span></a>
+    </li>
+</ul>

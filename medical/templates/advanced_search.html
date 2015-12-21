@@ -1,0 +1,54 @@
+{% extends 'base_medical.html' %}
+{% load i18n static crispy_forms_tags %}
+
+{% block title %}{% trans 'Advanced Search' %}{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
+    <script>$.endlessPaginate();</script>
+{% endblock extrahead %}
+
+{% block content %}
+    <h1>{% trans 'Advanced Search' %}</h1>
+
+    <div class="row">
+        <form action="{% url 'patient_list' %}#results" method="get" class="col-md-6">
+            <fieldset class="panel panel-primary">
+                <legend class="panel-heading">{% trans 'Search Patient' %}</legend>
+
+                <div class="panel-body">
+                    {{ search_form|crispy }}
+                    <p class="text-center">
+                        <input type="submit" value="{% trans 'Search' %}" class="btn btn-primary btn-lg" />
+                    </p>
+                </div>
+            </fieldset>
+        </form>
+
+        <form action="{% url 'problem_search' %}#results" method="get" class="col-md-6">
+            <fieldset class="panel panel-primary">
+                <legend class="panel-heading">{% trans 'Search Patient by Medical Problem' %}</legend>
+
+                <div class="panel-body">
+                    {{ search_form_problem|crispy }}
+                    <p class="text-center">
+                        <input type="submit" value="{% trans 'Search' %}" class="btn btn-primary btn-lg" />
+                    </p>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    {% if object_list %}
+        <h2 id="results">{% trans 'Results' %}</h2>
+
+        <p class="alert alert-info">
+            {% blocktrans count object_list|length as counter %}
+            There is only one element.
+            {% plural %}
+            There are {{ counter }} elements.
+            {% endblocktrans %}
+        </p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,51 @@
+{% load i18n %}
+
+{% if problem %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <p>{% trans 'order number'|capfirst %}: <strong class="badge">{{ problem.order_number }}</strong></p>
+
+            <p>{% trans 'opening date'|capfirst %}: <strong>{{ problem.created|date:'Y-m-d H:i:s' }}</strong></p>
+
+            <p>{% trans 'last update'|capfirst %}: <strong>{{ problem.modified|date:'Y-m-d H:i:s' }}</strong></p>
+
+            {% if problem.closing_date %}
+                <p class="label label-danger">{% trans 'closing date'|capfirst %}: <strong>{{ problem.closing_date|date:'Y-m-d' }}</strong></p>
+            {% endif %}
+
+            {% if problem.meeting_place %}
+                <p>{% trans 'meeting place'|capfirst %}: <strong>{{ problem.meeting_place }}</strong></p>
+            {% endif %}
+
+            {% if problem.doctor %}
+                <p>{% trans 'attending physician'|capfirst %}: <strong>{{ problem.doctor }}</strong></p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <p>{% trans 'wording'|capfirst %}: <strong>{{ problem.wording }}</strong></p>
+
+            {% if problem.subjetive %}
+                <p>{% trans 'subjetive'|capfirst %}: <strong>{{ problem.subjetive }}</strong></p>
+            {% endif %}
+
+            {% if problem.objetive %}
+                <p>{% trans 'objetive'|capfirst %}: <strong>{{ problem.objetive }}</strong></p>
+            {% endif %}
+
+            {% if problem.appreciation %}
+                <p>{% trans 'appreciation'|capfirst %}: <strong>{{ problem.appreciation }}</strong></p>
+            {% endif %}
+
+            {% if problem.action_plan %}
+                <p>{% trans 'action plan'|capfirst %}: <strong>{{ problem.action_plan }}</strong></p>
+            {% endif %}
+
+            {% if problem.prescription %}
+                <p>{% blocktrans %}Doctor's orders{% endblocktrans %}: <strong>{{ problem.prescription }}</strong></p>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,20 @@
+{% load i18n static setting %}
+
+<footer>
+    <section id="app_info" class="col-md-12">
+        <p><a href="https://github.com/jact/openclinic-in-django/">Powered by {% setting APP_NAME %}</a> ({% setting APP_VERSION %})</p>
+
+        <p>Copyright &copy; 2002-{% now 'Y' %} <a accesskey="9" href="mailto:CUT-THIS.openclinic&#64;gmail.com">{% setting APP_AUTHOR %}</a></p>
+
+        <p>Under the <a rel="license" href="{% url 'license' %}">GNU General Public License</a></p>
+
+        <p>
+            <a href="https://github.com/jact/openclinic-in-django/releases">{% trans 'Downloads' %}</a> |
+            <a href="https://github.com/jact/openclinic-in-django/issues">{% trans 'Report Issues' %}</a>
+        </p>
+
+        <p id="logos">
+            <a href="http://www.coresis.com/"><img width="65" height="30" src="{% static 'img/thank.png' %}" alt="{% trans 'OpenClinic Logo thanks to Coresis' %}" title="{% trans 'OpenClinic Logo thanks to Coresis' %}" /><img width="65" height="30" src="{% static 'img/coresis.png' %}" alt="{% trans 'OpenClinic Logo thanks to Coresis' %}" title="{% trans 'OpenClinic Logo thanks to Coresis' %}" /></a>
+        </p>
+    </section>
+</footer>

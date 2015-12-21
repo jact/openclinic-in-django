@@ -1,0 +1,88 @@
+{% load i18n static %}
+
+{% if patient.doctor_assigned or patient.race or patient.gender or patient.age or patient.birth_place %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">{% trans 'Basic data' %}</h2>
+        </div>
+        <div class="panel-body">
+        {% if patient.doctor_assigned %}
+            <p>{% trans 'doctor allocated by quota'|capfirst %}: <strong>{{ patient.doctor_assigned }}</strong></p>
+        {% endif %}
+
+        {% if patient.race %}
+            <p>{% trans 'race'|capfirst %}: <strong>{{ patient.race }}</strong></p>
+        {% endif %}
+
+        {% if patient.gender %}
+            <p>{% trans 'gender'|capfirst %}: <strong>{{ patient.gender_description }}</strong></p>
+        {% endif %}
+
+        {% if patient.birth_place %}
+            <p>{% trans 'birth place'|capfirst %}: <strong>{{ patient.birth_place }}</strong></p>
+        {% endif %}
+
+        {% if patient.age %}
+            <p>{% trans 'Age' %}: <strong>{{ patient.age }}</strong></p>
+            <p>{% trans 'birth date'|capfirst %}: <strong>{{ patient.birth_date|date:'Y-m-d' }}</strong></p>
+            {% if patient.decease_date %}
+                <p class="label label-danger">{% trans 'decease date'|capfirst %}: <strong>{{ patient.decease_date|date:'Y-m-d' }}</strong></p>
+            {% endif %}
+        {% endif %}
+        </div>
+    </div>
+{% endif %}
+
+{% if patient.address or patient.phone_contact or patient.tin or patient.ssn or patient.health_card_number or patient.insurance_company %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">{% trans 'Administrative data' %}</h2>
+        </div>
+        <div class="panel-body">
+        {% if patient.address %}
+            <p>{% trans 'address'|capfirst %}: <strong>{{ patient.address }}</strong></p>
+        {% endif %}
+
+        {% if patient.phone_contact %}
+            <p>{% trans 'phone contact'|capfirst %}: <strong>{{ patient.phone_contact }}</strong></p>
+        {% endif %}
+
+        {% if patient.tin %}
+            <p>{% trans 'taxpayer Identification Number (TIN)'|capfirst %}: <strong>{{ patient.tin }}</strong></p>
+        {% endif %}
+
+        {% if patient.ssn %}
+            <p>{% trans 'social Security Number (SSN)'|capfirst %}: <strong>{{ patient.ssn }}</strong></p>
+        {% endif %}
+
+        {% if patient.health_card_number %}
+            <p>{% trans 'health card number'|capfirst %}: <strong>{{ patient.health_card_number }}</strong></p>
+        {% endif %}
+
+        {% if patient.insurance_company %}
+            <p>{% trans 'insurance company'|capfirst %}: <strong>{{ patient.insurance_company }}</strong></p>
+        {% endif %}
+        </div>
+    </div>
+{% endif %}
+
+{% if patient.family_situation or patient.labour_situation or patient.education %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">{% trans 'Extra data' %}</h2>
+        </div>
+        <div class="panel-body">
+        {% if patient.family_situation %}
+            <p>{% trans 'family situation'|capfirst %}: <strong>{{ patient.family_situation }}</strong></p>
+        {% endif %}
+
+        {% if patient.labour_situation %}
+            <p>{% trans 'labour situation'|capfirst %}: <strong>{{ patient.labour_situation }}</strong></p>
+        {% endif %}
+
+        {% if patient.education %}
+            <p>{% trans 'education'|capfirst %}: <strong>{{ patient.education }}</strong></p>
+        {% endif %}
+        </div>
+    </div>
+{% endif %}

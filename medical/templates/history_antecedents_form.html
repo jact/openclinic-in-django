@@ -1,0 +1,26 @@
+{% extends 'base_medical.html' %}
+{% load i18n crispy_forms_tags admin_static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h1>{% trans 'Patient' %}</h1>
+
+    <div class="row">
+        {% include 'includes/patient_info.html' %}
+    </div>
+
+    <h1>{% trans 'Update antecedents' %}</h1>
+
+    {% if form.errors %}
+        <p class="alert alert-danger">
+            {% blocktrans %}Please correct the error {{ form.errors|pluralize }} below.{% endblocktrans %}
+        </p>
+    {% endif %}
+
+    <p class="alert alert-info">{% trans 'Fields with * are required.' %}</p>
+
+    <form action="." method="post">
+        {% crispy form %}
+    </form>
+{% endblock content %}
