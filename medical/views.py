@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (c) 2012-2015 Jose Antonio Chavarría
+# Copyright (c) 2012-2016 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,18 +14,15 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-# Author: Jose Antonio Chavarría <jachavar@gmail.com>
 
 __author__ = 'Jose Antonio Chavarría'
 __license__ = 'GPLv3'
 
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.template.defaultfilters import slugify
 from django.contrib import messages
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
 from django.db.models import Q
 from django.views.generic import (
@@ -248,7 +245,7 @@ class PatientTests(LoginRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
-        queryset = super(PatientTests, self).get_queryset()
+        super(PatientTests, self).get_queryset()
 
         return Test.objects.filter(
             problem__patient__id=self.kwargs['pk']
@@ -365,7 +362,7 @@ class ProblemList(LoginRequiredMixin, AjaxListView):
         return context
 
     def get_queryset(self):
-        queryset = super(ProblemList, self).get_queryset()
+        super(ProblemList, self).get_queryset()
 
         return Problem.opened.filter(
             patient__id=self.kwargs['pk']
@@ -459,7 +456,7 @@ class HistoryList(LoginRequiredMixin, AjaxListView):
         return context
 
     def get_queryset(self):
-        queryset = super(HistoryList, self).get_queryset()
+        super(HistoryList, self).get_queryset()
 
         return Problem.closed.filter(
             patient__id=self.kwargs['pk']
