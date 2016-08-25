@@ -144,7 +144,7 @@ class Patient(TimeStampedModel):
     def clean(self):
         super(Patient, self).clean()
         if self.birth_date and self.decease_date \
-        and self.birth_date > self.decease_date:
+                and self.birth_date > self.decease_date:
             raise ValidationError(_('Can not die before birth'))
 
     def age(self):
@@ -163,7 +163,7 @@ class Patient(TimeStampedModel):
         return None
 
     def __str__(self):
-        return '%s %s %s' % (
+        return '{} {} {}'.format(
             self.first_name,
             self.last_name,
             self.last_name_optional
