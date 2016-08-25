@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (c) 2014-2015 Jose Antonio Chavarría
+# Copyright (c) 2014-2016 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,8 +14,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-# Author: Jose Antonio Chavarría <jachavar@gmail.com>
 
 __author__ = 'Jose Antonio Chavarría'
 __license__ = 'GPLv3'
@@ -23,7 +21,6 @@ __license__ = 'GPLv3'
 # Django settings for openclinic project. OpenClinic Revisited project.
 
 import os
-import django.conf.global_settings as DEFAULT_SETTINGS
 
 from .openclinic_conf import *
 from .endless_conf import *
@@ -99,10 +96,16 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'medical', 'templates'),
         ],
         'OPTIONS': {
-            'context_processors': DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS
-            + (
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.request',
-            )
+            ]
         },
     },
 ]

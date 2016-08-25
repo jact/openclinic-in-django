@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (c) 2012-2015 Jose Antonio Chavarría
+# Copyright (c) 2012-2016 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,8 +14,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-# Author: Jose Antonio Chavarría <jachavar@gmail.com>
 
 __author__ = 'Jose Antonio Chavarría'
 __license__ = 'GPLv3'
@@ -25,6 +23,7 @@ from django.views.generic import TemplateView, RedirectView
 from django.core.urlresolvers import reverse_lazy
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.auth import views as auth_views
 
 from ajax_select import urls as ajax_select_urls
 
@@ -76,17 +75,15 @@ urlpatterns = [
 
     url(
         r'^login/$',
-        'login',
+        auth_views.login,
         {'template_name': 'login.html'},
-        name='openclinic_login',
-        prefix='django.contrib.auth.views'
+        name='openclinic_login'
     ),
     url(
         r'^logout/$',
-        'logout',
+        auth_views.logout,
         {'next_page': '/'},
-        name='openclinic_logout',
-        prefix='django.contrib.auth.views'
+        name='openclinic_logout'
     ),
 
     url(r'^medical_records/', include('medical.urls')),
