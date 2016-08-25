@@ -195,7 +195,7 @@ class HistoryAntecedentsForm(forms.ModelForm):
             Fieldset(
                 _('Personal antecedents'),
                 'medical_intolerance', 'birth_growth', 'growth_sexuality',
-                'feed','habits', 'peristaltic_conditions', 'psychological',
+                'feed', 'habits', 'peristaltic_conditions', 'psychological',
                 'children_complaint', 'venereal_disease',
                 'accident_surgical_operation', 'mental_illness', 'patient',
             ),
