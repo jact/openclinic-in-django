@@ -72,16 +72,8 @@ html, body {
     background-color: transparent !important;
 }
 
-header .navbar-nav .active a {
-    background: #3C84C1 !important;
-}
-
 article nav .list-group-item a {
     display: block;
-}
-
-article nav .list-group li.active a {
-    color: #fff;
 }
 
 article section form {
