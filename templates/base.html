@@ -1,6 +1,6 @@
 {% spaceless %}
 <!doctype html>
-{% load i18n static setting activelink %}
+{% load i18n static setting %}
 <html lang="{% setting LANGUAGE_CODE %}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
     <head>
         <meta charset="utf-8" />
@@ -54,8 +54,31 @@
                 <div class="collapse navbar-collapse">
                     {% block tabs %}
                         <ul class="nav navbar-nav">
-                            <li{% ifstartswith 'info' %} class="active"{% endifstartswith %}><a href="{% url 'bootstrap' %}"><span class="fa fa-home"></span> {% trans 'Home' %}</a></li>
-                            <li{% ifcontains 'medical_records' %} class="active"{% endifcontains %}><a href="{% url 'medical_records' %}"><span class="fa fa-user-md"></span> {% trans 'Medical Records' %}</a></li>
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="drop-info">
+                                    <span class="fa fa-info"></span> <span class="sr-only">{% trans 'Info' %}</span> <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="drop-info">
+                                    <li><a href="{% url 'bootstrap' %}">{% trans 'Welcome' %}</a></li>
+                                    <li><a href="{% url 'readme' %}">{% trans 'Readme' %}</a></li>
+                                    <li><a href="{% url 'install' %}">{% trans 'Install Instructions' %}</a></li>
+                                    <li><a href="{% url 'license' %}">{% trans 'License' %}</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-toggle vcard" data-toggle="dropdown" id="drop-contact">
+                                    <span class="fa fa-address-card-o"></span> <span class="sr-only fn org">{% setting CLINIC_NAME %}</span> <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="drop-contact">
+                                    <li><a class="url" href="{% setting CLINIC_URL %}">{% setting CLINIC_NAME %}</a></li>
+                                    <li><a href="{% setting CLINIC_URL %}">{% trans 'Clinic hours' %}: {% setting CLINIC_HOURS %}</a></li>
+                                    <li><a href="{% setting CLINIC_URL %}">{% trans 'Clinic address' %}: <span class="street-address">{% setting CLINIC_ADDRESS %}</span></a></li>
+                                    <li><a href="{% setting CLINIC_URL %}">{% trans 'Clinic phone' %}: <span class="tel value">{% setting CLINIC_PHONE %}</span></a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="{% url 'medical_records' %}"><span class="fa fa-user-md"></span> {% trans 'Medical Records' %}</a>
+                            </li>
                             {% if user.is_active and user.is_staff %}
                                 <li><a href="{% url 'admin:index' %}"><span class="fa fa-gears"></span> {% trans 'Admin' %}</a></li>
                             {% endif %}
@@ -72,7 +95,7 @@
         <hr />
 
         <article id="main" class="container row">
-            <section id="content" class="col-md-9">
+            <section id="content" class="col-md-12 col-lg-12">
                 {% block messages %}
                     {% if messages %}
                         <ul class="messages list-unstyled">
@@ -86,29 +109,6 @@
                 {% block content %}{% endblock content %}
                 <hr />
             </section>
-
-            <nav class="col-md-3">
-                {% block navigation %}{% endblock navigation %}
-
-                <aside>
-                    <div id="clinic_info" class="vcard contact panel panel-info">
-                        <div class="fn org panel-heading">
-                            <a class="url" href="{% setting CLINIC_URL %}">{% setting CLINIC_NAME %}</a>
-                        </div>
-
-                        <div class="panel-body">
-                            <p>{% trans 'Clinic hours' %}: {% setting CLINIC_HOURS %}</p>
-
-                            <address class="adr">
-                                <p>{% trans 'Clinic address' %}: <span class="street-address">{% setting CLINIC_ADDRESS %}</span></p>
-                                <p>{% trans 'Clinic phone' %}: <span class="tel value">{% setting CLINIC_PHONE %}</span></p>
-                            </address>
-                        </div>
-                    </div>
-                </aside>
-
-                {% block internal_navigation %}{% endblock internal_navigation %}
-            </nav>
         </article>
 
         <hr />
