@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (c) 2012-2016 Jose Antonio Chavarría <jachavar@gmail.com>
+# Copyright (c) 2012-2017 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,13 +18,13 @@
 __author__ = 'Jose Antonio Chavarría'
 __license__ = 'GPLv3'
 
-from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse, reverse_lazy
-from django.template.defaultfilters import slugify
-from django.contrib import messages
-from django.shortcuts import get_object_or_404, redirect
-from django.utils import timezone
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+from django.core.urlresolvers import reverse, reverse_lazy
+from django.shortcuts import get_object_or_404, redirect
+from django.template.defaultfilters import slugify
+from django.utils import timezone
 from django.views.generic import (
     ListView,
     CreateView,
@@ -46,15 +46,6 @@ from .forms import (
     ProblemForm, HistoryAntecedentsForm, PatientRelativesForm,
     ProblemConnectionsForm, TestForm,
 )
-
-
-class LoginRequiredMixin(object):
-    # https://code.djangoproject.com/ticket/16626
-    permanent = False
-
-    @classmethod
-    def as_view(cls):
-        return login_required(super(LoginRequiredMixin, cls).as_view())
 
 
 class PatientCreate(LoginRequiredMixin, CreateView):
@@ -79,7 +70,7 @@ class PatientUpdate(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(PatientUpdate, self).get_context_data(**kwargs)
-        context['title'] = '%s (%s)' % (
+        context['title'] = '{} ({})'.format(
             self.object,
             _('Update patient social data')
         )
@@ -99,7 +90,7 @@ class PatientDelete(LoginRequiredMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super(PatientDelete, self).get_context_data(**kwargs)
-        context['title'] = '%s: %s' % (_('Delete patient'), self.object)
+        context['title'] = '{}: {}'.format(_('Delete patient'), self.object)
         context['cancel_url'] = reverse_lazy(
             'patient_redirect_detail',
             args=(self.object.id,)
@@ -266,10 +257,9 @@ class ProblemCreate(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         instance = form.save(commit=False)
+        instance.closing_date = None
         if form.cleaned_data['closed']:
             instance.closing_date = timezone.now()
-        else:
-            instance.closing_date = None
         self.object = instance
 
         return super(ProblemCreate, self).form_valid(form)
@@ -277,7 +267,7 @@ class ProblemCreate(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(ProblemCreate, self).get_context_data(**kwargs)
         patient = get_object_or_404(Patient, pk=self.kwargs['pk'])
-        context['title'] = '%s (%s)' % (
+        context['title'] = '{} ({})'.format(
             patient.__str__(),
             _('New medical problem')
         )
@@ -295,17 +285,16 @@ class ProblemUpdate(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         instance = form.save(commit=False)
+        instance.closing_date = None
         if form.cleaned_data['closed']:
             instance.closing_date = timezone.now()
-        else:
-            instance.closing_date = None
         self.object = instance
 
         return super(ProblemUpdate, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super(ProblemUpdate, self).get_context_data(**kwargs)
-        context['title'] = '%s [%s] (%s)' % (
+        context['title'] = '{} [{}] ({})'.format(
             self.object.patient,
             self.object.wording,
             _('Update medical problem')
@@ -544,7 +533,7 @@ class HistoryAntecedentsUpdate(LoginRequiredMixin, UpdateView):
             HistoryAntecedentsUpdate, self
         ).get_context_data(**kwargs)
         patient = get_object_or_404(Patient, pk=self.kwargs['pk'])
-        context['title'] = '%s (%s)' % (
+        context['title'] = '{} ({})'.format(
             patient,
             _('Update antecedents')
         )
@@ -603,7 +592,7 @@ class ProblemTestDelete(LoginRequiredMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super(ProblemTestDelete, self).get_context_data(**kwargs)
-        context['title'] = '%s: %s' % (
+        context['title'] = '{}: {}'.format(
             _('Delete medical test'),
             str(self.object.filename())
         )
