@@ -125,7 +125,6 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'medical',
     'crispy_forms',
-    'activelink',
     'el_pagination',
     'ajax_select',
 )

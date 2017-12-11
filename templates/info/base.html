@@ -1,11 +1,1 @@
 {% extends 'base.html' %}
-{% load i18n activelink %}
-
-{% block navigation %}
-    <ul class="list-group">
-        <li class="list-group-item{% ifactive 'welcome' %} active{% endifactive %}"><a href="{% url 'welcome' %}">{% trans 'Welcome' %}</a></li>
-        <li class="list-group-item{% ifactive 'readme' %} active{% endifactive %}"><a href="{% url 'readme' %}">{% trans 'Readme' %}</a></li>
-        <li class="list-group-item{% ifactive 'install' %} active{% endifactive %}"><a href="{% url 'install' %}">{% trans 'Install Instructions' %}</a></li>
-        <li class="list-group-item{% ifactive 'license' %} active{% endifactive %}"><a href="{% url 'license' %}">{% trans 'License' %}</a></li>
-    </ul>
-{% endblock navigation %}

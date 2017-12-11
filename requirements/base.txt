@@ -1,6 +1,5 @@
 Django==1.11.7
 django-grappelli==2.10.1
 django-crispy-forms==1.7.0
-django-activelink==1.0
 django-el-pagination==3.1.0
 django-ajax-selects==1.6.1

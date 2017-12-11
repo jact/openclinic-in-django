@@ -1,10 +1,1 @@
 {% extends 'base.html' %}
-{% load i18n activelink %}
-
-{% block navigation %}
-    <ul class="list-group">
-        <li class="list-group-item{% ifactive 'patient_list' %} active{% endifactive %}"><a href="{% url 'patient_list' %}">{% trans 'Advanced Search' %}</a></li>
-
-        <li class="list-group-item active{% ifactive 'patient_add' %} active{% endifactive %}"><a href="{% url 'patient_add' %}">{% trans 'New Patient' %}</a></li>
-    </ul>
-{% endblock navigation %}
