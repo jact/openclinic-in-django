@@ -6,9 +6,5 @@
 {% block content %}
     <h1>{% trans 'Patient' %} {{ patient }}</h1>
 
-    <div class="row">
-        {% include 'includes/patient_actions.html' %}
-    </div>
-
     {% include 'includes/patient_detail.html' %}
 {% endblock %}
