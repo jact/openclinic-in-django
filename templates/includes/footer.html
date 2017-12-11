@@ -2,15 +2,20 @@
 
 <footer>
     <section id="app_info" class="col-md-12">
-        <p><a href="https://github.com/jact/openclinic-in-django/">Powered by {% setting APP_NAME %}</a> ({% setting APP_VERSION %})</p>
-
-        <p>Copyright &copy; 2002-{% now 'Y' %} <a accesskey="9" href="mailto:CUT-THIS.openclinic&#64;gmail.com">{% setting APP_AUTHOR %}</a></p>
+        <p>&copy; 2002-{% now 'Y' %} <a accesskey="9" href="mailto:CUT-THIS.openclinic&#64;gmail.com">{% setting APP_AUTHOR %}</a></p>
 
         <p>Under the <a rel="license" href="{% url 'license' %}">GNU General Public License</a></p>
 
-        <p>
-            <a href="https://github.com/jact/openclinic-in-django/releases">{% trans 'Downloads' %}</a> |
-            <a href="https://github.com/jact/openclinic-in-django/issues">{% trans 'Report Issues' %}</a>
+        <p class="btn-group" role="group" aria-label="github actions">
+            <a class="btn btn-default" href="https://github.com/jact/openclinic-in-django/" title="{% setting APP_VERSION %}">
+                <span class="fa fa-github fa-lg"></span> <span class="sr-only">{% setting APP_NAME %}</span>
+            </a>
+            <a class="btn btn-default" href="https://github.com/jact/openclinic-in-django/releases" title="{% trans 'Downloads' %}">
+                <span class="fa fa-cloud-download fa-lg"></span> <span class="sr-only">{% trans 'Downloads' %}</span>
+            </a>
+            <a class="btn btn-default" href="https://github.com/jact/openclinic-in-django/issues" title="{% trans 'Report Issues' %}">
+                <span class="fa fa-question fa-lg"></span> <span class="sr-only">{% trans 'Report Issues' %}</span>
+            </a>
         </p>
 
         <p id="logos">
