@@ -6,12 +6,13 @@ from django.core.management import call_command
 
 fixture = 'initial_data'
 
+
 def load_fixture(apps, schema_editor):
     call_command('loaddata', fixture, app_label='medical')
 
 
 def unload_fixture(apps, schema_editor):
-    "Brutally deleting all entries for this model..."
+    """Brutally deleting all entries for this model..."""
 
     MyModel = apps.get_model("medical", "Staff")
     MyModel.objects.all().delete()
