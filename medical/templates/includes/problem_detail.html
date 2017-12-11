@@ -21,6 +21,9 @@
                 <p>{% trans 'attending physician'|capfirst %}: <strong>{{ problem.doctor }}</strong></p>
             {% endif %}
         </div>
+        <div class="panel-footer text-center">
+            {% include 'includes/problem_actions.html' %}
+        </div>
     </div>
 
     <div class="panel panel-default">
