@@ -2,15 +2,25 @@
 
 <ul role="menu" class="patient-actions">
     <li>
-        <a href="{% url 'problem_change' problem.id %}" title="{% trans 'Update' %}"><span class="fa fa-edit"></span> <span class="sr-only">{% trans 'Update' %}</span></a>
+        <a href="{% url 'problem_change' problem.id %}" title="{% trans 'Update' %}">
+            <span class="fa fa-edit"></span> <span class="sr-only">{% trans 'Update' %}</span>
+        </a>
     </li>
     <li>
-        <a href="{% url 'problem_tests' problem.id %}" title="{% trans 'Medical tests' %}"><span class="fa fa-heartbeat"></span> <span class="sr-only">{% trans 'Medical tests' %}</span></a>
+        <a href="{% url 'problem_tests' problem.id %}" title="{% trans 'Medical tests' %}">
+            <span class="fa fa-heartbeat"></span> <span class="sr-only">{% trans 'Medical tests' %}</span>
+            <span class="badge">{{ problem.test_set.count }}</span>
+        </a>
     </li>
     <li>
-        <a href="{% url 'problem_connections' problem.id %}" title="{% trans 'Connections' %}"><span class="fa fa-chain"></span> <span class="sr-only">{% trans 'Connections' %}</span></a>
+        <a href="{% url 'problem_connections' problem.id %}" title="{% trans 'Connections' %}">
+            <span class="fa fa-chain"></span> <span class="sr-only">{% trans 'Connections' %}</span>
+            <span class="badge">{{ problem.connections.count }}</span>
+        </a>
     </li>
     <li>
-        <a href="{% url 'problem_delete' problem.id %}" title="{% trans 'Delete medical problem' %}" class="btn btn-danger"><span class="fa fa-trash-o"></span> <span class="sr-only">{% trans 'Delete medical problem' %}</span></a>
+        <a href="{% url 'problem_delete' problem.id %}" title="{% trans 'Delete medical problem' %}" class="btn btn-danger">
+            <span class="fa fa-trash-o"></span> <span class="sr-only">{% trans 'Delete medical problem' %}</span>
+        </a>
     </li>
 </ul>
