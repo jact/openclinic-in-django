@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2012-2016 Jose Antonio Chavarría <jachavar@gmail.com>
+# Copyright (c) 2012-2017 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ class PatientLookup(LookupChannel):
         return False
 
     def format_item_display(self, obj):
-        return '<a href="%s">%s</a>' % (
+        return u'<a href="{}">{}</a>'.format(
             reverse('patient_redirect_detail', args=(obj.id,)),
             escape(obj.__str__())
         )
@@ -59,7 +59,7 @@ class ProblemLookup(LookupChannel):
         return False
 
     def format_item_display(self, obj):
-        return '<a href="%s">%s</a>' % (
+        return u'<a href="{}">{}</a>'.format(
             reverse('problem_detail', args=(obj.id,)),
             escape(obj.__str__())
         )
