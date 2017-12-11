@@ -25,6 +25,9 @@
         <li class="dropdown">
             <a class="dropdown-toggle" id="dropuser" data-toggle="dropdown" href="#"><i class="fa fa-user"></i> {{ user.username }} <b class="caret"></b></a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropuser">
+                {% if user.is_active and user.is_staff %}
+                    <li><a href="{% url 'admin:index' %}"><span class="fa fa-gears"></span> {% trans 'Admin' %}</a></li>
+                {% endif %}
                 <li><a href="{% url 'admin:password_change' %}"><i class="fa fa-gear"></i> {% trans 'Password change' %}</a></li>
                 <li><a href="{% url 'openclinic_logout' %}"><i class="fa fa-power-off"></i> {% trans 'Logout' %}</a></li>
             </ul>

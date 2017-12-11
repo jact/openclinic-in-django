@@ -79,9 +79,6 @@
                             <li>
                                 <a href="{% url 'medical_records' %}"><span class="fa fa-user-md"></span> {% trans 'Medical Records' %}</a>
                             </li>
-                            {% if user.is_active and user.is_staff %}
-                                <li><a href="{% url 'admin:index' %}"><span class="fa fa-gears"></span> {% trans 'Admin' %}</a></li>
-                            {% endif %}
                         </ul>
                     {% endblock tabs %}
 
