@@ -2,7 +2,7 @@
 {% load i18n static %}
 
 {% block style %}
-    <link rel="stylesheet" href="{% static 'css/print.css?20151214' %}" media="screen, print" />
+    <link rel="stylesheet" href="{% static 'css/print.css' %}?20151214" media="screen, print" />
 {% endblock style %}
 
 {% block title %}{{ patient }} [{% now 'Y-m-d H:i:s' %}]{% endblock %}
