@@ -16,6 +16,7 @@
             <legend class="panel-heading">{% trans 'Relatives' %}</legend>
 
             <div class="panel-body">
+                {{ form.media }}
                 {{ form|crispy }}
                 <div class="controls text-center">
                     <button type="submit" class="btn btn-primary btn-lg">{% trans 'Add relatives to patient' %}</button>
