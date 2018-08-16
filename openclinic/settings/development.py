@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (c) 2014-2015 Jose Antonio Chavarría
+# Copyright (c) 2014-2018 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,8 +14,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-# Author: Jose Antonio Chavarría <jachavar@gmail.com>
 
 __author__ = 'Jose Antonio Chavarría'
 __license__ = 'GPLv3'
@@ -31,4 +29,4 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 INSTALLED_APPS += ("debug_toolbar", 'django_extensions')
 INTERNAL_IPS = ("127.0.0.1",)
 
-MIDDLEWARE_CLASSES += ("debug_toolbar.middleware.DebugToolbarMiddleware",)
+MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware", ]

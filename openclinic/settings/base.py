@@ -64,9 +64,9 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = ''
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-)
+]
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -76,7 +76,7 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'k4h!m#a0ip@ba2()i8gzxzzkv+!4ktsq2=3xjhym0ndw8pf^5z'
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -85,7 +85,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-)
+]
 
 TEMPLATES = [
     {
