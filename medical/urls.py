@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (c) 2012-2016 Jose Antonio Chavarría <jachavar@gmail.com>
+# Copyright (c) 2012-2018 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ __license__ = 'GPLv3'
 
 from django.conf.urls import url
 from django.views.generic import RedirectView
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 
 from .views import (
     PatientListView, PatientSearch, PatientCreate, PatientUpdate,
