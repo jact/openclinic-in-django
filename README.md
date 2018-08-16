@@ -4,6 +4,12 @@ Description
 OpenClinic is an easy to use, open source, medical records system.
 
 
+Requirements
+------------
+
+Python 3+
+
+
 Quick start
 -----------
 
