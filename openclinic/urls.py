@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (c) 2012-2017 Jose Antonio Chavarría <jachavar@gmail.com>
+# Copyright (c) 2012-2018 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,12 +18,12 @@
 __author__ = 'Jose Antonio Chavarría'
 __license__ = 'GPLv3'
 
-from django.conf.urls import include, url
-from django.views.generic import TemplateView, RedirectView
-from django.core.urlresolvers import reverse_lazy
-from django.conf.urls.static import static
 from django.conf import settings
+from django.conf.urls import include, url
+from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, RedirectView
 
 from ajax_select import urls as ajax_select_urls
 
@@ -35,7 +35,7 @@ urlpatterns = [
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     url(r'^grappelli/', include('grappelli.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
 
     url(r'^ajax_select/', include(ajax_select_urls)),
 
@@ -75,14 +75,12 @@ urlpatterns = [
 
     url(
         r'^login/$',
-        auth_views.login,
-        {'template_name': 'login.html'},
+        auth_views.LoginView.as_view(template_name='login.html'),
         name='openclinic_login'
     ),
     url(
         r'^logout/$',
-        auth_views.logout,
-        {'next_page': '/'},
+        auth_views.LogoutView.as_view(next_page='/'),
         name='openclinic_logout'
     ),
 
@@ -90,7 +88,8 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
+                   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
     try:
         import debug_toolbar
