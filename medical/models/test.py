@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (c) 2012-2017 Jose Antonio Chavarría <jachavar@gmail.com>
+# Copyright (c) 2012-2018 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -42,7 +42,10 @@ class Test(TimeStampedModel):
         verbose_name=_('document')
     )
 
-    problem = models.ForeignKey('Problem')
+    problem = models.ForeignKey(
+        'Problem',
+        on_delete=models.CASCADE
+    )
 
     def filename(self):
         return os.path.basename(self.document.name)
