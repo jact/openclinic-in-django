@@ -189,7 +189,7 @@ class Migration(migrations.Migration):
                 ('connections', models.ManyToManyField(
                     related_name='_problem_connections_+', to='medical.Problem', blank=True
                 )),
-                ('patient', models.ForeignKey(to='medical.Patient')),
+                ('patient', models.ForeignKey(to='medical.Patient', on_delete=models.CASCADE)),
                 ('doctor', models.ForeignKey(
                     on_delete=models.deletion.SET_NULL, verbose_name='attending physician',
                     to=settings.AUTH_USER_MODEL, null=True
@@ -210,12 +210,12 @@ class Migration(migrations.Migration):
                 ('modified', models.DateTimeField(auto_now=True)),
                 ('document_type', models.CharField(max_length=128, null=True, blank=True, verbose_name='MIME type')),
                 ('document', models.FileField(upload_to=b'medical_tests/%Y/%m/%d', verbose_name='document')),
-                ('problem', models.ForeignKey(to='medical.Problem')),
+                ('problem', models.ForeignKey(to='medical.Problem', on_delete=models.CASCADE)),
             ],
         ),
         migrations.AddField(
             model_name='history',
             name='patient',
-            field=models.OneToOneField(to='medical.Patient'),
+            field=models.OneToOneField(to='medical.Patient', on_delete=models.CASCADE),
         ),
     ]
