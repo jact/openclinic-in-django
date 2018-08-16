@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (c) 2012-2017 Jose Antonio Chavarría <jachavar@gmail.com>
+# Copyright (c) 2012-2018 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ __license__ = 'GPLv3'
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404, redirect
 from django.template.defaultfilters import slugify
 from django.utils import timezone
