@@ -23,7 +23,7 @@
         {% endif %}
 
         {% if patient.age %}
-            <p>{% trans 'Age' %}: <strong>{{ patient.age }}</strong></p>
+            <p>{% trans 'Age' %}: <strong>{{ patient.birth_date|timesince }}</strong></p>
             <p>{% trans 'birth date'|capfirst %}: <strong>{{ patient.birth_date|date:'Y-m-d' }}</strong></p>
             {% if patient.decease_date %}
                 <p class="label label-danger">{% trans 'decease date'|capfirst %}: <strong>{{ patient.decease_date|date:'Y-m-d' }}</strong></p>

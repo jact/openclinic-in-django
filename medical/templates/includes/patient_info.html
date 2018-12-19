@@ -18,7 +18,7 @@
                         {% endif %}
                         {% if patient.age %}
                             <br />
-                            {% trans 'Age' %}: {{ patient.age }}
+                            {% trans 'Age' %}: {{ patient.birth_date|timesince }}
                         {% endif %}
                     </div>
                 </div>
