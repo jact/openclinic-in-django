@@ -1,5 +1,5 @@
 -r base.txt # includes the base.txt requirements file
 
-django-debug-toolbar==1.9.1
-django-extensions==2.1.0
+django-debug-toolbar==1.11
+django-extensions==2.1.4
 sqlparse==0.2.4
