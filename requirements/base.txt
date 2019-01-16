@@ -1,4 +1,4 @@
-Django==2.1.4
+Django==2.1.5
 django-grappelli==2.12.1
 django-crispy-forms==1.7.2
 django-el-pagination==3.2.4
