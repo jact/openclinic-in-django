@@ -1,5 +1,5 @@
-Django==2.0.13
-django-grappelli==2.12.1
-django-crispy-forms==1.7.2
+Django==2.2.9
+django-grappelli==2.13.3
+django-crispy-forms==1.8.1
 django-el-pagination==3.2.4
-django-ajax-selects==1.7.1
+django-ajax-selects==1.9.0
