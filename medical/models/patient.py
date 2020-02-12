@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (c) 2012-2015 Jose Antonio Chavarría
+# Copyright (c) 2012-2020 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,8 +14,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-# Author: Jose Antonio Chavarría <jachavar@gmail.com>
 
 __author__ = 'Jose Antonio Chavarría'
 __license__ = 'GPLv3'
@@ -24,13 +22,11 @@ from datetime import datetime
 
 from django.db import models
 from django.core.exceptions import ValidationError
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from . import TimeStampedModel
 
 
-@python_2_unicode_compatible
 class Patient(TimeStampedModel):
     GENDER_CHOICES = (
         ('M', _('Male')),
