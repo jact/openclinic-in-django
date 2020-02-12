@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (c) 2012-2018 Jose Antonio Chavarría <jachavar@gmail.com>
+# Copyright (c) 2012-2020 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,7 +19,6 @@ __author__ = 'Jose Antonio Chavarría'
 __license__ = 'GPLv3'
 
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from . import TimeStampedModel
@@ -39,7 +38,6 @@ class ClosedManager(models.Manager):
         )
 
 
-@python_2_unicode_compatible
 class Problem(TimeStampedModel):
     order_number = models.PositiveSmallIntegerField(
         verbose_name=_('order number')
