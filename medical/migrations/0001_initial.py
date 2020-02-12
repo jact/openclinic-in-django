@@ -96,7 +96,7 @@ class Migration(migrations.Migration):
                     null=True, blank=True, verbose_name='psychological conditions'
                 )),
                 ('children_complaint', models.TextField(null=True, blank=True, verbose_name='children complaint')),
-                ('venereal_disease', models.TextField(null=True, blank=True, verbose_name='veneral disease')),
+                ('venereal_disease', models.TextField(null=True, blank=True, verbose_name='venereal disease')),
                 ('accident_surgical_operation', models.TextField(
                     null=True, blank=True, verbose_name='accidents and surgical operations'
                 )),
