@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (c) 2012-2018 Jose Antonio Chavarría <jachavar@gmail.com>
+# Copyright (c) 2012-2020 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,13 +23,11 @@ import os
 from django.db import models
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from . import TimeStampedModel
 
 
-@python_2_unicode_compatible
 class Test(TimeStampedModel):
     document_type = models.CharField(
         max_length=128,
