@@ -7,7 +7,7 @@
     <h1>{% trans 'Install Instructions' %}</h1>
 
     <ol>
-        <li><p>{% blocktrans %}Python 3+ is a requirement.{% endblocktrans %}</p></li>
+        <li><p>{% blocktrans %}Python 3.5+ is a requirement.{% endblocktrans %}</p></li>
 
         <li>
           <p>{% blocktrans %}Download project from <a href="https://github.com/jact/openclinic-in-django/">GitHub</a> and decompress file.{% endblocktrans %}</p>
@@ -17,11 +17,11 @@
           <p>{% blocktrans %}Execute these commands in a terminal from project directory:{% endblocktrans %}</p>
 
 <pre class="sqlcode"><code>
-$ <kbd>pip install -r requirements/production.txt</kbd>
+$ <kbd>pip3 install -r requirements/production.txt</kbd>
 
-$ <kbd>python manage.py migrate</kbd>
+$ <kbd>python3 manage.py migrate</kbd>
 
-$ <kbd>python manage.py runserver</kbd>
+$ <kbd>python3 manage.py runserver</kbd>
 </code></pre>
         </li>
 
