@@ -7,17 +7,17 @@ OpenClinic is an easy to use, open source, medical records system.
 Requirements
 ------------
 
-Python 3+
+Python 3.5+
 
 
 Quick start
 -----------
 
-pip install -r requirements/development.txt
+pip3 install -r requirements/development.txt
 
-python manage.py migrate --settings=openclinic.settings.development
+python3 manage.py migrate --settings=openclinic.settings.development
 
-python manage.py runserver --settings=openclinic.settings.development
+python3 manage.py runserver --settings=openclinic.settings.development
 
 
 Contributors
