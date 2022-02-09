@@ -13,12 +13,11 @@ Python 3.5+
 Quick start
 -----------
 
-pip3 install -r requirements/development.txt
-
-python3 manage.py migrate --settings=openclinic.settings.development
-
-python3 manage.py runserver --settings=openclinic.settings.development
-
+```bash
+$ pip3 install -r requirements/development.txt
+$ python3 manage.py migrate --settings=openclinic.settings.development
+$ python3 manage.py runserver --settings=openclinic.settings.development
+```
 
 Contributors
 ------------
