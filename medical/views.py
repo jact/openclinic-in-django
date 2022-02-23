@@ -472,22 +472,15 @@ class HistoryAntecedentsCreate(LoginRequiredMixin, CreateView):
         }
 
     def get_context_data(self, **kwargs):
-        context = super(
-            HistoryAntecedentsCreate, self
-        ).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         patient = get_object_or_404(Patient, pk=self.kwargs['pk'])
-        context['title'] = '%s (%s)' % (
-            patient,
-            _('Update antecedents')
-        )
+        context['title'] = f'{patient} ({_("Update antecedents")})'
         context['patient'] = patient
 
         return context
 
     def get_success_url(self):
-        messages.success(
-            self.request, _("Antecedents have been updated!")
-        )
+        messages.success(self.request, _("Antecedents have been updated!"))
 
         return reverse_lazy(
             'patient_history_antecedents',
