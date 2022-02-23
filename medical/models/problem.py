@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (c) 2012-2020 Jose Antonio Chavarría <jachavar@gmail.com>
+# Copyright (c) 2012-2022 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -111,7 +111,7 @@ class Problem(TimeStampedModel):
         return last_order_number
 
     def __str__(self):
-        return '{}: {}'.format(self.order_number, self.wording)
+        return f'{self.order_number}: {self.wording}'
 
     class Meta:
         app_label = 'medical'

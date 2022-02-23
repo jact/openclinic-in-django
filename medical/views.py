@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# Copyright (c) 2012-2018 Jose Antonio Chavarría <jachavar@gmail.com>
+# Copyright (c) 2012-2022 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -56,10 +56,12 @@ class PatientCreate(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = _('New Patient')
+
         return context
 
     def get_success_url(self):
         messages.success(self.request, _("Patient, %s, added!") % self.object)
+
         return reverse_lazy('patient_redirect_detail', args=(self.object.id,))
 
 
@@ -70,10 +72,8 @@ class PatientUpdate(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = '{} ({})'.format(
-            self.object,
-            _('Update patient social data')
-        )
+        context['title'] = f'{self.object} ({_("Update patient social data")})'
+
         return context
 
     def get_object(self, queryset=None):
@@ -81,6 +81,7 @@ class PatientUpdate(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         messages.success(self.request, _("Patient, %s, updated!") % self.object)
+
         return reverse_lazy('patient_redirect_detail', args=(self.object.id,))
 
 
@@ -90,7 +91,7 @@ class PatientDelete(LoginRequiredMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = '{}: {}'.format(_('Delete patient'), self.object)
+        context['title'] = f'{_("Delete patient")}: {self.object}'
         context['cancel_url'] = reverse_lazy(
             'patient_redirect_detail',
             args=(self.object.id,)
@@ -100,6 +101,7 @@ class PatientDelete(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         messages.success(self.request, _("Patient, %s, deleted!") % self.object)
+
         return reverse_lazy('patient_list')
 
 
@@ -261,10 +263,7 @@ class ProblemCreate(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         patient = get_object_or_404(Patient, pk=self.kwargs['pk'])
-        context['title'] = '{} ({})'.format(
-            patient.__str__(),
-            _('New medical problem')
-        )
+        context['title'] = f'{patient.__str__()} ({_("New medical problem")})'
 
         return context
 
@@ -288,20 +287,16 @@ class ProblemUpdate(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = '{} [{}] ({})'.format(
-            self.object.patient,
-            self.object.wording,
-            _('Update medical problem')
-        )
+        context['title'] = f'{self.object.patient} [{self.object.wording}] ({_("Update medical problem")})'
+
         return context
 
     def get_object(self, queryset=None):
         return Problem.objects.get(id=self.kwargs['pk'])
 
     def get_success_url(self):
-        messages.success(
-            self.request, _('Medical problem, %s, updated!') % self.object
-        )
+        messages.success(self.request, _('Medical problem, %s, updated!') % self.object)
+
         return reverse_lazy('problem_detail', args=(self.object.pk,))
 
 
@@ -511,14 +506,9 @@ class HistoryAntecedentsUpdate(LoginRequiredMixin, UpdateView):
         }
 
     def get_context_data(self, **kwargs):
-        context = super(
-            HistoryAntecedentsUpdate, self
-        ).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         patient = get_object_or_404(Patient, pk=self.kwargs['pk'])
-        context['title'] = '{} ({})'.format(
-            patient,
-            _('Update antecedents')
-        )
+        context['title'] = f'{patient} ({_("Update antecedents")})'
         context['patient'] = patient
 
         return context
@@ -527,9 +517,7 @@ class HistoryAntecedentsUpdate(LoginRequiredMixin, UpdateView):
         return History.objects.get(patient__id=self.kwargs['pk'])
 
     def get_success_url(self):
-        messages.success(
-            self.request, _("Antecedents have been updated!")
-        )
+        messages.success(self.request, _("Antecedents have been updated!"))
 
         return reverse_lazy(
             'patient_history_antecedents',
@@ -574,10 +562,7 @@ class ProblemTestDelete(LoginRequiredMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = '{}: {}'.format(
-            _('Delete medical test'),
-            str(self.object.filename())
-        )
+        context['title'] = f'{_("Delete medical test")}: {self.object.filename()}'
         context['cancel_url'] = reverse_lazy(
             'problem_tests',
             args=(self.object.problem.id,)
