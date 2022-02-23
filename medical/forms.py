@@ -68,7 +68,7 @@ class PatientForm(forms.ModelForm):
                 Submit('save', _('Save'), css_class='btn-lg'),
             ),
         )
-        super(PatientForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields['doctor_assigned'].queryset = Staff.doctors.all()
 
     class Meta:
@@ -116,7 +116,7 @@ class PatientSearchForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request")
-        super(PatientSearchForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields['search_type'].initial = self.request.GET.get(
             'search_type',
             'last_name'
@@ -152,7 +152,7 @@ class PatientSearchByMedicalProblemForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request")
-        super(PatientSearchByMedicalProblemForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields['search_type_problem'].initial = self.request.GET.get(
             'search_type_problem', 'wording'
         )
@@ -168,7 +168,7 @@ class ProblemForm(forms.ModelForm):
     closed = forms.BooleanField(label=_('Closed problem?'), required=False)
 
     def __init__(self, *args, **kwargs):
-        super(ProblemForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields['order_number'].widget.attrs['readonly'] = True
         if self.instance:
             self.fields['closed'].initial = self.instance.closing_date
@@ -208,7 +208,7 @@ class HistoryAntecedentsForm(forms.ModelForm):
                 Submit('save', _('Save'), css_class='btn-lg'),
             ),
         )
-        super(HistoryAntecedentsForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     class Meta:
         model = History

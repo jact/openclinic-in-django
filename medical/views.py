@@ -54,7 +54,7 @@ class PatientCreate(LoginRequiredMixin, CreateView):
     template_name = 'patient_form.html'
 
     def get_context_data(self, **kwargs):
-        context = super(PatientCreate, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['title'] = _('New Patient')
         return context
 
@@ -69,7 +69,7 @@ class PatientUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'patient_form.html'
 
     def get_context_data(self, **kwargs):
-        context = super(PatientUpdate, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['title'] = '{} ({})'.format(
             self.object,
             _('Update patient social data')
@@ -89,7 +89,7 @@ class PatientDelete(LoginRequiredMixin, DeleteView):
     template_name = 'object_confirm_delete.html'
 
     def get_context_data(self, **kwargs):
-        context = super(PatientDelete, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['title'] = '{}: {}'.format(_('Delete patient'), self.object)
         context['cancel_url'] = reverse_lazy(
             'patient_redirect_detail',
@@ -109,7 +109,7 @@ class PatientList(LoginRequiredMixin, AjaxListView):
     page_template = 'includes/patient_list.html'
 
     def get_context_data(self, **kwargs):
-        context = super(PatientList, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['search_form'] = PatientSearchForm(request=self.request)
         context['search_form_problem'] = PatientSearchByMedicalProblemForm(
             request=self.request
@@ -120,7 +120,7 @@ class PatientList(LoginRequiredMixin, AjaxListView):
 
 class PatientListView(PatientList):
     def get_queryset(self):
-        queryset = super(PatientListView, self).get_queryset()
+        queryset = super().get_queryset()
 
         search_type = self.request.GET.get('search_type', None)
         search_text = self.request.GET.get('search_text', '')
@@ -133,7 +133,7 @@ class PatientListView(PatientList):
 
 class PatientSearch(PatientList):
     def get_queryset(self):
-        queryset = super(PatientSearch, self).get_queryset()
+        queryset = super().get_queryset()
         pattern = self.request.GET.get('q', None)
 
         if pattern:
@@ -155,9 +155,7 @@ class PatientRedirectDetail(LoginRequiredMixin, RedirectView):
             kwargs={'pk': patient.id, 'slug': slugify(patient)}
         )
 
-        return super(PatientRedirectDetail, self).get(
-            self, request, *args, **kwargs
-        )
+        return super().get(self, request, *args, **kwargs)
 
 
 class PatientDetail(LoginRequiredMixin, DetailView):
@@ -166,7 +164,7 @@ class PatientDetail(LoginRequiredMixin, DetailView):
     template_name = 'patient_detail.html'
 
     def get_context_data(self, **kwargs):
-        context = super(PatientDetail, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['patient'] = Patient.objects.get(
             pk=self.kwargs.get('pk', None)
         )
@@ -180,7 +178,7 @@ class PatientRelatives(LoginRequiredMixin, UpdateView):
     template_name = 'patient_relatives.html'
 
     def get_context_data(self, **kwargs):
-        context = super(PatientRelatives, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['patient'] = self.object
 
         return context
@@ -197,7 +195,7 @@ class PatientRelatives(LoginRequiredMixin, UpdateView):
         if self.kwargs['pk'] in form.cleaned_data['relatives']:
             form.cleaned_data['relatives'].remove(self.kwargs['pk'])
 
-        return super(PatientRelatives, self).form_valid(form)
+        return super().form_valid(form)
 
 
 class PatientMedicalReport(LoginRequiredMixin, DetailView):
@@ -207,7 +205,7 @@ class PatientMedicalReport(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         patient_id = self.kwargs.get('pk', None)
-        context = super(PatientMedicalReport, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         patient = get_object_or_404(Patient, pk=patient_id)
         history = get_object_or_404(History, patient__id=patient_id)
 
@@ -228,19 +226,15 @@ class PatientTests(LoginRequiredMixin, ListView):
     template_name = 'patient_tests.html'
 
     def get_context_data(self, **kwargs):
-        context = super(PatientTests, self).get_context_data(**kwargs)
-        context['patient'] = get_object_or_404(
-            Patient, pk=self.kwargs['pk']
-        )
+        context = super().get_context_data(**kwargs)
+        context['patient'] = get_object_or_404(Patient, pk=self.kwargs['pk'])
 
         return context
 
     def get_queryset(self):
-        super(PatientTests, self).get_queryset()
+        super().get_queryset()
 
-        return Test.objects.filter(
-            problem__patient__id=self.kwargs['pk']
-        )
+        return Test.objects.filter(problem__patient__id=self.kwargs['pk'])
 
 
 class ProblemCreate(LoginRequiredMixin, CreateView):
@@ -262,10 +256,10 @@ class ProblemCreate(LoginRequiredMixin, CreateView):
             instance.closing_date = timezone.now()
         self.object = instance
 
-        return super(ProblemCreate, self).form_valid(form)
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
-        context = super(ProblemCreate, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         patient = get_object_or_404(Patient, pk=self.kwargs['pk'])
         context['title'] = '{} ({})'.format(
             patient.__str__(),
@@ -290,10 +284,10 @@ class ProblemUpdate(LoginRequiredMixin, UpdateView):
             instance.closing_date = timezone.now()
         self.object = instance
 
-        return super(ProblemUpdate, self).form_valid(form)
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
-        context = super(ProblemUpdate, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['title'] = '{} [{}] ({})'.format(
             self.object.patient,
             self.object.wording,
@@ -317,7 +311,7 @@ class ProblemSearch(LoginRequiredMixin, AjaxListView):
     page_template = 'includes/problem_list.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ProblemSearch, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['search_form'] = PatientSearchForm(request=self.request)
         context['search_form_problem'] = PatientSearchByMedicalProblemForm(
             request=self.request
@@ -326,7 +320,7 @@ class ProblemSearch(LoginRequiredMixin, AjaxListView):
         return context
 
     def get_queryset(self):
-        queryset = super(ProblemSearch, self).get_queryset()
+        queryset = super().get_queryset()
 
         search_type = self.request.GET.get('search_type_problem', None)
         search_text = self.request.GET.get('search_text_problem', '')
@@ -343,19 +337,15 @@ class ProblemList(LoginRequiredMixin, AjaxListView):
     page_template = 'includes/problem_list.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ProblemList, self).get_context_data(**kwargs)
-        context['patient'] = get_object_or_404(
-            Patient, pk=self.kwargs['pk']
-        )
+        context = super().get_context_data(**kwargs)
+        context['patient'] = get_object_or_404(Patient, pk=self.kwargs['pk'])
 
         return context
 
     def get_queryset(self):
-        super(ProblemList, self).get_queryset()
+        super().get_queryset()
 
-        return Problem.opened.filter(
-            patient__id=self.kwargs['pk']
-        ).order_by('-modified')
+        return Problem.opened.filter(patient__id=self.kwargs['pk']).order_by('-modified')
 
 
 class ProblemDetail(LoginRequiredMixin, DetailView):
@@ -364,7 +354,7 @@ class ProblemDetail(LoginRequiredMixin, DetailView):
     context_object_name = 'problem'
 
     def get_context_data(self, **kwargs):
-        context = super(ProblemDetail, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         problem = get_object_or_404(Problem, pk=self.kwargs.get('pk', None))
         patient = get_object_or_404(Patient, pk=problem.patient.id)
         context['problem'] = problem
@@ -378,7 +368,7 @@ class ProblemDelete(LoginRequiredMixin, DeleteView):
     template_name = 'object_confirm_delete.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ProblemDelete, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['title'] = '%s: %s' % (_('Delete medical problem'), self.object)
         context['cancel_url'] = reverse_lazy(
             'problem_detail',
@@ -405,7 +395,7 @@ class ProblemConnections(LoginRequiredMixin, UpdateView):
     template_name = 'problem_connections.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ProblemConnections, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         patient = get_object_or_404(Patient, pk=self.object.patient.id)
         context['problem'] = self.object
         context['patient'] = patient
@@ -428,7 +418,7 @@ class ProblemConnections(LoginRequiredMixin, UpdateView):
         if self.kwargs['pk'] in form.cleaned_data['connections']:
             form.cleaned_data['connections'].remove(self.kwargs['pk'])
 
-        return super(ProblemConnections, self).form_valid(form)
+        return super().form_valid(form)
 
 
 class HistoryList(LoginRequiredMixin, AjaxListView):
@@ -437,19 +427,15 @@ class HistoryList(LoginRequiredMixin, AjaxListView):
     page_template = 'includes/problem_list.html'
 
     def get_context_data(self, **kwargs):
-        context = super(HistoryList, self).get_context_data(**kwargs)
-        context['patient'] = get_object_or_404(
-            Patient, pk=self.kwargs['pk']
-        )
+        context = super().get_context_data(**kwargs)
+        context['patient'] = get_object_or_404(Patient, pk=self.kwargs['pk'])
 
         return context
 
     def get_queryset(self):
-        super(HistoryList, self).get_queryset()
+        super().get_queryset()
 
-        return Problem.closed.filter(
-            patient__id=self.kwargs['pk']
-        ).order_by('-modified')
+        return Problem.closed.filter(patient__id=self.kwargs['pk']).order_by('-modified')
 
 
 class HistoryAntecedentsDetail(LoginRequiredMixin, DetailView):
@@ -458,9 +444,7 @@ class HistoryAntecedentsDetail(LoginRequiredMixin, DetailView):
     template_name = 'history_antecedents_detail.html'
 
     def get_context_data(self, **kwargs):
-        context = super(
-            HistoryAntecedentsDetail, self
-        ).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         patient = get_object_or_404(Patient, pk=self.kwargs['pk'])
         history = History.objects.get(patient__id=self.kwargs['pk'])
 
@@ -474,9 +458,7 @@ class HistoryAntecedentsDetail(LoginRequiredMixin, DetailView):
 
     def get(self, request, *args, **kwargs):
         try:
-            return super(HistoryAntecedentsDetail, self).get(
-                request, *args, **kwargs
-            )
+            return super().get(request, *args, **kwargs)
         except:
             return redirect(
                 'patient_history_antecedents_add',
@@ -566,7 +548,7 @@ class ProblemTests(LoginRequiredMixin, CreateView):
         }
 
     def get_context_data(self, **kwargs):
-        context = super(ProblemTests, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         problem = get_object_or_404(Problem, pk=self.kwargs['pk'])
         patient = get_object_or_404(Patient, pk=problem.patient.id)
         tests = Test.objects.filter(problem=problem)
@@ -591,7 +573,7 @@ class ProblemTestDelete(LoginRequiredMixin, DeleteView):
     template_name = 'object_confirm_delete.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ProblemTestDelete, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['title'] = '{}: {}'.format(
             _('Delete medical test'),
             str(self.object.filename())

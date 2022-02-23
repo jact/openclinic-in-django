@@ -26,16 +26,12 @@ from . import TimeStampedModel
 
 class OpenedManager(models.Manager):
     def get_queryset(self):
-        return super(OpenedManager, self).get_queryset().filter(
-            closing_date__isnull=True
-        )
+        return super().get_queryset().filter(closing_date__isnull=True)
 
 
 class ClosedManager(models.Manager):
     def get_queryset(self):
-        return super(ClosedManager, self).get_queryset().filter(
-            closing_date__isnull=False
-        )
+        return super().get_queryset().filter(closing_date__isnull=False)
 
 
 class Problem(TimeStampedModel):

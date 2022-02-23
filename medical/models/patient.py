@@ -138,7 +138,7 @@ class Patient(TimeStampedModel):
     relatives = models.ManyToManyField('self', blank=True)
 
     def clean(self):
-        super(Patient, self).clean()
+        super().clean()
         if self.birth_date and self.decease_date \
                 and self.birth_date > self.decease_date:
             raise ValidationError(_('Can not die before birth'))

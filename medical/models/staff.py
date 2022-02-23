@@ -26,16 +26,12 @@ from django.contrib.auth.models import AbstractUser, UserManager
 
 class AdministrativeManager(models.Manager):
     def get_queryset(self):
-        return super(AdministrativeManager, self).get_queryset().filter(
-            staff_type='A'
-        )
+        return super().get_queryset().filter(staff_type='A')
 
 
 class DoctorManager(models.Manager):
     def get_queryset(self):
-        return super(DoctorManager, self).get_queryset().filter(
-            staff_type='D'
-        )
+        return super().get_queryset().filter(staff_type='D')
 
 
 class Staff(AbstractUser):
@@ -83,7 +79,7 @@ class Staff(AbstractUser):
     administratives = AdministrativeManager()
 
     def clean(self):
-        super(Staff, self).clean()
+        super().clean()
         if self.staff_type == 'D' and not self.collegiate_number:
             raise ValidationError(_('Collegiate number is required for doctor'))
 
