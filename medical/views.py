@@ -127,7 +127,7 @@ class PatientListView(PatientList):
         search_type = self.request.GET.get('search_type', None)
         search_text = self.request.GET.get('search_text', '')
         if search_type:
-            search_filter = '%s__icontains' % search_type
+            search_filter = f'{search_type}__icontains'
             return queryset.filter(**{search_filter: search_text})
 
         return None
@@ -308,9 +308,7 @@ class ProblemSearch(LoginRequiredMixin, AjaxListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['search_form'] = PatientSearchForm(request=self.request)
-        context['search_form_problem'] = PatientSearchByMedicalProblemForm(
-            request=self.request
-        )
+        context['search_form_problem'] = PatientSearchByMedicalProblemForm(request=self.request)
 
         return context
 
@@ -320,7 +318,7 @@ class ProblemSearch(LoginRequiredMixin, AjaxListView):
         search_type = self.request.GET.get('search_type_problem', None)
         search_text = self.request.GET.get('search_text_problem', '')
         if search_type:
-            search_filter = '%s__icontains' % search_type
+            search_filter = f'{search_type}__icontains'
             return queryset.filter(**{search_filter: search_text})
 
         return None
@@ -364,7 +362,7 @@ class ProblemDelete(LoginRequiredMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = '%s: %s' % (_('Delete medical problem'), self.object)
+        context['title'] = f'{_("Delete medical problem")}: {self.object}'
         context['cancel_url'] = reverse_lazy(
             'problem_detail',
             args=(self.object.id,)
