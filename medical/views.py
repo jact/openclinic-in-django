@@ -21,7 +21,7 @@ __license__ = 'GPLv3'
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from django.shortcuts import get_object_or_404, redirect
 from django.template.defaultfilters import slugify
 from django.utils import timezone
@@ -62,7 +62,7 @@ class PatientCreate(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         messages.success(self.request, _("Patient, %s, added!") % self.object)
 
-        return reverse_lazy('patient_redirect_detail', args=(self.object.id,))
+        return reverse('patient_redirect_detail', args=(self.object.id,))
 
 
 class PatientUpdate(LoginRequiredMixin, UpdateView):
@@ -82,7 +82,7 @@ class PatientUpdate(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         messages.success(self.request, _("Patient, %s, updated!") % self.object)
 
-        return reverse_lazy('patient_redirect_detail', args=(self.object.id,))
+        return reverse('patient_redirect_detail', args=(self.object.id,))
 
 
 class PatientDelete(LoginRequiredMixin, DeleteView):
@@ -92,7 +92,7 @@ class PatientDelete(LoginRequiredMixin, DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = f'{_("Delete patient")}: {self.object}'
-        context['cancel_url'] = reverse_lazy(
+        context['cancel_url'] = reverse(
             'patient_redirect_detail',
             args=(self.object.id,)
         )
@@ -102,7 +102,7 @@ class PatientDelete(LoginRequiredMixin, DeleteView):
     def get_success_url(self):
         messages.success(self.request, _("Patient, %s, deleted!") % self.object)
 
-        return reverse_lazy('patient_list')
+        return reverse('patient_list')
 
 
 class PatientList(LoginRequiredMixin, AjaxListView):
@@ -190,7 +190,7 @@ class PatientRelatives(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         messages.success(self.request, _("Patient, %s, updated!") % self.object)
-        return reverse_lazy('patient_relatives', args=(self.object.id,))
+        return reverse('patient_relatives', args=(self.object.id,))
 
     def form_valid(self, form):
         # avoid IntegrityError
@@ -268,7 +268,7 @@ class ProblemCreate(LoginRequiredMixin, CreateView):
         return context
 
     def get_success_url(self):
-        return reverse_lazy('problem_detail', args=(self.object.pk,))
+        return reverse('problem_detail', args=(self.object.pk,))
 
 
 class ProblemUpdate(LoginRequiredMixin, UpdateView):
@@ -297,7 +297,7 @@ class ProblemUpdate(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         messages.success(self.request, _('Medical problem, %s, updated!') % self.object)
 
-        return reverse_lazy('problem_detail', args=(self.object.pk,))
+        return reverse('problem_detail', args=(self.object.pk,))
 
 
 class ProblemSearch(LoginRequiredMixin, AjaxListView):
@@ -363,7 +363,7 @@ class ProblemDelete(LoginRequiredMixin, DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = f'{_("Delete medical problem")}: {self.object}'
-        context['cancel_url'] = reverse_lazy(
+        context['cancel_url'] = reverse(
             'problem_detail',
             args=(self.object.id,)
         )
@@ -376,10 +376,7 @@ class ProblemDelete(LoginRequiredMixin, DeleteView):
             _("Medical problem, %s, deleted!") % self.object
         )
 
-        return reverse_lazy(
-            'problem_list',
-            args=(self.object.patient.id,)
-        )
+        return reverse('problem_list', args=(self.object.patient.id,))
 
 
 class ProblemConnections(LoginRequiredMixin, UpdateView):
@@ -404,7 +401,7 @@ class ProblemConnections(LoginRequiredMixin, UpdateView):
             _("Medical problem, %s, updated!") % self.object
         )
 
-        return reverse_lazy('problem_connections', args=(self.object.id,))
+        return reverse('problem_connections', args=(self.object.id,))
 
     def form_valid(self, form):
         # avoid IntegrityError
@@ -480,7 +477,7 @@ class HistoryAntecedentsCreate(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         messages.success(self.request, _("Antecedents have been updated!"))
 
-        return reverse_lazy(
+        return reverse(
             'patient_history_antecedents',
             args=(self.object.patient.id,)
         )
@@ -510,7 +507,7 @@ class HistoryAntecedentsUpdate(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         messages.success(self.request, _("Antecedents have been updated!"))
 
-        return reverse_lazy(
+        return reverse(
             'patient_history_antecedents',
             args=(self.object.patient.id,)
         )
@@ -544,7 +541,7 @@ class ProblemTests(LoginRequiredMixin, CreateView):
             _('Medical test, %s, added!') % self.object
         )
 
-        return reverse_lazy('problem_tests', args=(self.object.problem.id,))
+        return reverse('problem_tests', args=(self.object.problem.id,))
 
 
 class ProblemTestDelete(LoginRequiredMixin, DeleteView):
@@ -554,7 +551,7 @@ class ProblemTestDelete(LoginRequiredMixin, DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = f'{_("Delete medical test")}: {self.object.filename()}'
-        context['cancel_url'] = reverse_lazy(
+        context['cancel_url'] = reverse(
             'problem_tests',
             args=(self.object.problem.id,)
         )
@@ -567,4 +564,4 @@ class ProblemTestDelete(LoginRequiredMixin, DeleteView):
             _('Medical test, %s, deleted!') % str(self.object.filename())
         )
 
-        return reverse_lazy('problem_tests', args=(self.object.problem.id,))
+        return reverse('problem_tests', args=(self.object.problem.id,))
