@@ -78,14 +78,14 @@ class Staff(AbstractUser):
     doctors = DoctorManager()
     administratives = AdministrativeManager()
 
-    def clean(self):
-        super().clean()
-        if self.staff_type == 'D' and not self.collegiate_number:
-            raise ValidationError(_('Collegiate number is required for doctor'))
+    class Meta:
+        app_label = 'medical'
+        db_table = 'staff'
 
     def __str__(self):
         return f'{self.first_name} {self.last_name} {self.last_name_optional}'
 
-    class Meta:
-        app_label = 'medical'
-        db_table = 'staff'
+    def clean(self):
+        super().clean()
+        if self.staff_type == 'D' and not self.collegiate_number:
+            raise ValidationError(_('Collegiate number is required for doctor'))
