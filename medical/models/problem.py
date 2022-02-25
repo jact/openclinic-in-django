@@ -90,6 +90,7 @@ class Problem(TimeStampedModel):
     doctor = models.ForeignKey(
         'medical.Staff',
         null=True,
+        blank=True,
         on_delete=models.SET_NULL,
         verbose_name=_('attending physician')
     )
