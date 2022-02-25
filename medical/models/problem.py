@@ -100,6 +100,16 @@ class Problem(TimeStampedModel):
     opened = OpenedManager()
     closed = ClosedManager()
 
+    class Meta:
+        app_label = 'medical'
+        db_table = 'problem'
+        ordering = ['order_number']
+        verbose_name = _('Medical Problem')
+        verbose_name_plural = _('Medical Problems')
+
+    def __str__(self):
+        return f'{self.order_number}: {self.wording}'
+
     @staticmethod
     def get_last_order_number(patient_id):
         last_order_number = Problem.objects.filter(
@@ -109,13 +119,3 @@ class Problem(TimeStampedModel):
             last_order_number = 0
 
         return last_order_number
-
-    def __str__(self):
-        return f'{self.order_number}: {self.wording}'
-
-    class Meta:
-        app_label = 'medical'
-        db_table = 'problem'
-        ordering = ['order_number']
-        verbose_name = _('Medical Problem')
-        verbose_name_plural = _('Medical Problems')
