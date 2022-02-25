@@ -138,6 +138,16 @@ class Patient(TimeStampedModel):
 
     relatives = models.ManyToManyField('self', blank=True)
 
+    class Meta:
+        app_label = 'medical'
+        db_table = 'patient'
+        ordering = ['last_name', 'last_name_optional', 'first_name']
+        verbose_name = _('Patient')
+        verbose_name_plural = _('Patients')
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name} {self.last_name_optional}'
+
     def clean(self):
         super().clean()
         if self.birth_date and self.decease_date \
@@ -158,13 +168,3 @@ class Patient(TimeStampedModel):
             return dict(self.GENDER_CHOICES)[self.gender]
 
         return None
-
-    def __str__(self):
-        return f'{self.first_name} {self.last_name} {self.last_name_optional}'
-
-    class Meta:
-        app_label = 'medical'
-        db_table = 'patient'
-        ordering = ['last_name', 'last_name_optional', 'first_name']
-        verbose_name = _('Patient')
-        verbose_name_plural = _('Patients')
