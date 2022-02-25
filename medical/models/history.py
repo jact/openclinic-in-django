@@ -107,9 +107,9 @@ class History(models.Model):
         verbose_name=_('family illness')
     )
 
-    def __str__(self):
-        return f'{self.patient} ({self.medical_intolerance})'
-
     class Meta:
         app_label = 'medical'
         db_table = 'history'
+
+    def __str__(self):
+        return f'{self.patient} ({self.medical_intolerance})'
