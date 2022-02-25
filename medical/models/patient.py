@@ -67,9 +67,7 @@ class Patient(TimeStampedModel):
         null=True,
         blank=True,
         verbose_name=_('birth date'),
-        help_text='%(year)s-%(month)s-%(day)s' % {
-            'year': _('yyyy'), 'month': _('mm'), 'day': _('dd')
-        }
+        help_text=f'{_("yyyy")-{_("mm")}-{_("dd")}}'
     )
     birth_place = models.CharField(
         max_length=50,
@@ -81,9 +79,7 @@ class Patient(TimeStampedModel):
         null=True,
         blank=True,
         verbose_name=_('decease date'),
-        help_text='%(year)s-%(month)s-%(day)s' % {
-            'year': _('yyyy'), 'month': _('mm'), 'day': _('dd')
-        }
+        help_text=f'{_("yyyy")-{_("mm")}-{_("dd")}}'
     )
 
     tin = models.CharField(
