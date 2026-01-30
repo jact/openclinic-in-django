@@ -1,6 +1,4 @@
-# -*- coding: UTF-8 -*-
-
-# Copyright (c) 2014-2021 Jose Antonio Chavarría <jachavar@gmail.com>
+# Copyright (c) 2014-2026 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -37,7 +35,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 DATABASES = {
     'default': {
@@ -76,7 +74,11 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'k4h!m#a0ip@ba2()i8gzxzzkv+!4ktsq2=3xjhym0ndw8pf^5z'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'k4h!m#a0ip@ba2()i8gzxzzkv+!4ktsq2=3xjhym0ndw8pf^5z')
+
+# Security: Default allowed hosts (can be overridden in environment-specific settings)
+# Production MUST use environment variable ALLOWED_HOSTS
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
@@ -127,11 +129,14 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'medical',
     'crispy_forms',
+    'crispy_bootstrap3',
     'el_pagination',
     'ajax_select',
 )
 
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap3"
+
+CRISPY_TEMPLATE_PACK = "bootstrap3"
 
 AUTH_USER_MODEL = 'medical.Staff'
 
@@ -140,7 +145,7 @@ AUTH_USER_MODEL = 'medical.Staff'
 # the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
-"""
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -199,4 +204,3 @@ LOGGING = {
         },
     }
 }
-"""
