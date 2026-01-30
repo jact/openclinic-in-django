@@ -1,6 +1,4 @@
-# -*- coding: UTF-8 -*-
-
-# Copyright (c) 2012-2022 Jose Antonio Chavarría <jachavar@gmail.com>
+# Copyright (c) 2012-2026 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,7 +17,7 @@ __author__ = 'Jose Antonio Chavarría'
 __license__ = 'GPLv3'
 
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 class History(models.Model):
