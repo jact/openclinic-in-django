@@ -1,6 +1,4 @@
-# -*- coding: UTF-8 -*-
-
-# Copyright (c) 2012-2015 Jose Antonio Chavarría
+# Copyright (c) 2012-2026 Jose Antonio Chavarría
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,15 +12,13 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-# Author: Jose Antonio Chavarría <jachavar@gmail.com>
 
 __author__ = 'Jose Antonio Chavarría'
 __license__ = 'GPLv3'
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from .models import Patient, Problem, Staff, History, Test
 
