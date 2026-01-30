@@ -1,6 +1,4 @@
-# -*- coding: UTF-8 -*-
-
-# Copyright (c) 2012-2022 Jose Antonio Chavarría <jachavar@gmail.com>
+# Copyright (c) 2012-2026 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,7 +20,7 @@ from datetime import datetime
 
 from django.db import models
 from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from . import TimeStampedModel
 
@@ -67,7 +65,7 @@ class Patient(TimeStampedModel):
         null=True,
         blank=True,
         verbose_name=_('birth date'),
-        help_text=f'{_("yyyy")-{_("mm")}-{_("dd")}}'
+        help_text='{}-{}-{}'.format(_("yyyy"), _("mm"), _("dd"))
     )
     birth_place = models.CharField(
         max_length=50,
@@ -79,7 +77,7 @@ class Patient(TimeStampedModel):
         null=True,
         blank=True,
         verbose_name=_('decease date'),
-        help_text=f'{_("yyyy")-{_("mm")}-{_("dd")}}'
+        help_text='{}-{}-{}'.format(_("yyyy"), _("mm"), _("dd"))
     )
 
     tin = models.CharField(
