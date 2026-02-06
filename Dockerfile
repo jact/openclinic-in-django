@@ -2,15 +2,17 @@
 # ============================================================
 # OpenClinic Dockerfile - Multi-stage Build
 # ============================================================
-# This Dockerfile supports both development and production modes.
+# This Dockerfile supports development, production, and test modes.
 #
 # Build Options:
 #   - Development:  docker build --target development -t openclinic:dev .
 #   - Production:   docker build --target production -t openclinic:prod .
+#   - Test:         docker build --target test -t openclinic:test .
 #
 # Usage:
 #   - Development:  docker run -p 8000:8000 openclinic:dev
 #   - Production:   docker run -p 8000:8000 -e DJANGO_SETTINGS_MODULE=openclinic.settings.production openclinic:prod
+#   - Test:         docker run --rm openclinic:test pytest -v
 # ============================================================
 
 # -----------------------------------------------------------------------------
@@ -29,20 +31,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
-    PIP_NO_PYTHON_VERSION_WARNING=1
+    PIP_NO_PYTHON_VERSION_WARNING=1 \
+    PYTHONPATH=/install
 
 # Set work directory
 WORKDIR /src
 
-# Install Python dependencies
-COPY pyproject.toml .
-RUN pip install --prefix=/install .
-
-# Copy application code
+# Copy source code first, then install dependencies
 COPY . .
 
-# Collect static files (for production)
-RUN DJANGO_SETTINGS_MODULE=openclinic.settings.production \
+# Install Python dependencies
+RUN pip install --target=/install .
+
+# Create static directory and collect static files (for production)
+RUN mkdir -p /src/staticcollected && \
+    DJANGO_SETTINGS_MODULE=openclinic.settings.production \
     python manage.py collectstatic --noinput \
     --settings=openclinic.settings.production
 
@@ -65,12 +68,13 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 RUN groupadd --gid 1000 appgroup && \
     useradd --uid 1000 --gid appgroup --shell /bin/bash --create-home appuser
 
-# Install development dependencies
+# Install Python dependencies
+# First copy only pyproject.toml to leverage Docker cache
 COPY pyproject.toml .
-RUN pip install --prefix=/install -e ".[development,testing]"
 
-# Copy application code
+# Then copy source code and install
 COPY --chown=appuser:appgroup . .
+RUN pip install -e ".[development,testing]" --no-cache-dir
 
 # Switch to non-root user
 USER appuser
@@ -100,7 +104,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Set Python environment
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    DJANGO_SETTINGS_MODULE=openclinic.settings.production
+    DJANGO_SETTINGS_MODULE=openclinic.settings.production \
+    PYTHONPATH=/usr/local
 
 # Create non-root user
 RUN groupadd --gid 1000 appgroup && \
@@ -148,15 +153,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     sqlite3 \
     && rm -rf /var/lib/apt/lists/*
 
+# Set Python environment
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    DJANGO_SETTINGS_MODULE=openclinic.settings.development \
-    COVERAGE_PROCESS_START=/src/pyproject.toml
+    DJANGO_SETTINGS_MODULE=openclinic.settings.test
 
-COPY pyproject.toml .
-RUN pip install --prefix=/install -e ".[testing]"
+# Create non-root user for security
+RUN groupadd --gid 1000 appgroup && \
+    useradd --uid 1000 --gid appgroup --shell /bin/bash --create-home appuser
 
-COPY --chown=appuser:appgroup . .
+# Copy source code and install dependencies
+COPY --chown=appuser:appgroup . /home/appuser
+RUN cd /home/appuser && pip install -e ".[testing]" --no-cache-dir
 
 USER appuser
 WORKDIR /home/appuser

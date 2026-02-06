@@ -68,4 +68,8 @@ LOGGING["loggers"]["django.security"] = {
     "propagate": False,
 }
 
-LOGGING["loggers"]["django"]["handlers"] = ["file", "mail_admins"]
+LOGGING.setdefault("loggers", {})["django"] = {
+    "handlers": ["file", "mail_admins"],
+    "level": "INFO",
+    "propagate": False,
+}
