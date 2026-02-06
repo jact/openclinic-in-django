@@ -67,7 +67,7 @@ class ProblemUpdate(LoginRequiredMixin, UpdateView):
         return context
 
     def get_object(self, queryset=None):
-        return Problem.objects.get(id=self.kwargs['pk'])
+        return get_object_or_404(Problem, id=self.kwargs['pk'])
 
     def get_success_url(self):
         messages.success(self.request, _('Medical problem, %s, updated!') % self.object)
@@ -170,7 +170,7 @@ class ProblemConnections(LoginRequiredMixin, UpdateView):
         return context
 
     def get_object(self, queryset=None):
-        return Problem.objects.get(id=self.kwargs['pk'])
+        return get_object_or_404(Problem, id=self.kwargs['pk'])
 
     def get_success_url(self):
         messages.success(

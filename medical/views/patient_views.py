@@ -144,7 +144,7 @@ class PatientRelatives(LoginRequiredMixin, UpdateView):
         return context
 
     def get_object(self, queryset=None):
-        return Patient.objects.get(id=self.kwargs['pk'])
+        return get_object_or_404(Patient, id=self.kwargs['pk'])
 
     def get_success_url(self):
         messages.success(self.request, _("Patient, %s, updated!") % self.object)
