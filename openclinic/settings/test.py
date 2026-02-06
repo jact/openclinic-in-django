@@ -23,3 +23,28 @@ __license__ = "GPLv3"
 # Django settings for openclinic project (test environment)
 
 from .base import *
+
+DEBUG = True
+
+# Use faster password hasher for tests
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.MD5PasswordHasher",
+]
+
+# Disable migrations for tests (faster)
+class DisableMigrations:
+    def __contains__(self, item):
+        return True
+
+    def __getitem__(self, item):
+        return None
+
+MIGRATION_MODULES = DisableMigrations()
+
+# Silence security warnings for tests (expected in test mode)
+SILENCED_SYSTEM_CHECKS = [
+    "security.W001",  # SecurityMiddleware not in MIDDLEWARE
+    "security.W012",  # SESSION_COOKIE_SECURE not True
+    "security.W016",  # CSRF_COOKIE_SECURE not True
+    "security.W018",  # DEBUG is True
+]

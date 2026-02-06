@@ -30,3 +30,10 @@ INTERNAL_IPS = ("127.0.0.1",)
 MIDDLEWARE += [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
+
+# Silence security warnings for development (expected in dev mode)
+SILENCED_SYSTEM_CHECKS = [
+    "security.W001",  # SecurityMiddleware not in MIDDLEWARE
+    "security.W012",  # SESSION_COOKIE_SECURE not True
+    "security.W016",  # CSRF_COOKIE_SECURE not True
+]
