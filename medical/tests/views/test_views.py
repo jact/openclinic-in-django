@@ -134,7 +134,11 @@ class TestProblemViews:
         """Test successful problem creation."""
         url = reverse("problem_add", kwargs={"pk": test_patient.pk})
         data = {
+            "patient": test_patient.pk,
+            "order_number": 1,
             "wording": "New medical issue",
+            "subjetive": "Patient reports headache",
+            "objetive": "Normal vital signs",
             "closed": False,
         }
         resp = client_logged_in.post(url, data)

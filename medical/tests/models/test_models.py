@@ -86,7 +86,7 @@ class TestProblemModel:
             patient=patient,
             wording="Open problem",
             order_number=1,
-            closed=False
+            closing_date=None  # Open problem has no closing date
         )
         assert open_problem in Problem.opened.all()
         assert open_problem not in Problem.closed.all()
@@ -98,8 +98,7 @@ class TestProblemModel:
             patient=patient,
             wording="Closed problem",
             order_number=1,
-            closed=True,
-            closing_date=date.today()
+            closing_date=date.today()  # Closed problem has closing date
         )
         assert closed_problem in Problem.closed.all()
         assert closed_problem not in Problem.opened.all()

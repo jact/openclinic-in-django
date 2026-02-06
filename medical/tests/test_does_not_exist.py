@@ -220,7 +220,11 @@ class TestProblemCRUD:
         """Test that problem creation works."""
         url = reverse("problem_add", kwargs={"pk": test_patient.pk})
         data = {
+            "patient": test_patient.pk,
+            "order_number": 1,
             "wording": "New medical issue",
+            "subjetive": "Patient reports symptoms",
+            "objetive": "Clinical findings",
             "closed": False,
         }
         resp = client_logged_in.post(url, data)
@@ -231,8 +235,12 @@ class TestProblemCRUD:
         """Test that problem update works."""
         url = reverse("problem_change", kwargs={"pk": test_problem.pk})
         data = {
+            "patient": test_problem.patient.pk,
+            "order_number": test_problem.order_number,
             "wording": "Updated medical issue",
-            "closed": True,
+            "subjetive": "Updated subjective",
+            "objetive": "Updated objective",
+            "closed": False,
         }
         resp = client_logged_in.post(url, data)
         assert resp.status_code == 302

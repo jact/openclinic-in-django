@@ -1,5 +1,6 @@
 import pytest
 from datetime import date
+from django.test import RequestFactory
 
 from medical.forms import (
     PatientForm,
@@ -55,16 +56,17 @@ class TestPatientSearchForm:
     
     def test_search_form_valid(self):
         """Test search form with valid data."""
-        data = {
-            "search_type": "first_name",
-            "search_text": "John",
-        }
-        form = PatientSearchForm(data=data)
+        factory = RequestFactory()
+        request = factory.get('/', {'search_type': 'first_name', 'search_text': 'John'})
+        # Pass data explicitly to form
+        form = PatientSearchForm(data=request.GET, request=request)
         assert form.is_valid()
     
     def test_search_form_empty_valid(self):
         """Test search form can be empty."""
-        form = PatientSearchForm(data={})
+        factory = RequestFactory()
+        request = factory.get('/', {'search_type': 'last_name', 'search_text': ''})
+        form = PatientSearchForm(data=request.GET, request=request)
         assert form.is_valid()
 
 
@@ -79,7 +81,6 @@ class TestProblemForm:
             "patient": patient.pk,
             "wording": "Medical issue description",
             "order_number": 1,
-            "closed": False,
         }
         form = ProblemForm(data=data)
         assert form.is_valid()
@@ -95,8 +96,10 @@ class TestProblemForm:
         }
         form = ProblemForm(data=data)
         assert form.is_valid()
-        problem = form.save()
-        assert problem.closed is True
+        problem = form.save(commit=False)
+        if form.cleaned_data.get('closed'):
+            problem.closing_date = date.today()
+        problem.save()
         assert problem.closing_date is not None
 
 

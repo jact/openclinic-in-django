@@ -11,7 +11,7 @@ from django.http import Http404
 
 from .base import (
     LoginRequiredMixin, AjaxListView, CreateView, UpdateView,
-    DetailView, redirect, get_object_or_404, messages, logger, _
+    DetailView, redirect, get_object_or_404, messages, logger, reverse, _
 )
 from ..models import Patient, Problem, History
 from ..forms import HistoryAntecedentsForm
