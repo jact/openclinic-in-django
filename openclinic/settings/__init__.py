@@ -17,17 +17,17 @@
 #
 # Author: Jose Antonio Chavarría <jachavar@gmail.com>
 
-__author__ = 'Jose Antonio Chavarría'
-__license__ = 'GPLv3'
+__author__ = "Jose Antonio Chavarría"
+__license__ = "GPLv3"
 
-import os
 import importlib
+import os
 
 # Get the Django settings module from environment variable
 # Format: DJANGO_SETTINGS_MODULE=openclinic.settings.development|staging|production|test
 # Default: openclinic.settings.base if not set (to use base.py by default)
 
-django_settings = os.environ.get('DJANGO_SETTINGS_MODULE', '')
+django_settings = os.environ.get("DJANGO_SETTINGS_MODULE", "")
 
 # Load the base settings by default (includes logging configuration)
 from .base import *

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright (c) 2012-2022 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -15,19 +13,18 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-__author__ = 'Jose Antonio Chavarría'
-__license__ = 'GPLv3'
+__author__ = "Jose Antonio Chavarría"
+__license__ = "GPLv3"
 
+from ajax_select import LookupChannel, register
 from django.db.models import Q
 from django.urls import reverse
 from django.utils.html import escape
 
-from ajax_select import register, LookupChannel
-
 from .models import Patient, Problem
 
 
-@register('patients')
+@register("patients")
 class PatientLookup(LookupChannel):
     model = Patient
 
@@ -36,8 +33,7 @@ class PatientLookup(LookupChannel):
 
     def format_item_display(self, obj):
         return '<a href="{}">{}</a>'.format(
-            reverse('patient_redirect_detail', args=(obj.id,)),
-            escape(obj.__str__())
+            reverse("patient_redirect_detail", args=(obj.id,)), escape(obj.__str__())
         )
 
     def get_query(self, q, request):
@@ -48,10 +44,10 @@ class PatientLookup(LookupChannel):
         )
 
     def get_objects(self, ids):
-        return self.model.objects.filter(pk__in=ids).order_by('first_name')
+        return self.model.objects.filter(pk__in=ids).order_by("first_name")
 
 
-@register('problems')
+@register("problems")
 class ProblemLookup(LookupChannel):
     model = Problem
 
@@ -60,8 +56,7 @@ class ProblemLookup(LookupChannel):
 
     def format_item_display(self, obj):
         return '<a href="{}">{}</a>'.format(
-            reverse('problem_detail', args=(obj.id,)),
-            escape(obj.__str__())
+            reverse("problem_detail", args=(obj.id,)), escape(obj.__str__())
         )
 
     def get_query(self, q, request):
@@ -72,4 +67,4 @@ class ProblemLookup(LookupChannel):
         )
 
     def get_objects(self, ids):
-        return self.model.objects.filter(pk__in=ids).order_by('wording')
+        return self.model.objects.filter(pk__in=ids).order_by("wording")

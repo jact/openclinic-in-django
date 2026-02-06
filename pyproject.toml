@@ -91,7 +91,9 @@ openclinic = "manage:main"
 [tool.setuptools]
 packages = ["openclinic", "medical"]
 
-# ==================== RUFF CONFIGURATION ====================
+# ============================================================
+# RUFF CONFIGURATION (Deprecated format - use [lint] section)
+# ============================================================
 
 [tool.ruff]
 target-version = "py310"
@@ -109,27 +111,40 @@ select = [
     "C4",
     "SIM",
     "DJ",
-    "Q",
     "RET",
-    "G",
     "RUF",
 ]
 ignore = [
-    "F841",
-    "E501",
-    "D100",
-    "D101",
-    "D102",
-    "D103",
-    "D104",
-    "D105",
-    "D106",
-    "D107",
-    "R0904",
-    "R0903",
-    "C901",
-    "S101",
-    "T201",
+    "F841",  # Local variable is assigned but never used
+    "E501",  # Line too long
+    "D100",  # Missing docstring in public module
+    "D101",  # Missing docstring in public class
+    "D102",  # Missing docstring in public method
+    "D103",  # Missing docstring in public function
+    "D104",  # Missing docstring in public package
+    "D105",  # Missing docstring in magic method
+    "D106",  # Missing docstring in public nested class
+    "D107",  # Missing docstring in __init__
+    "C901",  # Function too complex
+    "S101",  # Use of assert detected
+    "T201",  # Print statement found
+    "RUF005",  # Consider iterable unpacking
+    # Django-specific (style suggestions, not errors)
+    "DJ001",  # Avoid using null=True on string-based fields
+    "DJ006",  # Do not use exclude with ModelForm
+    "DJ007",  # Do not use __all__ with ModelForm
+    "F401",  # Import but unused (for re-exports)
+    "F403",  # Star imports used
+    "F405",  # May be undefined from star import
+    "E402",  # Module level import not at top
+    "RUF012",  # Mutable class attributes should be ClassVar
+    "B017",  # Assert blind exception
+    "B904",  # raise within except without from
+    "D205",  # 1 blank line required between summary line and description
+    "D200",  # One-line docstring should fit on one line
+    "D401",  # First line of docstring should be in imperative mood
+    "N806",  # Variable in function should be lowercase
+    "RUF022",  # __all__ is not sorted
 ]
 exclude = [
     ".bzr",

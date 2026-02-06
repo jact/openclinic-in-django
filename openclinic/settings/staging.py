@@ -13,19 +13,19 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-__author__ = 'Jose Antonio Chavarría'
-__license__ = 'GPLv3'
+__author__ = "Jose Antonio Chavarría"
+__license__ = "GPLv3"
 
 # Django settings for openclinic project (staging environment)
 
 from .base import *
 
 DEBUG = False
-TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
+TEMPLATES[0]["OPTIONS"]["debug"] = DEBUG
 
 # Staging logging configuration (less verbose than development)
-LOGGING['handlers']['default']['level'] = 'INFO'
-LOGGING['handlers']['console']['level'] = 'INFO'
+LOGGING["handlers"]["default"]["level"] = "INFO"
+LOGGING["handlers"]["console"]["level"] = "INFO"
 
-LOGGING['loggers']['django.db.backends']['level'] = 'INFO'
-LOGGING['loggers']['django']['level'] = 'INFO'
+LOGGING["loggers"]["django.db.backends"]["level"] = "INFO"
+LOGGING["loggers"]["django"]["level"] = "INFO"

@@ -13,63 +13,52 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-__author__ = 'Jose Antonio Chavarría'
-__license__ = 'GPLv3'
+__author__ = "Jose Antonio Chavarría"
+__license__ = "GPLv3"
 
-from django.db import models
-from django.core.exceptions import ValidationError
-from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser, UserManager
+from django.core.exceptions import ValidationError
+from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class AdministrativeManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(staff_type='A')
+        return super().get_queryset().filter(staff_type="A")
 
 
 class DoctorManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(staff_type='D')
+        return super().get_queryset().filter(staff_type="D")
 
 
 class Staff(AbstractUser):
     STAFF_CHOICES = (
-        ('A', _('Administrative')),
-        ('D', _('Doctor')),
+        ("A", _("Administrative")),
+        ("D", _("Doctor")),
     )
 
     collegiate_number = models.CharField(
-        max_length=20,
-        blank=True,
-        null=True,
-        verbose_name=_('collegiate number')
+        max_length=20, blank=True, null=True, verbose_name=_("collegiate number")
     )
     tin = models.CharField(
         max_length=20,
         blank=True,
         null=True,
-        verbose_name=_('taxpayer Identification Number (TIN)')
+        verbose_name=_("taxpayer Identification Number (TIN)"),
     )
 
     last_name_optional = models.CharField(
-        max_length=30,
-        blank=True,
-        null=True,
-        verbose_name=_('last name optional')
+        max_length=30, blank=True, null=True, verbose_name=_("last name optional")
     )
 
-    address = models.TextField(blank=True, null=True, verbose_name=_('address'))
+    address = models.TextField(blank=True, null=True, verbose_name=_("address"))
     phone_contact = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name=_('phone contact')
+        blank=True, null=True, verbose_name=_("phone contact")
     )
 
     staff_type = models.CharField(
-        max_length=1,
-        choices=STAFF_CHOICES,
-        default='A',
-        verbose_name=_('staff type')
+        max_length=1, choices=STAFF_CHOICES, default="A", verbose_name=_("staff type")
     )
 
     objects = UserManager()
@@ -77,13 +66,13 @@ class Staff(AbstractUser):
     administratives = AdministrativeManager()
 
     class Meta:
-        app_label = 'medical'
-        db_table = 'staff'
+        app_label = "medical"
+        db_table = "staff"
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name} {self.last_name_optional}'
+        return f"{self.first_name} {self.last_name} {self.last_name_optional}"
 
     def clean(self):
         super().clean()
-        if self.staff_type == 'D' and not self.collegiate_number:
-            raise ValidationError(_('Collegiate number is required for doctor'))
+        if self.staff_type == "D" and not self.collegiate_number:
+            raise ValidationError(_("Collegiate number is required for doctor"))

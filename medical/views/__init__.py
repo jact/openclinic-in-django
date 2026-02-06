@@ -14,75 +14,75 @@ from the split view modules.
 # Import base utilities
 from .base import logger
 
+# History views
+from .history_views import (
+    HistoryAntecedentsCreate,
+    HistoryAntecedentsDetail,
+    HistoryAntecedentsUpdate,
+)
+
 # Patient views
 from .patient_views import (
     PatientCreate,
-    PatientUpdate,
     PatientDelete,
+    PatientDetail,
     PatientList,
     PatientListView,
-    PatientSearch,
-    PatientRedirectDetail,
-    PatientDetail,
-    PatientRelatives,
     PatientMedicalReport,
+    PatientRedirectDetail,
+    PatientRelatives,
+    PatientSearch,
     PatientTests,
+    PatientUpdate,
 )
 
 # Problem views
 from .problem_views import (
-    ProblemCreate,
-    ProblemUpdate,
-    ProblemSearch,
-    ProblemList,
-    ProblemDetail,
-    ProblemDelete,
-    ProblemConnections,
     HistoryList,
-)
-
-# History views
-from .history_views import (
-    HistoryAntecedentsDetail,
-    HistoryAntecedentsCreate,
-    HistoryAntecedentsUpdate,
+    ProblemConnections,
+    ProblemCreate,
+    ProblemDelete,
+    ProblemDetail,
+    ProblemList,
+    ProblemSearch,
+    ProblemUpdate,
 )
 
 # Test views
 from .test_views import (
-    ProblemTests,
     ProblemTestDelete,
+    ProblemTests,
 )
 
 __all__ = [
     # Base
-    'logger',
+    "logger",
     # Patient views
-    'PatientCreate',
-    'PatientUpdate',
-    'PatientDelete',
-    'PatientList',
-    'PatientListView',
-    'PatientSearch',
-    'PatientRedirectDetail',
-    'PatientDetail',
-    'PatientRelatives',
-    'PatientMedicalReport',
-    'PatientTests',
+    "PatientCreate",
+    "PatientUpdate",
+    "PatientDelete",
+    "PatientList",
+    "PatientListView",
+    "PatientSearch",
+    "PatientRedirectDetail",
+    "PatientDetail",
+    "PatientRelatives",
+    "PatientMedicalReport",
+    "PatientTests",
     # Problem views
-    'ProblemCreate',
-    'ProblemUpdate',
-    'ProblemSearch',
-    'ProblemList',
-    'ProblemDetail',
-    'ProblemDelete',
-    'ProblemConnections',
-    'HistoryList',
+    "ProblemCreate",
+    "ProblemUpdate",
+    "ProblemSearch",
+    "ProblemList",
+    "ProblemDetail",
+    "ProblemDelete",
+    "ProblemConnections",
+    "HistoryList",
     # History views
-    'HistoryAntecedentsDetail',
-    'HistoryAntecedentsCreate',
-    'HistoryAntecedentsUpdate',
+    "HistoryAntecedentsDetail",
+    "HistoryAntecedentsCreate",
+    "HistoryAntecedentsUpdate",
     # Test views
-    'ProblemTests',
-    'ProblemTestDelete',
+    "ProblemTests",
+    "ProblemTestDelete",
 ]

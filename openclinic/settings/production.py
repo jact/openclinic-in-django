@@ -13,59 +13,59 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-__author__ = 'Jose Antonio Chavarría'
-__license__ = 'GPLv3'
+__author__ = "Jose Antonio Chavarría"
+__license__ = "GPLv3"
 
 # Django settings for openclinic project (production environment)
 
 from .base import *
 
 DEBUG = False
-TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
+TEMPLATES[0]["OPTIONS"]["debug"] = DEBUG
 
 # Security: Read allowed hosts from environment variable
 # Format: comma-separated list of domains, e.g., "example.com,www.example.com"
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 
-STATIC_ROOT = '/var/tmp/static'
+STATIC_ROOT = "/var/tmp/static"
 
 # Production logging configuration
 import os
 
-LOG_DIR = os.environ.get('LOG_DIR', '/var/log/openclinic')
+LOG_DIR = os.environ.get("LOG_DIR", "/var/log/openclinic")
 os.makedirs(LOG_DIR, exist_ok=True)
 
-LOGGING['handlers']['file'] = {
-    'level': 'INFO',
-    'class': 'logging.handlers.RotatingFileHandler',
-    'filename': os.path.join(LOG_DIR, 'django.log'),
-    'maxBytes': 1024 * 1024 * 10,  # 10 MB
-    'backupCount': 5,
-    'formatter': 'verbose',
+LOGGING["handlers"]["file"] = {
+    "level": "INFO",
+    "class": "logging.handlers.RotatingFileHandler",
+    "filename": os.path.join(LOG_DIR, "django.log"),
+    "maxBytes": 1024 * 1024 * 10,  # 10 MB
+    "backupCount": 5,
+    "formatter": "verbose",
 }
 
-LOGGING['handlers']['error_file'] = {
-    'level': 'ERROR',
-    'class': 'logging.handlers.RotatingFileHandler',
-    'filename': os.path.join(LOG_DIR, 'django_errors.log'),
-    'maxBytes': 1024 * 1024 * 10,  # 10 MB
-    'backupCount': 10,
-    'formatter': 'verbose',
+LOGGING["handlers"]["error_file"] = {
+    "level": "ERROR",
+    "class": "logging.handlers.RotatingFileHandler",
+    "filename": os.path.join(LOG_DIR, "django_errors.log"),
+    "maxBytes": 1024 * 1024 * 10,  # 10 MB
+    "backupCount": 10,
+    "formatter": "verbose",
 }
 
-LOGGING['handlers']['security_file'] = {
-    'level': 'WARNING',
-    'class': 'logging.handlers.RotatingFileHandler',
-    'filename': os.path.join(LOG_DIR, 'security.log'),
-    'maxBytes': 1024 * 1024 * 5,  # 5 MB
-    'backupCount': 10,
-    'formatter': 'verbose',
+LOGGING["handlers"]["security_file"] = {
+    "level": "WARNING",
+    "class": "logging.handlers.RotatingFileHandler",
+    "filename": os.path.join(LOG_DIR, "security.log"),
+    "maxBytes": 1024 * 1024 * 5,  # 5 MB
+    "backupCount": 10,
+    "formatter": "verbose",
 }
 
-LOGGING['loggers']['django.security'] = {
-    'handlers': ['security_file', 'mail_admins'],
-    'level': 'WARNING',
-    'propagate': False,
+LOGGING["loggers"]["django.security"] = {
+    "handlers": ["security_file", "mail_admins"],
+    "level": "WARNING",
+    "propagate": False,
 }
 
-LOGGING['loggers']['django']['handlers'] = ['file', 'mail_admins']
+LOGGING["loggers"]["django"]["handlers"] = ["file", "mail_admins"]

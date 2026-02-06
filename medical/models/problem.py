@@ -13,8 +13,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-__author__ = 'Jose Antonio Chavarría'
-__license__ = 'GPLv3'
+__author__ = "Jose Antonio Chavarría"
+__license__ = "GPLv3"
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -33,91 +33,62 @@ class ClosedManager(models.Manager):
 
 
 class Problem(TimeStampedModel):
-    order_number = models.PositiveSmallIntegerField(
-        verbose_name=_('order number')
-    )
+    order_number = models.PositiveSmallIntegerField(verbose_name=_("order number"))
     closing_date = models.DateField(
-        blank=True,
-        null=True,
-        editable=False,
-        verbose_name=_('closing date')
+        blank=True, null=True, editable=False, verbose_name=_("closing date")
     )
 
     meeting_place = models.CharField(
-        max_length=50,
-        null=True,
-        blank=True,
-        verbose_name=_('meeting place')
+        max_length=50, null=True, blank=True, verbose_name=_("meeting place")
     )
 
-    wording = models.TextField(
-        verbose_name=_('wording')
-    )
+    wording = models.TextField(verbose_name=_("wording"))
 
-    subjetive = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('subjetive')
-    )
-    objetive = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('objetive')
-    )
+    subjetive = models.TextField(null=True, blank=True, verbose_name=_("subjetive"))
+    objetive = models.TextField(null=True, blank=True, verbose_name=_("objetive"))
     appreciation = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('appreciation')
+        null=True, blank=True, verbose_name=_("appreciation")
     )
-    action_plan = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('action plan')
-    )
+    action_plan = models.TextField(null=True, blank=True, verbose_name=_("action plan"))
     prescription = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_("doctor's orders")
+        null=True, blank=True, verbose_name=_("doctor's orders")
     )
 
-    patient = models.ForeignKey(
-        'Patient',
-        on_delete=models.CASCADE
-    )
+    patient = models.ForeignKey("Patient", on_delete=models.CASCADE)
 
     doctor = models.ForeignKey(
-        'medical.Staff',
+        "medical.Staff",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        verbose_name=_('attending physician')
+        verbose_name=_("attending physician"),
     )
 
-    connections = models.ManyToManyField('self', blank=True)
+    connections = models.ManyToManyField("self", blank=True)
 
     objects = models.Manager()
     opened = OpenedManager()
     closed = ClosedManager()
 
     class Meta:
-        app_label = 'medical'
-        db_table = 'problem'
-        ordering = ['order_number']
-        verbose_name = _('Medical Problem')
-        verbose_name_plural = _('Medical Problems')
+        app_label = "medical"
+        db_table = "problem"
+        ordering = ["order_number"]
+        verbose_name = _("Medical Problem")
+        verbose_name_plural = _("Medical Problems")
         indexes = [
-            models.Index(fields=['patient', 'order_number']),
-            models.Index(fields=['closing_date', 'modified']),
+            models.Index(fields=["patient", "order_number"]),
+            models.Index(fields=["closing_date", "modified"]),
         ]
 
     def __str__(self):
-        return f'{self.order_number}: {self.wording}'
+        return f"{self.order_number}: {self.wording}"
 
     @staticmethod
     def get_last_order_number(patient_id):
         last_order_number = Problem.objects.filter(
             patient_id__exact=patient_id
-        ).aggregate(models.Max('order_number'))['order_number__max']
+        ).aggregate(models.Max("order_number"))["order_number__max"]
         if not last_order_number:
             last_order_number = 0
 

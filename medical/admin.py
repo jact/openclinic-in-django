@@ -13,14 +13,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-__author__ = 'Jose Antonio Chavarría'
-__license__ = 'GPLv3'
+__author__ = "Jose Antonio Chavarría"
+__license__ = "GPLv3"
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 
-from .models import Patient, Problem, Staff, History, Test
+from .models import History, Patient, Problem, Staff, Test
 
 admin.site.register(History)
 admin.site.register(Patient)
@@ -31,28 +31,35 @@ admin.site.register(Test)
 @admin.register(Staff)
 class StaffAdmin(UserAdmin):
     fieldsets = (
-        (None, {'fields': ('username', 'email', 'password')}),
-        (_('Personal info'), {'fields': ('first_name', 'last_name')}),
-        (_('Permissions'), {
-            'fields': (
-                'is_active', 'is_staff', 'is_superuser',
-                'groups', 'user_permissions',
-                'staff_type'
-            )
-        }),
-        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+        (None, {"fields": ("username", "email", "password")}),
+        (_("Personal info"), {"fields": ("first_name", "last_name")}),
+        (
+            _("Permissions"),
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "groups",
+                    "user_permissions",
+                    "staff_type",
+                )
+            },
+        ),
+        (_("Important dates"), {"fields": ("last_login", "date_joined")}),
     )
     add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': (
-                'username', 'staff_type', 'email', 'password1', 'password2'
-            )
-        }),
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": ("username", "staff_type", "email", "password1", "password2"),
+            },
+        ),
     )
     # https://www.caktusgroup.com/blog/2013/08/07/migrating-custom-user-model-django/
     # form = StaffChangeForm
     # add_form = StaffCreationForm
-    list_display = ('first_name', 'last_name', 'email', 'is_staff')
-    search_fields = ('email', 'first_name', 'last_name')
-    ordering = ('username',)
+    list_display = ("first_name", "last_name", "email", "is_staff")
+    search_fields = ("email", "first_name", "last_name")
+    ordering = ("username",)

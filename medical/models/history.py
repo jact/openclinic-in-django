@@ -13,104 +13,67 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-__author__ = 'Jose Antonio Chavarría'
-__license__ = 'GPLv3'
+__author__ = "Jose Antonio Chavarría"
+__license__ = "GPLv3"
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
 class History(models.Model):
-    patient = models.OneToOneField(
-        'Patient',
-        on_delete=models.CASCADE
-    )
+    patient = models.OneToOneField("Patient", on_delete=models.CASCADE)
 
     birth_growth = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('birth and growth')
+        null=True, blank=True, verbose_name=_("birth and growth")
     )
     growth_sexuality = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('growth and sexuality')
+        null=True, blank=True, verbose_name=_("growth and sexuality")
     )
 
-    feed = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('feed')
-    )
-    habits = models.TextField(
-        verbose_name=_('habits'),
-        blank=True,
-        null=True
-    )
+    feed = models.TextField(null=True, blank=True, verbose_name=_("feed"))
+    habits = models.TextField(verbose_name=_("habits"), blank=True, null=True)
     peristaltic_conditions = models.TextField(
-        verbose_name=_('peristaltic conditions'),
-        blank=True,
-        null=True
+        verbose_name=_("peristaltic conditions"), blank=True, null=True
     )
     psychological_conditions = models.TextField(
-        verbose_name=_('psychological conditions'),
-        blank=True,
-        null=True
+        verbose_name=_("psychological conditions"), blank=True, null=True
     )
 
     children_complaint = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('children complaint')
+        null=True, blank=True, verbose_name=_("children complaint")
     )
     venereal_disease = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('venereal disease')
+        null=True, blank=True, verbose_name=_("venereal disease")
     )
     accident_surgical_operation = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('accidents and surgical operations')
+        null=True, blank=True, verbose_name=_("accidents and surgical operations")
     )
     medical_intolerance = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('medical intolerance')
+        null=True, blank=True, verbose_name=_("medical intolerance")
     )
     mental_illness = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('mental illness')
+        null=True, blank=True, verbose_name=_("mental illness")
     )
 
     parents_status_health = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('parents status health')
+        null=True, blank=True, verbose_name=_("parents status health")
     )
     brothers_status_health = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('brothers status health')
+        null=True, blank=True, verbose_name=_("brothers status health")
     )
     spouse_childs_status_health = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('spouse and childs status health')
+        null=True, blank=True, verbose_name=_("spouse and childs status health")
     )
     family_illness = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('family illness')
+        null=True, blank=True, verbose_name=_("family illness")
     )
 
     class Meta:
-        app_label = 'medical'
-        db_table = 'history'
+        app_label = "medical"
+        db_table = "history"
         indexes = [
-            models.Index(fields=['patient']),
+            models.Index(fields=["patient"]),
         ]
 
     def __str__(self):
-        return f'{self.patient} ({self.medical_intolerance})'
+        return f"{self.patient} ({self.medical_intolerance})"

@@ -17,8 +17,8 @@
 #
 # Author: Jose Antonio Chavarría <jachavar@gmail.com>
 
-__author__ = 'Jose Antonio Chavarría'
-__license__ = 'GPLv3'
+__author__ = "Jose Antonio Chavarría"
+__license__ = "GPLv3"
 
 # Settings for django endless pagination app
 # http://django-endless-pagination.readthedocs.org/en/latest/customization.html

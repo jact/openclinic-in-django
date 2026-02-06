@@ -13,13 +13,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-__author__ = 'Jose Antonio Chavarría'
-__license__ = 'GPLv3'
+__author__ = "Jose Antonio Chavarría"
+__license__ = "GPLv3"
 
 from datetime import datetime
 
-from django.db import models
 from django.core.exceptions import ValidationError
+from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from . import TimeStampedModel
@@ -27,24 +27,19 @@ from . import TimeStampedModel
 
 class Patient(TimeStampedModel):
     GENDER_CHOICES = (
-        ('M', _('Male')),
-        ('F', _('Female')),
+        ("M", _("Male")),
+        ("F", _("Female")),
     )
 
-    first_name = models.CharField(max_length=30, verbose_name=_('first name'))
-    last_name = models.CharField(max_length=30, verbose_name=_('last name'))
+    first_name = models.CharField(max_length=30, verbose_name=_("first name"))
+    last_name = models.CharField(max_length=30, verbose_name=_("last name"))
     last_name_optional = models.CharField(
-        max_length=30,
-        null=True,
-        blank=True,
-        verbose_name=_('last name optional')
+        max_length=30, null=True, blank=True, verbose_name=_("last name optional")
     )
 
-    address = models.TextField(null=True, blank=True, verbose_name=_('address'))
+    address = models.TextField(null=True, blank=True, verbose_name=_("address"))
     phone_contact = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('phone contact')
+        null=True, blank=True, verbose_name=_("phone contact")
     )
 
     gender = models.CharField(
@@ -52,106 +47,89 @@ class Patient(TimeStampedModel):
         choices=GENDER_CHOICES,
         null=True,
         blank=True,
-        verbose_name=_('gender')
+        verbose_name=_("gender"),
     )
     race = models.CharField(
-        max_length=30,
-        null=True,
-        blank=True,
-        verbose_name=_('race')
+        max_length=30, null=True, blank=True, verbose_name=_("race")
     )
 
     birth_date = models.DateField(
         null=True,
         blank=True,
-        verbose_name=_('birth date'),
-        help_text='{}-{}-{}'.format(_("yyyy"), _("mm"), _("dd"))
+        verbose_name=_("birth date"),
+        help_text="{}-{}-{}".format(_("yyyy"), _("mm"), _("dd")),
     )
     birth_place = models.CharField(
-        max_length=50,
-        null=True,
-        blank=True,
-        verbose_name=_('birth place')
+        max_length=50, null=True, blank=True, verbose_name=_("birth place")
     )
     decease_date = models.DateField(
         null=True,
         blank=True,
-        verbose_name=_('decease date'),
-        help_text='{}-{}-{}'.format(_("yyyy"), _("mm"), _("dd"))
+        verbose_name=_("decease date"),
+        help_text="{}-{}-{}".format(_("yyyy"), _("mm"), _("dd")),
     )
 
     tin = models.CharField(
         max_length=20,
         null=True,
         blank=True,
-        verbose_name=_('taxpayer Identification Number (TIN)')
+        verbose_name=_("taxpayer Identification Number (TIN)"),
     )
     ssn = models.CharField(
         max_length=30,
         null=True,
         blank=True,
-        verbose_name=_('social Security Number (SSN)')
+        verbose_name=_("social Security Number (SSN)"),
     )
     health_card_number = models.CharField(
-        max_length=30,
-        null=True,
-        blank=True,
-        verbose_name=_('health card number')
+        max_length=30, null=True, blank=True, verbose_name=_("health card number")
     )
 
     family_situation = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('family situation')
+        null=True, blank=True, verbose_name=_("family situation")
     )
     labour_situation = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('labour situation')
+        null=True, blank=True, verbose_name=_("labour situation")
     )
-    education = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_('education')
-    )
+    education = models.TextField(null=True, blank=True, verbose_name=_("education"))
 
     insurance_company = models.CharField(
-        max_length=30,
-        null=True,
-        blank=True,
-        verbose_name=_('insurance company')
+        max_length=30, null=True, blank=True, verbose_name=_("insurance company")
     )
 
     doctor_assigned = models.ForeignKey(
-        'medical.Staff',
+        "medical.Staff",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        verbose_name=_('doctor allocated by quota')
+        verbose_name=_("doctor allocated by quota"),
     )
 
-    relatives = models.ManyToManyField('self', blank=True)
+    relatives = models.ManyToManyField("self", blank=True)
 
     class Meta:
-        app_label = 'medical'
-        db_table = 'patient'
-        ordering = ['last_name', 'last_name_optional', 'first_name']
-        verbose_name = _('Patient')
-        verbose_name_plural = _('Patients')
+        app_label = "medical"
+        db_table = "patient"
+        ordering = ["last_name", "last_name_optional", "first_name"]
+        verbose_name = _("Patient")
+        verbose_name_plural = _("Patients")
         indexes = [
-            models.Index(fields=['last_name', 'first_name']),
-            models.Index(fields=['birth_date']),
-            models.Index(fields=['tin']),
+            models.Index(fields=["last_name", "first_name"]),
+            models.Index(fields=["birth_date"]),
+            models.Index(fields=["tin"]),
         ]
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name} {self.last_name_optional}'
+        return f"{self.first_name} {self.last_name} {self.last_name_optional}"
 
     def clean(self):
         super().clean()
-        if self.birth_date and self.decease_date \
-                and self.birth_date > self.decease_date:
-            raise ValidationError(_('Can not die before birth'))
+        if (
+            self.birth_date
+            and self.decease_date
+            and self.birth_date > self.decease_date
+        ):
+            raise ValidationError(_("Can not die before birth"))
 
     def age(self):
         age = 0

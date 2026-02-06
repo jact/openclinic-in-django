@@ -9,8 +9,8 @@
 
 import pytest
 from django.urls import reverse
-from django.shortcuts import get_object_or_404
-from medical.models import Patient, Problem, History
+
+from medical.models import History, Patient, Problem
 
 
 @pytest.mark.django_db
@@ -50,7 +50,9 @@ class TestPatientDeleteView:
         assert resp.status_code == 302
         assert Patient.objects.filter(pk=test_patient.pk).count() == 0
 
-    def test_patient_delete_get_shows_confirmation(self, client_logged_in, test_patient):
+    def test_patient_delete_get_shows_confirmation(
+        self, client_logged_in, test_patient
+    ):
         """Test GET request shows delete confirmation."""
         url = reverse("patient_delete", kwargs={"pk": test_patient.pk})
         resp = client_logged_in.get(url)
@@ -125,10 +127,11 @@ class TestHistoryAntecedentsUpdateView:
     def test_history_update_success(self, client_logged_in, test_patient):
         """Test successful history antecedents update."""
         history = History.objects.create(
-            patient=test_patient,
-            medical_intolerance="Old"
+            patient=test_patient, medical_intolerance="Old"
         )
-        url = reverse("patient_history_antecedents_change", kwargs={"pk": test_patient.pk})
+        url = reverse(
+            "patient_history_antecedents_change", kwargs={"pk": test_patient.pk}
+        )
         data = {
             "patient": test_patient.pk,
             "medical_intolerance": "Updated",
@@ -157,7 +160,7 @@ class TestPatientMedicalReportView:
             patient=test_patient,
             wording="Open problem",
             order_number=1,
-            closing_date=None
+            closing_date=None,
         )
         url = reverse("patient_medical_report", kwargs={"pk": test_patient.pk})
         resp = client_logged_in.get(url)

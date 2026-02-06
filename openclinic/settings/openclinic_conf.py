@@ -15,17 +15,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-__author__ = 'Jose Antonio Chavarría'
-__license__ = 'GPLv3'
+__author__ = "Jose Antonio Chavarría"
+__license__ = "GPLv3"
 
 # Settings for OpenClinic project. OpenClinic Revisited project.
 
 APP_AUTHOR = __author__
-APP_NAME = 'OpenClinic'  # OpenClinic Revisited (in Django)
-APP_VERSION = '1.0.20171211'
+APP_NAME = "OpenClinic"  # OpenClinic Revisited (in Django)
+APP_VERSION = "1.0.20171211"
 
-CLINIC_NAME = 'My Clinic'
-CLINIC_HOURS = 'L-V 9am-3pm, S 10am-1pm'
-CLINIC_ADDRESS = 'Sesame Street'
-CLINIC_PHONE = '999 66 66 66'
-CLINIC_URL = '#'  # 'http://www.example.com'
+CLINIC_NAME = "My Clinic"
+CLINIC_HOURS = "L-V 9am-3pm, S 10am-1pm"
+CLINIC_ADDRESS = "Sesame Street"
+CLINIC_PHONE = "999 66 66 66"
+CLINIC_URL = "#"  # 'http://www.example.com'

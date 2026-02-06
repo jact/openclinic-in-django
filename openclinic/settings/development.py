@@ -13,18 +13,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-__author__ = 'Jose Antonio Chavarría'
-__license__ = 'GPLv3'
+__author__ = "Jose Antonio Chavarría"
+__license__ = "GPLv3"
 
 # Django settings for develop openclinic project
 
 from .base import *
 
 DEBUG = True
-TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
+TEMPLATES[0]["OPTIONS"]["debug"] = DEBUG
 
 # python manage.py graph_models -a -o myapp_models.png
-INSTALLED_APPS += ("debug_toolbar", 'django_extensions')
+INSTALLED_APPS += ("debug_toolbar", "django_extensions")
 INTERNAL_IPS = ("127.0.0.1",)
 
-MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware", ]
+MIDDLEWARE += [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+]

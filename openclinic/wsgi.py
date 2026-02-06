@@ -13,17 +13,16 @@ middleware here, or combine a Django application with an application of another
 framework.
 
 """
+
 import os
 
-os.environ.setdefault(
-    "DJANGO_SETTINGS_MODULE",
-    "openclinic.settings.production"
-)
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "openclinic.settings.production")
 
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.
 from django.core.wsgi import get_wsgi_application
+
 application = get_wsgi_application()
 
 # Apply WSGI middleware here.

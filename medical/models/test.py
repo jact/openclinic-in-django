@@ -13,8 +13,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-__author__ = 'Jose Antonio Chavarría'
-__license__ = 'GPLv3'
+__author__ = "Jose Antonio Chavarría"
+__license__ = "GPLv3"
 
 import os
 
@@ -28,25 +28,18 @@ from . import TimeStampedModel
 
 class Test(TimeStampedModel):
     document_type = models.CharField(
-        max_length=128,
-        null=True,
-        blank=True,
-        verbose_name=_('MIME type')
+        max_length=128, null=True, blank=True, verbose_name=_("MIME type")
     )
     document = models.FileField(
-        upload_to='medical_tests/%Y/%m/%d',
-        verbose_name=_('document')
+        upload_to="medical_tests/%Y/%m/%d", verbose_name=_("document")
     )
 
-    problem = models.ForeignKey(
-        'Problem',
-        on_delete=models.CASCADE
-    )
+    problem = models.ForeignKey("Problem", on_delete=models.CASCADE)
 
     class Meta:
-        app_label = 'medical'
+        app_label = "medical"
         indexes = [
-            models.Index(fields=['problem']),
+            models.Index(fields=["problem"]),
         ]
 
     def __str__(self):

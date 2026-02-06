@@ -7,8 +7,8 @@
 
 """Health check endpoints for container orchestration."""
 
-from django.http import JsonResponse
 from django.db import connection
+from django.http import JsonResponse
 
 
 def health_check(request):
@@ -26,10 +26,13 @@ def health_check(request):
 
     status = 200 if db_status == "healthy" else 503
 
-    return JsonResponse({
-        "status": "healthy" if status == 200 else "unhealthy",
-        "database": db_status,
-    }, status=status)
+    return JsonResponse(
+        {
+            "status": "healthy" if status == 200 else "unhealthy",
+            "database": db_status,
+        },
+        status=status,
+    )
 
 
 def readiness_check(request):

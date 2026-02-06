@@ -1,9 +1,8 @@
 import pytest
-from django.urls import reverse
 from django.contrib.auth import get_user_model
-from django.test import Client
+from django.urls import reverse
 
-from medical.models import Patient, Problem, History
+from medical.models import History, Patient, Problem
 
 
 @pytest.fixture(autouse=True)
@@ -27,9 +26,7 @@ def client_logged_in(client):
 def test_patient(db):
     """Create and return a test patient."""
     return Patient.objects.create(
-        first_name="John",
-        last_name="Doe",
-        last_name_optional="Smith"
+        first_name="John", last_name="Doe", last_name_optional="Smith"
     )
 
 
@@ -37,9 +34,7 @@ def test_patient(db):
 def test_problem(db, test_patient):
     """Create and return a test problem."""
     return Problem.objects.create(
-        patient=test_patient,
-        wording="Test medical problem",
-        order_number=1
+        patient=test_patient, wording="Test medical problem", order_number=1
     )
 
 
@@ -70,7 +65,9 @@ class TestPatientDetail:
 
     def test_patient_detail_success(self, client_logged_in, test_patient):
         """Test that existing patient detail loads."""
-        url = reverse("patient_detail", kwargs={"pk": test_patient.pk, "slug": "john-doe"})
+        url = reverse(
+            "patient_detail", kwargs={"pk": test_patient.pk, "slug": "john-doe"}
+        )
         resp = client_logged_in.get(url)
         assert resp.status_code == 200
 
@@ -123,12 +120,16 @@ class TestHistoryAntecedentsDetail:
         resp = client_logged_in.get(url)
         assert resp.status_code == 404
 
-    def test_history_antecedents_detail_no_history(self, client_logged_in, test_patient):
+    def test_history_antecedents_detail_no_history(
+        self, client_logged_in, test_patient
+    ):
         """Test that patient without history redirects to create page."""
         url = reverse("patient_history_antecedents", kwargs={"pk": test_patient.pk})
         resp = client_logged_in.get(url)
         assert resp.status_code == 302
-        assert resp.url == reverse("patient_history_antecedents_add", kwargs={"pk": test_patient.pk})
+        assert resp.url == reverse(
+            "patient_history_antecedents_add", kwargs={"pk": test_patient.pk}
+        )
 
     def test_history_antecedents_detail_success(self, client_logged_in, test_patient):
         """Test that patient with history loads."""

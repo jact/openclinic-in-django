@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright (c) 2012-2022 Jose Antonio Chavarría <jachavar@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -26,7 +24,9 @@ def setting(parser, token):
     try:
         _, option = token.split_contents()
     except ValueError:
-        raise template.TemplateSyntaxError(f'{token.contents[0]} tag requires a single argument')
+        raise template.TemplateSyntaxError(
+            f"{token.contents[0]} tag requires a single argument"
+        )
 
     return SettingNode(option)
 
@@ -39,5 +39,5 @@ class SettingNode(template.Node):
         # if FAILURE then FAIL silently
         try:
             return str(settings.__getattr__(self.option))
-        except:
-            return ''
+        except AttributeError:
+            return ""

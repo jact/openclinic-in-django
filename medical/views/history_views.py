@@ -9,121 +9,122 @@
 
 from django.http import Http404
 
-from .base import (
-    LoginRequiredMixin, AjaxListView, CreateView, UpdateView,
-    DetailView, redirect, get_object_or_404, messages, logger, reverse, _
-)
-from ..models import Patient, Problem, History
 from ..forms import HistoryAntecedentsForm
+from ..models import History, Patient, Problem
+from .base import (
+    AjaxListView,
+    CreateView,
+    DetailView,
+    LoginRequiredMixin,
+    UpdateView,
+    _,
+    get_object_or_404,
+    messages,
+    redirect,
+    reverse,
+)
 
 
 class HistoryList(LoginRequiredMixin, AjaxListView):
     model = Problem
-    template_name = 'history_list.html'
-    page_template = 'includes/problem_list.html'
+    template_name = "history_list.html"
+    page_template = "includes/problem_list.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['patient'] = get_object_or_404(Patient, pk=self.kwargs['pk'])
+        context["patient"] = get_object_or_404(Patient, pk=self.kwargs["pk"])
 
         return context
 
     def get_queryset(self):
         super().get_queryset()
         # Optimizado: select_related para evitar consultas N+1
-        return Problem.closed.filter(
-            patient__id=self.kwargs['pk']
-        ).select_related('patient', 'doctor').order_by('-modified')
+        return (
+            Problem.closed.filter(patient__id=self.kwargs["pk"])
+            .select_related("patient", "doctor")
+            .order_by("-modified")
+        )
 
 
 class HistoryAntecedentsDetail(LoginRequiredMixin, DetailView):
     model = History
-    context_object_name = 'history'
-    template_name = 'history_antecedents_detail.html'
+    context_object_name = "history"
+    template_name = "history_antecedents_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        patient = get_object_or_404(Patient, pk=self.kwargs['pk'])
-        history = get_object_or_404(History, patient__id=self.kwargs['pk'])
+        patient = get_object_or_404(Patient, pk=self.kwargs["pk"])
+        history = get_object_or_404(History, patient__id=self.kwargs["pk"])
 
-        context['patient'] = patient
-        context['history'] = history
+        context["patient"] = patient
+        context["history"] = history
 
         return context
 
     def get_queryset(self):
-        return History.objects.filter(
-            patient__id=self.kwargs['pk']
-        ).select_related('patient')
+        return History.objects.filter(patient__id=self.kwargs["pk"]).select_related(
+            "patient"
+        )
 
     def get(self, request, *args, **kwargs):
         try:
             return super().get(request, *args, **kwargs)
         except Http404:
             # Verificar que el paciente existe primero
-            get_object_or_404(Patient, pk=self.kwargs['pk'])
+            get_object_or_404(Patient, pk=self.kwargs["pk"])
             # Paciente existe pero history no - redirigir a creación
-            return redirect(
-                'patient_history_antecedents_add',
-                pk=self.kwargs['pk']
-            )
+            return redirect("patient_history_antecedents_add", pk=self.kwargs["pk"])
 
 
 class HistoryAntecedentsCreate(LoginRequiredMixin, CreateView):
     model = History
     form_class = HistoryAntecedentsForm
-    template_name = 'history_antecedents_form.html'
+    template_name = "history_antecedents_form.html"
 
     def get_initial(self):
         return {
-            'patient': self.kwargs['pk'],
+            "patient": self.kwargs["pk"],
         }
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        patient = get_object_or_404(Patient, pk=self.kwargs['pk'])
-        context['title'] = f'{patient} ({_("Update antecedents")})'
-        context['patient'] = patient
+        patient = get_object_or_404(Patient, pk=self.kwargs["pk"])
+        context["title"] = f"{patient} ({_('Update antecedents')})"
+        context["patient"] = patient
 
         return context
 
     def get_success_url(self):
         messages.success(self.request, _("Antecedents have been updated!"))
 
-        return reverse(
-            'patient_history_antecedents',
-            args=(self.object.patient.id,)
-        )
+        return reverse("patient_history_antecedents", args=(self.object.patient.id,))
 
 
 class HistoryAntecedentsUpdate(LoginRequiredMixin, UpdateView):
     model = History
     form_class = HistoryAntecedentsForm
-    template_name = 'history_antecedents_form.html'
+    template_name = "history_antecedents_form.html"
 
     def get_initial(self):
         return {
-            'patient': self.kwargs['pk'],
+            "patient": self.kwargs["pk"],
         }
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        patient = get_object_or_404(Patient, pk=self.kwargs['pk'])
-        context['title'] = f'{patient} ({_("Update antecedents")})'
-        context['patient'] = patient
+        patient = get_object_or_404(Patient, pk=self.kwargs["pk"])
+        context["title"] = f"{patient} ({_('Update antecedents')})"
+        context["patient"] = patient
 
         return context
 
     def get_object(self, queryset=None):
         # Optimizado: select_related para cargar patient
-        return History.objects.select_related('patient').get(
-            patient__id=self.kwargs['pk']
+        return History.objects.select_related("patient").get(
+            patient__id=self.kwargs["pk"]
         )
 
     def get_success_url(self):
         messages.success(self.request, _("Antecedents have been updated!"))
 
-        return reverse(
-            'patient_history_antecedents',
-            args=(self.object.patient.id,)
-        )
+        return reverse("patient_history_antecedents", args=(self.object.patient.id,))
