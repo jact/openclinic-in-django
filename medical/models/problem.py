@@ -105,6 +105,10 @@ class Problem(TimeStampedModel):
         ordering = ['order_number']
         verbose_name = _('Medical Problem')
         verbose_name_plural = _('Medical Problems')
+        indexes = [
+            models.Index(fields=['patient', 'order_number']),
+            models.Index(fields=['closing_date', 'modified']),
+        ]
 
     def __str__(self):
         return f'{self.order_number}: {self.wording}'

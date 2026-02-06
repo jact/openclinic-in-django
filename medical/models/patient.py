@@ -138,6 +138,11 @@ class Patient(TimeStampedModel):
         ordering = ['last_name', 'last_name_optional', 'first_name']
         verbose_name = _('Patient')
         verbose_name_plural = _('Patients')
+        indexes = [
+            models.Index(fields=['last_name', 'first_name']),
+            models.Index(fields=['birth_date']),
+            models.Index(fields=['tin']),
+        ]
 
     def __str__(self):
         return f'{self.first_name} {self.last_name} {self.last_name_optional}'

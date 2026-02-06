@@ -108,6 +108,9 @@ class History(models.Model):
     class Meta:
         app_label = 'medical'
         db_table = 'history'
+        indexes = [
+            models.Index(fields=['patient']),
+        ]
 
     def __str__(self):
         return f'{self.patient} ({self.medical_intolerance})'

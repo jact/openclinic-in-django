@@ -45,6 +45,9 @@ class Test(TimeStampedModel):
 
     class Meta:
         app_label = 'medical'
+        indexes = [
+            models.Index(fields=['problem']),
+        ]
 
     def __str__(self):
         return str(self.document)
