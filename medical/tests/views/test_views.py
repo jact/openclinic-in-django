@@ -157,10 +157,11 @@ class TestHistoryViews:
         assert resp.status_code == 200
 
     def test_history_antecedents_no_history(self, client_logged_in, test_patient):
-        """Test that patient without history returns 404."""
+        """Test that patient without history redirects to create page."""
         url = reverse("patient_history_antecedents", kwargs={"pk": test_patient.pk})
         resp = client_logged_in.get(url)
-        assert resp.status_code == 404
+        assert resp.status_code == 302
+        assert resp.url == reverse("patient_history_antecedents_add", kwargs={"pk": test_patient.pk})
 
 
 class TestAuthenticationRequired:

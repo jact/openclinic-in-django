@@ -7,6 +7,8 @@
 
 """History-related views."""
 
+from django.http import Http404
+
 from .base import (
     LoginRequiredMixin, AjaxListView, CreateView, UpdateView,
     DetailView, redirect, get_object_or_404, messages, logger, _
@@ -50,7 +52,6 @@ class HistoryAntecedentsDetail(LoginRequiredMixin, DetailView):
         return context
 
     def get_queryset(self):
-        # Optimizado: select_related para cargar patient
         return History.objects.filter(
             patient__id=self.kwargs['pk']
         ).select_related('patient')
@@ -58,8 +59,10 @@ class HistoryAntecedentsDetail(LoginRequiredMixin, DetailView):
     def get(self, request, *args, **kwargs):
         try:
             return super().get(request, *args, **kwargs)
-        except Exception as e:
-            logger.exception("Error in HistoryAntecedentsDetail: %s", e)
+        except Http404:
+            # Verificar que el paciente existe primero
+            get_object_or_404(Patient, pk=self.kwargs['pk'])
+            # Paciente existe pero history no - redirigir a creación
             return redirect(
                 'patient_history_antecedents_add',
                 pk=self.kwargs['pk']
