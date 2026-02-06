@@ -154,13 +154,13 @@ jobs:
       - name: Configure Database
         run: |
           export DJANGO_SETTINGS_MODULE=openclinic.settings.test
-          python manage.py migrate --noinput
+          python manage.py migrate
 
       - name: Run Django Tests
         env:
           DJANGO_SETTINGS_MODULE: openclinic.settings.test
         run: |
-          pytest -v --cov=medical --cov-report=term-missing --cov-report=xml
+          pytest -v --cov=medical --cov-report=term-missing --cov-report=xml --create-db
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
