@@ -148,16 +148,18 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest pytest-django pytest-cov coverage psycopg2-binary
+          pip install pytest pytest-django pytest-cov coverage dj-database-url psycopg2-binary
           pip install -e .
 
       - name: Configure Database
         run: |
+          export DATABASE_URL=postgres://test_user:test_pass@localhost:5432/openclinic_test
           export DJANGO_SETTINGS_MODULE=openclinic.settings.test
           python manage.py migrate
 
       - name: Run Django Tests
         env:
+          DATABASE_URL: postgres://test_user:test_pass@localhost:5432/openclinic_test
           DJANGO_SETTINGS_MODULE: openclinic.settings.test
         run: |
           pytest -v --cov=medical --cov-report=term-missing --cov-report=xml --create-db

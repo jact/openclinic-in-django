@@ -22,19 +22,18 @@ __license__ = "GPLv3"
 
 # Django settings for openclinic project (test environment)
 
+import dj_database_url
+
 from .base import *
 
 DEBUG = True
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "openclinic_test",
-        "USER": "test_user",
-        "PASSWORD": "test_pass",
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
+    "default": dj_database_url.config(
+        default="sqlite://:memory:",
+        conn_max_age=0,
+        conn_health_checks=True,
+    )
 }
 
 # Use faster password hasher for tests
