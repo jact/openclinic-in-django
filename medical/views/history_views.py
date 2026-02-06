@@ -28,8 +28,10 @@ class HistoryList(LoginRequiredMixin, AjaxListView):
 
     def get_queryset(self):
         super().get_queryset()
-
-        return Problem.closed.filter(patient__id=self.kwargs['pk']).order_by('-modified')
+        # Optimizado: select_related para evitar consultas N+1
+        return Problem.closed.filter(
+            patient__id=self.kwargs['pk']
+        ).select_related('patient', 'doctor').order_by('-modified')
 
 
 class HistoryAntecedentsDetail(LoginRequiredMixin, DetailView):
@@ -48,7 +50,10 @@ class HistoryAntecedentsDetail(LoginRequiredMixin, DetailView):
         return context
 
     def get_queryset(self):
-        return History.objects.filter(patient__id=self.kwargs['pk'])
+        # Optimizado: select_related para cargar patient
+        return History.objects.filter(
+            patient__id=self.kwargs['pk']
+        ).select_related('patient')
 
     def get(self, request, *args, **kwargs):
         try:
@@ -107,7 +112,10 @@ class HistoryAntecedentsUpdate(LoginRequiredMixin, UpdateView):
         return context
 
     def get_object(self, queryset=None):
-        return History.objects.get(patient__id=self.kwargs['pk'])
+        # Optimizado: select_related para cargar patient
+        return History.objects.select_related('patient').get(
+            patient__id=self.kwargs['pk']
+        )
 
     def get_success_url(self):
         messages.success(self.request, _("Antecedents have been updated!"))

@@ -170,12 +170,13 @@ class PatientMedicalReport(LoginRequiredMixin, DetailView):
 
         context['patient'] = patient
         context['history'] = history
+        # Optimizado: select_related reduce consultas N+1 al acceder a doctor
         context['problem_list'] = Problem.opened.filter(
             patient__id=self.kwargs['pk']
-        ).order_by('-modified')
+        ).select_related('doctor').order_by('-modified')
         context['closed_problem_list'] = Problem.closed.filter(
             patient__id=self.kwargs['pk']
-        ).order_by('-modified')
+        ).select_related('doctor').order_by('-modified')
 
         return context
 
@@ -192,4 +193,7 @@ class PatientTests(LoginRequiredMixin, ListView):
     def get_queryset(self):
         super().get_queryset()
         from ..models import Test
-        return Test.objects.filter(problem__patient__id=self.kwargs['pk'])
+        # Optimizado: select_related reduce consultas al acceder a problem y patient
+        return Test.objects.filter(
+            problem__patient__id=self.kwargs['pk']
+        ).select_related('problem', 'problem__patient')

@@ -109,7 +109,10 @@ class ProblemList(LoginRequiredMixin, AjaxListView):
 
     def get_queryset(self):
         super().get_queryset()
-        return Problem.opened.filter(patient__id=self.kwargs['pk']).order_by('-modified')
+        # Optimizado: select_related para evitar consultas N+1
+        return Problem.opened.filter(
+            patient__id=self.kwargs['pk']
+        ).select_related('patient', 'doctor').order_by('-modified')
 
 
 class ProblemDetail(LoginRequiredMixin, DetailView):
@@ -117,12 +120,18 @@ class ProblemDetail(LoginRequiredMixin, DetailView):
     template_name = 'problem_detail.html'
     context_object_name = 'problem'
 
+    def get_object(self, queryset=None):
+        # Optimizado: select_related carga patient en una sola consulta
+        return get_object_or_404(
+            Problem.objects.select_related('patient'),
+            pk=self.kwargs.get('pk', None)
+        )
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        problem = get_object_or_404(Problem, pk=self.kwargs.get('pk', None))
-        patient = get_object_or_404(Patient, pk=problem.patient.id)
-        context['problem'] = problem
-        context['patient'] = patient
+        # patient ya está cargado via select_related
+        context['problem'] = self.object
+        context['patient'] = self.object.patient
 
         return context
 
@@ -190,4 +199,7 @@ class HistoryList(LoginRequiredMixin, AjaxListView):
 
     def get_queryset(self):
         super().get_queryset()
-        return Problem.closed.filter(patient__id=self.kwargs['pk']).order_by('-modified')
+        # Optimizado: select_related para evitar consultas N+1
+        return Problem.closed.filter(
+            patient__id=self.kwargs['pk']
+        ).select_related('patient', 'doctor').order_by('-modified')

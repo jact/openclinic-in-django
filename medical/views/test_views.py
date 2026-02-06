@@ -27,12 +27,16 @@ class ProblemTests(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        problem = get_object_or_404(Problem, pk=self.kwargs['pk'])
-        patient = get_object_or_404(Patient, pk=problem.patient.id)
-        tests = Test.objects.filter(problem=problem)
+        # Optimizado: select_related carga patient en una sola consulta
+        problem = get_object_or_404(
+            Problem.objects.select_related('patient'),
+            pk=self.kwargs['pk']
+        )
+        # Optimizado: select_related para tests
+        tests = Test.objects.filter(problem=problem).select_related('problem')
 
         context['problem'] = problem
-        context['patient'] = patient
+        context['patient'] = problem.patient
         context['object_list'] = tests
 
         return context
