@@ -254,7 +254,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Build Production Image
+       - name: Build Production Image
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -265,9 +265,24 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      - name: Build Test Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile
+          target: test
+          load: true
+          tags: openclinic:test-runner
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
       - name: Verify Docker Images
         run: |
           docker images | grep openclinic || echo "No OpenClinic images found"
+
+      - name: Run Tests in Docker
+        run: |
+          docker run --rm openclinic:test-runner pytest -v 2>&1 | tail -20
 
       - name: Run Container Health Check
         run: |
