@@ -1,0 +1,61 @@
+# MkDocs Configuration for OpenClinic
+
+site_name: OpenClinic Documentation
+site_description: Open-source medical records system documentation
+site_author: OpenClinic Team
+
+# Repository
+repo_name: jact/openclinic-in-django
+repo_url: https://github.com/jact/openclinic-in-django
+
+# Navigation
+nav:
+  - Home: index.md
+  - Tutorials:
+    - Getting Started: tutorials/getting-started.md
+    - Patient Management: tutorials/patient-management.md
+  - How-To Guides:
+    - Installation: how-to/install.md
+    - Configuration: how-to/configure.md
+    - Development: how-to/development.md
+  - Reference:
+    - Architecture: reference/architecture.md
+    - Models: reference/models.md
+  - Explanation:
+    - Security: explanation/security.md
+
+# Theme
+theme:
+  name: material
+  palette:
+    primary: blue
+    accent: light blue
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - search.suggest
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - codehilite
+  - footnotes
+  - mermaid2:
+      theme: neutral
+  - toc:
+      permalink: true
+
+# Plugins
+plugins:
+  - search:
+      preindex: true
+  - mermaid2:
+      version: 10.6.1
+
+# Exclude
+exclude_docs: |
+  .git/
+  __pycache__/
+  *.pyc
+  venv/
+  .venv/
