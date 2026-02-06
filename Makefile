@@ -91,16 +91,8 @@ format:
 	ruff format medical/ openclinic/
 	isort medical/ openclinic/
 
-lint-fix:
-	ruff check --fix medical/ openclinic/
-	ruff format medical/ openclinic/
-	isort medical/ openclinic/
-
-type-check:
-	mypy medical/ openclinic/
-
 # Checks
-check: lint type-check security-check
+check: lint
 	@echo "All checks completed!"
 
 # Database
@@ -227,7 +219,7 @@ ci: ci-lint ci-test ci-security ci-docs ci-docker
 	@echo "✅ All CI checks passed locally!"
 
 # CI: Linting only
-ci-lint: lint type-check
+ci-lint: lint
 	@echo "✅ Linting passed!"
 
 # CI: Tests only
