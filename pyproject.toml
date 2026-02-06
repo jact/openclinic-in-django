@@ -272,7 +272,7 @@ ignore_missing_imports = true
 # ==================== PYTEST CONFIGURATION ====================
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "openclinic.settings.test"
+DJANGO_SETTINGS_MODULE = "openclinic.settings.development"
 python_files = ["test_*.py", "*_test.py", "tests.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]

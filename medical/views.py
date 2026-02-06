@@ -35,8 +35,8 @@ from django.utils.translation import gettext_lazy as _
 
 from el_pagination.views import AjaxListView
 
-# from django.utils.log import getLogger
-# logger = getLogger('django.request')
+import logging
+logger = logging.getLogger(__name__)
 
 from .models import Patient, Problem, History, Test
 from .forms import (
@@ -71,10 +71,10 @@ class PatientUpdate(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = f'{self.object} ({_("Update patient social data")})'
-
         return context
 
     def get_object(self, queryset=None):
+        # Avoid broad exception handling; raise DoesNotExist if not found
         return Patient.objects.get(id=self.kwargs['pk'])
 
     def get_success_url(self):
@@ -149,7 +149,7 @@ class PatientSearch(PatientList):
 class PatientRedirectDetail(LoginRequiredMixin, RedirectView):
     def get(self, request, *args, **kwargs):
         patient_id = self.kwargs.get('pk', None)
-        patient = Patient.objects.get(pk=patient_id)
+        patient = get_object_or_404(Patient, pk=patient_id)
         self.url = reverse(
             'patient_detail',
             kwargs={'pk': patient.id, 'slug': slugify(patient)}
@@ -165,10 +165,9 @@ class PatientDetail(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['patient'] = Patient.objects.get(
-            pk=self.kwargs.get('pk', None)
-        )
-
+        from django.shortcuts import get_object_or_404
+        patient = get_object_or_404(Patient, pk=self.kwargs['pk'])
+        context['patient'] = patient
         return context
 
 
@@ -434,7 +433,7 @@ class HistoryAntecedentsDetail(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         patient = get_object_or_404(Patient, pk=self.kwargs['pk'])
-        history = History.objects.get(patient__id=self.kwargs['pk'])
+        history = get_object_or_404(History, patient__id=self.kwargs['pk'])
 
         context['patient'] = patient
         context['history'] = history
@@ -447,7 +446,8 @@ class HistoryAntecedentsDetail(LoginRequiredMixin, DetailView):
     def get(self, request, *args, **kwargs):
         try:
             return super().get(request, *args, **kwargs)
-        except:
+        except Exception as e:
+            logger.exception("Error in HistoryAntecedentsDetail: %s", e)
             return redirect(
                 'patient_history_antecedents_add',
                 pk=self.kwargs['pk']
