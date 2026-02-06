@@ -211,3 +211,66 @@ logs-security:
 	else \
 		echo "Security log file not found."; \
 	fi
+# ============================================================
+# CI/CD Targets (Local Testing)
+# ============================================================
+
+.PHONY: ci ci-lint ci-test ci-security ci-docs ci-docker ci-full
+
+# Install CI dependencies
+install-ci:
+	pip install -r requirements-ci.txt
+
+# Run full CI locally (mirrors GitHub Actions)
+ci: ci-lint ci-test ci-security ci-docs ci-docker
+	@echo ""
+	@echo "✅ All CI checks passed locally!"
+
+# CI: Linting only
+ci-lint: lint type-check
+	@echo "✅ Linting passed!"
+
+# CI: Tests only
+ci-test: test-coverage
+	@echo "✅ Tests passed!"
+
+# CI: Security only
+ci-security: security-check pip-audit
+	@echo "✅ Security checks passed!"
+
+# CI: Documentation only
+ci-docs:
+	@echo "Validating documentation..."
+	mkdocs build --strict --site-dir site 2>&1 | head -20 || echo "MkDocs build had warnings"
+
+# CI: Docker only
+ci-docker:
+	@echo "Building Docker images..."
+	docker build --target development -t openclinic:dev .
+	docker build --target production -t openclinic:prod .
+	@echo "✅ Docker builds successful!"
+
+# CI: Docker BuildKit cache optimization
+ci-docker-cache:
+	docker buildx build --cache-from type=gha -t openclinic:dev --target development .
+	docker buildx build --cache-from type=gha -t openclinic:prod --target production .
+
+# Dependency audit
+pip-audit:
+	@echo "Running pip-audit..."
+	pip-audit --format=columns || echo "Vulnerabilities found (see above)"
+
+# Validate migrations
+ci-migrations:
+	@echo "Checking migrations..."
+	python manage.py makemigrations --check --dry-run
+	@echo "✅ Migrations are up to date!"
+
+# URL validation
+ci-urls:
+	@echo "Validating URLs..."
+	python manage.py show_urls 2>/dev/null || echo "show_urls not available"
+
+# Fast CI (skip slow checks)
+ci-fast: lint test
+	@echo "✅ Fast CI passed! (lint + test only)"

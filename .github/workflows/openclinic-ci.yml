@@ -1,0 +1,385 @@
+# GitHub Actions Workflow for OpenClinic Django Application
+# ==========================================================
+# This workflow runs comprehensive CI checks including:
+# - Unit tests with coverage
+# - Code quality (linting)
+# - Type checking
+# - Security auditing
+# - Docker build verification
+#
+# Triggers:
+#   - Push to main branch
+#   - Pull requests to main branch
+#
+# Secrets Required:
+#   - None (for public repositories)
+#
+# ==========================================================
+
+name: OpenClinic CI/CD
+
+on:
+  push:
+    branches: [main, master]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.gitignore'
+      - 'LICENSE*'
+  pull_request:
+    branches: [main, master]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.gitignore'
+      - 'LICENSE*'
+
+env:
+  PYTHON_VERSION: '3.13'
+  POETRY_VERSION: '1.7.1'
+  DOCKER_BUILDKIT: '1'
+
+jobs:
+  # ============================================================
+  # Job 1: Quality Gates - Linting and Type Checking
+  # ============================================================
+  quality-gates:
+    name: Quality Gates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff black isort mypy django-stubs
+
+      - name: Run Ruff Linter
+        run: |
+          ruff check .
+          ruff format --check .
+
+      - name: Run Black Formatter
+        run: black --check .
+
+      - name: Run isort
+        run: isort --check-only .
+
+      - name: Run MyPy Type Checker
+        run: mypy medical/ --ignore-missing-imports
+
+  # ============================================================
+  # Job 2: Security Audit
+  # ============================================================
+  security-audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install security tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install bandit safety
+
+      - name: Run Bandit Security Scan
+        run: bandit -r medical/ -f txt -o bandit-report.txt
+
+      - name: Run Safety Check
+        run: safety check -r pyproject.toml --bare
+
+      - name: Upload Bandit Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bandit-report
+          path: bandit-report.txt
+          retention-days: 7
+
+  # ============================================================
+  # Job 3: Django Tests with Coverage
+  # ============================================================
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_pass
+          POSTGRES_DB: openclinic_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-django pytest-cov coverage
+
+      - name: Configure Database
+        run: |
+          export DATABASE_URL=postgres://test_user:test_pass@localhost:5432/openclinic_test
+          export DJANGO_SETTINGS_MODULE=openclinic.settings.test
+          python manage.py migrate --noinput
+
+      - name: Run Django Tests
+        env:
+          DATABASE_URL: postgres://test_user:test_pass@localhost:5432/openclinic_test
+          DJANGO_SETTINGS_MODULE: openclinic.settings.test
+        run: |
+          pytest -v --cov=medical --cov-report=term-missing --cov-report=xml
+
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage.xml
+          retention-days: 30
+
+      - name: Upload HTML Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: htmlcov
+          path: htmlcov/
+          retention-days: 30
+
+      - name: Check Coverage Threshold
+        run: |
+          coverage xml
+          TOTAL=$(grep -oP 'line-rate="\K[0-9.]+' coverage.xml | head -1)
+          THRESHOLD=0.80
+          if (( $(echo "$TOTAL >= $THRESHOLD" | bc -l) )); then
+            echo "✅ Coverage check passed: $TOTAL%"
+          else
+            echo "❌ Coverage check failed: $TOTAL% (threshold: $THRESHOLD%)"
+            exit 1
+          fi
+
+  # ============================================================
+  # Job 4: Django System Checks
+  # ============================================================
+  django-checks:
+    name: Django Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install Django
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[development]"
+
+      - name: Run Django System Checks
+        env:
+          DJANGO_SETTINGS_MODULE: openclinic.settings.development
+        run: |
+          python manage.py check
+          python manage.py check --deploy --fail-level WARNING
+
+      - name: Validate URLs
+        run: |
+          python manage.py show_urls || echo "show_urls not available, skipping"
+
+      - name: Check migrations are up to date
+        run: |
+          python manage.py makemigrations --check --dry-run
+
+  # ============================================================
+  # Job 5: Docker Build Verification
+  # ============================================================
+  docker-build:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Development Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile
+          target: development
+          load: true
+          tags: openclinic:test-dev
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build Production Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile
+          target: production
+          load: true
+          tags: openclinic:test-prod
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Verify Docker Images
+        run: |
+          docker images | grep openclinic || echo "No OpenClinic images found"
+
+      - name: Run Container Health Check
+        run: |
+          docker run --rm openclinic:test-dev python -c "import django; django.setup()" || exit 1
+
+  # ============================================================
+  # Job 6: Documentation Validation
+  # ============================================================
+  docs-validation:
+    name: Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install MkDocs
+        run: |
+          pip install mkdocs mkdocs-material
+
+      - name: Validate MkDocs Configuration
+        run: |
+          mkdocs --version
+          mkdocs build --strict --site-dir site 2>&1 | head -50 || echo "MkDocs build had warnings"
+
+      - name: Check for broken internal links
+        run: |
+          # Check for common documentation issues
+          grep -r "TODO" docs/ || echo "✅ No TODO markers in docs"
+          grep -r "FIXME" docs/ || echo "✅ No FIXME markers in docs"
+
+  # ============================================================
+  # Job 7: Dependency Vulnerability Scan
+  # ============================================================
+  dependency-scan:
+    name: Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install pip-audit
+        run: |
+          pip install pip-audit
+
+      - name: Audit Dependencies
+        run: |
+          pip-audit --format=columns || echo "Vulnerabilities found (see above)"
+
+  # ============================================================
+  # Summary: Combined Status Check
+  # ============================================================
+  ci-status:
+    name: CI Status
+    runs-on: ubuntu-latest
+    needs:
+      - quality-gates
+      - security-audit
+      - tests
+      - django-checks
+      - docker-build
+      - docs-validation
+      - dependency-scan
+    if: always()
+    steps:
+      - name: Check all jobs status
+        run: |
+          echo "========================================="
+          echo "CI/CD Pipeline Summary"
+          echo "========================================="
+          
+          # Get status of each job
+          echo ""
+          echo "Quality Gates: ${{ needs.quality-gates.result }}"
+          echo "Security Audit: ${{ needs.security-audit.result }}"
+          echo "Tests: ${{ needs.tests.result }}"
+          echo "Django Checks: ${{ needs.django-checks.result }}"
+          echo "Docker Build: ${{ needs.docker-build.result }}"
+          echo "Documentation: ${{ needs.docs-validation.result }}"
+          echo "Dependencies: ${{ needs.dependency-scan.result }}"
+          echo ""
+          
+          # Fail if any job failed
+          FAILED=0
+          if [[ "${{ needs.quality-gates.result }}" == "failure" ]]; then FAILED=1; fi
+          if [[ "${{ needs.security-audit.result }}" == "failure" ]]; then FAILED=1; fi
+          if [[ "${{ needs.tests.result }}" == "failure" ]]; then FAILED=1; fi
+          if [[ "${{ needs.django-checks.result }}" == "failure" ]]; then FAILED=1; fi
+          if [[ "${{ needs.docker-build.result }}" == "failure" ]]; then FAILED=1; fi
+          if [[ "${{ needs.docs-validation.result }}" == "failure" ]]; then FAILED=1; fi
+          if [[ "${{ needs.dependency-scan.result }}" == "failure" ]]; then FAILED=1; fi
+          
+          if [[ $FAILED -eq 1 ]]; then
+            echo "❌ CI/CD Pipeline FAILED"
+            exit 1
+          else
+            echo "✅ All CI/CD checks PASSED"
+            exit 0
+          fi

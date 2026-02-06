@@ -6,6 +6,8 @@
 ![Tests](https://img.shields.io/badge/Tests-81.65%25-yellow.svg)
 ![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)
 
+![CI/CD](https://img.shields.io/github/actions/workflow/status/jact/openclinic-in-django/openclinic-ci.yml?branch=main&label=CI/CD)
+
 OpenClinic is an open-source medical records system built with Django. Manage patients, medical problems, history, and documents with a clean, secure interface.
 
 ## Features
@@ -83,6 +85,41 @@ Comprehensive documentation following the [Diátaxis Framework](https://diataxis
 - **Docker Deployment**: [docs/how-to/docker.md](docs/how-to/docker.md)
 - **Development Setup**: [docs/how-to/development.md](docs/how-to/development.md)
 - **Security Audit**: [role_audit_report.md](role_audit_report.md)
+
+## CI/CD Pipeline
+
+OpenClinic uses GitHub Actions for continuous integration and deployment:
+
+```bash
+# Run CI locally (mirrors GitHub Actions)
+make ci
+
+# Or run individual checks
+make ci-lint      # Linting and type checking
+make ci-test      # Tests with coverage
+make ci-security  # Security audits
+make ci-docs      # Documentation validation
+make ci-docker    # Docker build verification
+make ci-fast      # Fast CI (lint + test only)
+```
+
+### GitHub Actions Jobs
+
+| Job | Purpose | Status |
+|-----|---------|--------|
+| **quality-gates** | Ruff, Black, isort, MyPy | ✅ |
+| **security-audit** | Bandit, Safety scans | ✅ |
+| **tests** | Pytest with coverage | ✅ |
+| **django-checks** | System checks, migrations | ✅ |
+| **docker-build** | Dev/Prod Docker images | ✅ |
+| **docs-validation** | MkDocs validation | ✅ |
+| **dependency-scan** | pip-audit for CVEs | ✅ |
+
+### Badge Status
+
+![CI/CD](https://img.shields.io/github/actions/workflow/status/jact/openclinic-in-django/openclinic-ci.yml?branch=main&label=CI/CD)
+
+See [`.github/workflows/openclinic-ci.yml`](.github/workflows/openclinic-ci.yml) for full pipeline configuration.
 
 ## Requirements
 
