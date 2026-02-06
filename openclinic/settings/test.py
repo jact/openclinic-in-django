@@ -26,6 +26,17 @@ from .base import *
 
 DEBUG = True
 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "openclinic_test",
+        "USER": "test_user",
+        "PASSWORD": "test_pass",
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
+}
+
 # Use faster password hasher for tests
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.MD5PasswordHasher",
