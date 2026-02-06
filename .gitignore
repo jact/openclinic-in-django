@@ -136,4 +136,4 @@ Thumbs.db
 
 # Media files
 media/
-staticfiles/
+staticfiles/.agent/
