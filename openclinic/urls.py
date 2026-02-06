@@ -27,6 +27,8 @@ from ajax_select import urls as ajax_select_urls
 
 from django.contrib import admin
 
+from . import health
+
 admin.autodiscover()
 
 urlpatterns = [
@@ -84,6 +86,11 @@ urlpatterns = [
     ),
 
     re_path(r'^medical_records/', include('medical.urls')),
+
+    # Health check endpoints for container orchestration
+    re_path(r'^health/$', health.health_check, name='health_check'),
+    re_path(r'^health/ready/$', health.readiness_check, name='readiness_check'),
+    re_path(r'^health/live/$', health.liveness_check, name='liveness_check'),
 ]
 
 if settings.DEBUG:

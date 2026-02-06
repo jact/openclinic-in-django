@@ -15,6 +15,22 @@ docs/
 ├── how-to/              # Problem-oriented guides
 │   ├── install.md
 │   ├── configure.md
+│   ├── development.md
+│   └── docker.md       # Docker deployment
+├── reference/           # Information-oriented reference
+│   ├── architecture.md
+│   └── models.md
+└── explanation/         # Understanding-oriented content
+    └── security.md
+```
+docs/
+├── index.md              # Documentation home
+├── tutorials/            # Learning-oriented tutorials
+│   ├── getting-started.md
+│   └── patient-management.md
+├── how-to/              # Problem-oriented guides
+│   ├── install.md
+│   ├── configure.md
 │   └── development.md
 ├── reference/           # Information-oriented reference
 │   ├── architecture.md
@@ -33,8 +49,9 @@ docs/
 | **Install the system** | [Installation Guide](how-to/install.md) |
 | **Configure settings** | [Configuration Guide](how-to/configure.md) |
 | **Set up development** | [Development Guide](how-to/development.md) |
+| **Deploy with Docker** | [Docker Deployment](how-to/docker.md) |
 | **Understand the code** | [Architecture Reference](reference/architecture.md) |
-| **API reference** | [API Documentation](reference/api.md) |
+| **API reference** | [API Documentation](reference/models.md) |
 
 ## Related Documentation
 

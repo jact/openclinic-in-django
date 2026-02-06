@@ -1,0 +1,149 @@
+# ============================================================
+# OpenClinic Docker Compose Configuration
+# ============================================================
+# Supports SQLite (development) and PostgreSQL (production) modes.
+#
+# Usage:
+#   - Development:  docker compose up -d
+#   - Production:   docker compose -f docker-compose.yml -f docker-compose.production.yml up -d
+#   - With tests:   docker compose --profile test up test
+# ============================================================
+
+services:
+  # -------------------------------------------------------
+  # Development Service (SQLite)
+  # -------------------------------------------------------
+  openclinic-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: openclinic-dev
+    hostname: openclinic-dev
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=openclinic.settings.development
+      - SECRET_KEY=${DJANGO_SECRET_KEY:-django-insecure-dev-key-change-in-production}
+      - DEBUG=True
+      - ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
+    volumes:
+      - .:/home/appuser
+    depends_on:
+      redis:
+        condition: service_healthy
+    profiles:
+      - dev
+    networks:
+      - openclinic-net
+
+  # -------------------------------------------------------
+  # Production Service (PostgreSQL)
+  # -------------------------------------------------------
+  openclinic-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: openclinic-prod
+    hostname: openclinic-prod
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=openclinic.settings.production
+      - SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DEBUG=False
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-localhost}
+      - DATABASE_URL=postgres://${POSTGRES_USER:-openclinic}:${POSTGRES_PASSWORD:-openclinic}@db:5432/${POSTGRES_DB:-openclinic}
+      - REDIS_URL=redis://redis:6379/0
+    volumes:
+      - openclinic-media:/home/appuser/media
+      - openclinic-static:/home/appuser/staticcollected
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    profiles:
+      - prod
+    networks:
+      - openclinic-net
+    restart: unless-stopped
+
+  # -------------------------------------------------------
+  # Test Service
+  # -------------------------------------------------------
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test
+    container_name: openclinic-test
+    hostname: openclinic-test
+    environment:
+      - DJANGO_SETTINGS_MODULE=openclinic.settings.development
+      - SECRET_KEY=test-secret-key
+    volumes:
+      - .:/home/appuser
+    profiles:
+      - test
+    networks:
+      - openclinic-net
+    command: pytest -v --cov=medical --cov-report=term-missing
+
+  # -------------------------------------------------------
+  # PostgreSQL Database (Production)
+  # -------------------------------------------------------
+  db:
+    image: postgres:16-alpine
+    container_name: openclinic-db
+    hostname: db
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-openclinic}
+      - POSTGRES_USER=${POSTGRES_USER:-openclinic}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-openclinic}
+    volumes:
+      - openclinic-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-openclinic} -d ${POSTGRES_DB:-openclinic}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    profiles:
+      - prod
+    networks:
+      - openclinic-net
+    restart: unless-stopped
+
+  # -------------------------------------------------------
+  # Redis Cache
+  # -------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: openclinic-redis
+    hostname: redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - openclinic-net
+    restart: unless-stopped
+
+# -------------------------------------------------------
+# Networks
+# -------------------------------------------------------
+networks:
+  openclinic-net:
+    driver: bridge
+
+# -------------------------------------------------------
+# Volumes
+# -------------------------------------------------------
+volumes:
+  openclinic-pgdata:
+  openclinic-media:
+  openclinic-static:

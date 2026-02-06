@@ -4,6 +4,7 @@
 ![Python](https://img.shields.io/badge/Python-3.10+-green.svg)
 ![Django](https://img.shields.io/badge/Django-5.2-brightgreen.svg)
 ![Tests](https://img.shields.io/badge/Tests-81.65%25-yellow.svg)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)
 
 OpenClinic is an open-source medical records system built with Django. Manage patients, medical problems, history, and documents with a clean, secure interface.
 
@@ -42,6 +43,28 @@ python manage.py runserver --settings=openclinic.settings.development
 
 Visit `http://localhost:8000/` and log in with your superuser account.
 
+## Docker Quick Start
+
+```bash
+# Clone and navigate
+git clone https://github.com/jact/openclinic-in-django.git
+cd openclinic-in-django
+
+# Configure environment
+cp .env.example .env
+
+# Start with Docker Compose
+docker compose up -d
+
+# Access the application
+http://localhost:8000
+
+# Create superuser
+docker exec -it openclinic-dev python manage.py createsuperuser
+```
+
+See [docs/how-to/docker.md](docs/how-to/docker.md) for detailed Docker deployment documentation.
+
 ## Documentation
 
 Comprehensive documentation following the [Diátaxis Framework](https://diataxis.frameworks.io/):
@@ -57,6 +80,7 @@ Comprehensive documentation following the [Diátaxis Framework](https://diataxis
 
 - **Getting Started**: [docs/tutorials/getting-started.md](docs/tutorials/getting-started.md)
 - **Installation**: [docs/how-to/install.md](docs/how-to/install.md)
+- **Docker Deployment**: [docs/how-to/docker.md](docs/how-to/docker.md)
 - **Development Setup**: [docs/how-to/development.md](docs/how-to/development.md)
 - **Security Audit**: [role_audit_report.md](role_audit_report.md)
 
@@ -89,11 +113,16 @@ openclinic-in-django/
 │   └── tests/           # Comprehensive test suite
 ├── docs/                # Documentation (Diátaxis structure)
 │   ├── tutorials/       # Learning guides
-│   ├── how-to/          # Task guides
+│   ├── how-to/         # Task guides (includes docker.md)
 │   ├── reference/       # Technical reference
 │   └── explanation/     # Conceptual guides
 ├── openclinic/          # Project configuration
-└── templates/           # Base templates
+├── templates/           # Base templates
+├── Dockerfile          # Multi-stage Docker build
+├── docker-compose.yml  # Development orchestration
+├── docker-compose.production.yml  # Production override
+├── mkdocs.yml          # MkDocs configuration
+└── .dockerignore      # Docker build exclusions
 ```
 
 ## Contributing

@@ -1,0 +1,39 @@
+# ============================================================
+# Production Docker Compose Override
+# ============================================================
+# Usage: docker compose -f docker-compose.yml -f docker-compose.production.yml up -d
+
+services:
+  openclinic-prod:
+    environment:
+      - DJANGO_SETTINGS_MODULE=openclinic.settings.production
+      - SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DEBUG=False
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - SECURE_SSL_REDIRECT=True
+      - SESSION_COOKIE_SECURE=True
+      - CSRF_COOKIE_SECURE=True
+      - SECURE_HSTS_SECONDS=31536000
+      - SECURE_HSTS_INCLUDE_SUBDOMAINS=True
+      - SECURE_HSTS_PRELOAD=True
+    command: >
+      gunicorn
+      --bind 0.0.0.0:8000
+      --workers 2
+      --worker-class sync
+      --timeout 120
+      --keep-alive 5
+      --access-logfile -
+      --error-logfile -
+      --capture-output
+      openclinic.wsgi:application
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M

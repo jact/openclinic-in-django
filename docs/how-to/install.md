@@ -100,3 +100,4 @@ gunicorn openclinic.wsgi:application
 
 - [Configure settings](configure.md)
 - [Set up development environment](development.md)
+- [Docker Deployment](docker.md) - Run with Docker and Docker Compose
