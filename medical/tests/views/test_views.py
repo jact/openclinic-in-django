@@ -151,14 +151,18 @@ class TestHistoryViews:
         resp = client_logged_in.get(url)
         assert resp.status_code == 404
 
-    def test_history_antecedents_success(self, client_logged_in, transactional_db):
+    def test_history_antecedents_success(
+        self, client_logged_in, transactional_db
+    ):
         """Test that patient with history loads."""
         from medical.models import History, Patient
 
         patient = Patient.objects.create(
             first_name="John", last_name="Doe", gender="M"
         )
-        History.objects.create(patient=patient, medical_intolerance="Penicillin")
+        History.objects.create(
+            patient=patient, medical_intolerance="Penicillin"
+        )
         url = reverse("patient_history_antecedents", kwargs={"pk": patient.pk})
         resp = client_logged_in.get(url)
         assert resp.status_code == 200
