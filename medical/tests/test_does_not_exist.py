@@ -1,7 +1,7 @@
 import pytest
 from django.urls import reverse
 
-from medical.models import History, Patient
+from medical.models import History, Patient, Problem
 
 
 class TestPatientRedirectDetail:
