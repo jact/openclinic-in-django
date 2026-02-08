@@ -26,10 +26,29 @@ from django.utils.translation import gettext_lazy as _
 from .models import History, Patient, Problem, Staff, Test
 
 
-class PatientForm(forms.ModelForm):
+class BaseSearchForm(forms.Form):
+    """Base class for search forms with request handling."""
+
+    required_css_class = "required"
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request", None)
+        super().__init__(*args, **kwargs)
+        self._set_initial_values()
+
+    def _set_initial_values(self):
+        """Override in subclasses to set initial values from request.GET."""
+        pass
+
+
+class FormCssMixin:
+    """Mixin providing standard CSS classes for forms."""
+
     error_css_class = "error"
     required_css_class = "required"
 
+
+class PatientForm(FormCssMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.layout = Layout(
@@ -79,9 +98,7 @@ class PatientForm(forms.ModelForm):
         }
 
 
-class PatientSearchForm(forms.Form):
-    required_css_class = "required"
-
+class PatientSearchForm(BaseSearchForm):
     search_type = forms.ChoiceField(
         label=_("Field"),
         required=True,
@@ -108,18 +125,14 @@ class PatientSearchForm(forms.Form):
         label=_("Value"), required=False, help_text=_("(empty = see all results)")
     )
 
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop("request")
-        super().__init__(*args, **kwargs)
+    def _set_initial_values(self):
         self.fields["search_type"].initial = self.request.GET.get(
             "search_type", "last_name"
         )
         self.fields["search_text"].initial = self.request.GET.get("search_text", "")
 
 
-class PatientSearchByMedicalProblemForm(forms.Form):
-    required_css_class = "required"
-
+class PatientSearchByMedicalProblemForm(BaseSearchForm):
     search_type_problem = forms.ChoiceField(
         label=_("Field"),
         required=True,
@@ -138,9 +151,7 @@ class PatientSearchByMedicalProblemForm(forms.Form):
         label=_("Value"), required=False, help_text=_("(empty = see all results)")
     )
 
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop("request")
-        super().__init__(*args, **kwargs)
+    def _set_initial_values(self):
         self.fields["search_type_problem"].initial = self.request.GET.get(
             "search_type_problem", "wording"
         )
@@ -149,10 +160,7 @@ class PatientSearchByMedicalProblemForm(forms.Form):
         )
 
 
-class ProblemForm(forms.ModelForm):
-    error_css_class = "error"
-    required_css_class = "required"
-
+class ProblemForm(FormCssMixin, forms.ModelForm):
     closed = forms.BooleanField(label=_("Closed problem?"), required=False)
 
     def __init__(self, *args, **kwargs):
@@ -181,10 +189,7 @@ class ProblemForm(forms.ModelForm):
         }
 
 
-class HistoryAntecedentsForm(forms.ModelForm):
-    error_css_class = "error"
-    required_css_class = "required"
-
+class HistoryAntecedentsForm(FormCssMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.layout = Layout(
