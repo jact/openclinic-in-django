@@ -39,7 +39,7 @@ def test_problem(db, test_patient):
 
 
 @pytest.fixture
-def test_history(db, test_patient):
+def test_history(transactional_db, test_patient):
     """Create and return a test history."""
     return History.objects.create(
         patient=test_patient, medical_intolerance="Penicillin"
@@ -152,7 +152,7 @@ class TestHistoryViews:
         assert resp.status_code == 404
 
     def test_history_antecedents_success(
-        self, client_logged_in, test_patient, test_history
+        self, client_logged_in, test_patient, test_history, transactional_db
     ):
         """Test that patient with history loads."""
         url = reverse("patient_history_antecedents", kwargs={"pk": test_patient.pk})
