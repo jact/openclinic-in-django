@@ -59,19 +59,17 @@ class TestPatientModel:
 class TestProblemModel:
     """Tests for Problem model."""
 
-    def test_problem_creation(self):
+    def test_problem_creation(self, test_patient):
         """Test basic problem creation."""
-        patient = Patient.objects.create(first_name="John", last_name="Doe")
         problem = Problem.objects.create(
-            patient=patient, wording="Test problem", order_number=1
+            patient=test_patient, wording="Test problem", order_number=1
         )
         assert problem.pk is not None
 
-    def test_problem_opened_manager(self):
+    def test_problem_opened_manager(self, test_patient):
         """Test that opened problems are accessible via manager."""
-        patient = Patient.objects.create(first_name="John", last_name="Doe")
         open_problem = Problem.objects.create(
-            patient=patient,
+            patient=test_patient,
             wording="Open problem",
             order_number=1,
             closing_date=None,  # Open problem has no closing date
@@ -79,11 +77,10 @@ class TestProblemModel:
         assert open_problem in Problem.opened.all()
         assert open_problem not in Problem.closed.all()
 
-    def test_problem_closed_manager(self):
+    def test_problem_closed_manager(self, test_patient):
         """Test that closed problems are accessible via manager."""
-        patient = Patient.objects.create(first_name="John", last_name="Doe")
         closed_problem = Problem.objects.create(
-            patient=patient,
+            patient=test_patient,
             wording="Closed problem",
             order_number=1,
             closing_date=date.today(),  # Closed problem has closing date
@@ -96,19 +93,17 @@ class TestProblemModel:
 class TestHistoryModel:
     """Tests for History model."""
 
-    def test_history_creation(self):
+    def test_history_creation(self, test_patient):
         """Test basic history creation linked to patient."""
-        patient = Patient.objects.create(first_name="John", last_name="Doe")
         history = History.objects.create(
-            patient=patient, medical_intolerance="Penicillin"
+            patient=test_patient, medical_intolerance="Penicillin"
         )
         assert history.pk is not None
-        assert history.patient == patient
+        assert history.patient == test_patient
 
-    def test_history_one_to_one_relation(self):
+    def test_history_one_to_one_relation(self, test_patient):
         """Test that history has one-to-one relation with patient."""
-        patient = Patient.objects.create(first_name="John", last_name="Doe")
-        History.objects.create(patient=patient)
+        History.objects.create(patient=test_patient)
 
         with pytest.raises(Exception):
-            History.objects.create(patient=patient)
+            History.objects.create(patient=test_patient)

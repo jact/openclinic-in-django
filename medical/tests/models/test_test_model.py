@@ -10,80 +10,60 @@
 import pytest
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-from medical.models import Patient, Problem, Test
+from medical.models import Test
 
 
 @pytest.mark.django_db
 class TestTestModel:
     """Tests for the Test model."""
 
-    def test_test_creation(self):
+    def test_test_creation(self, test_problem):
         """Test creating a Test instance."""
-        patient = Patient.objects.create(first_name="John", last_name="Doe")
-        problem = Problem.objects.create(
-            patient=patient, wording="Test problem", order_number=1
-        )
         test_file = SimpleUploadedFile(
             "test_document.pdf", b"file content", content_type="application/pdf"
         )
         test = Test.objects.create(
-            problem=problem, document=test_file, document_type="application/pdf"
+            problem=test_problem, document=test_file, document_type="application/pdf"
         )
-        assert test.problem == problem
+        assert test.problem == test_problem
         assert test.document_type == "application/pdf"
         assert test.document is not None
 
-    def test_test_str(self):
+    def test_test_str(self, test_problem):
         """Test Test string representation."""
-        patient = Patient.objects.create(first_name="John", last_name="Doe")
-        problem = Problem.objects.create(
-            patient=patient, wording="Test problem", order_number=1
-        )
         test_file = SimpleUploadedFile(
             "document.pdf", b"content", content_type="application/pdf"
         )
-        test = Test.objects.create(problem=problem, document=test_file)
+        test = Test.objects.create(problem=test_problem, document=test_file)
         assert str(test) == str(test.document)
 
-    def test_filename_method(self):
+    def test_filename_method(self, test_problem):
         """Test the filename method returns correct filename."""
-        patient = Patient.objects.create(first_name="John", last_name="Doe")
-        problem = Problem.objects.create(
-            patient=patient, wording="Test problem", order_number=1
-        )
         test_file = SimpleUploadedFile(
             "medical_report_2024.pdf", b"content", content_type="application/pdf"
         )
-        test = Test.objects.create(problem=problem, document=test_file)
+        test = Test.objects.create(problem=test_problem, document=test_file)
         # Django may add unique suffix to prevent filename collisions
         filename = test.filename()
         assert filename.endswith(".pdf")
         assert "medical_report_2024" in filename
 
-    def test_filename_with_path(self):
+    def test_filename_with_path(self, test_problem):
         """Test filename method with path in document name."""
-        patient = Patient.objects.create(first_name="John", last_name="Doe")
-        problem = Problem.objects.create(
-            patient=patient, wording="Test problem", order_number=1
-        )
         test_file = SimpleUploadedFile(
             "path/to/document.pdf", b"content", content_type="application/pdf"
         )
-        test = Test.objects.create(problem=problem, document=test_file)
+        test = Test.objects.create(problem=test_problem, document=test_file)
         # filename() should return just the basename (Django may add suffix)
         assert test.filename().endswith(".pdf")
         assert "/" not in test.filename()
 
-    def test_test_delete_signal(self):
+    def test_test_delete_signal(self, test_problem):
         """Test that deleting a Test deletes the associated file."""
-        patient = Patient.objects.create(first_name="John", last_name="Doe")
-        problem = Problem.objects.create(
-            patient=patient, wording="Test problem", order_number=1
-        )
         test_file = SimpleUploadedFile(
             "delete_me.pdf", b"content", content_type="application/pdf"
         )
-        test = Test.objects.create(problem=problem, document=test_file)
+        test = Test.objects.create(problem=test_problem, document=test_file)
 
         # Store document path
         document_path = test.document.path
@@ -94,20 +74,15 @@ class TestTestModel:
         # Verify test was deleted
         assert Test.objects.filter(pk=test.pk).count() == 0
 
-    def test_test_ordering(self):
+    def test_test_ordering(self, test_problem):
         """Test that tests are ordered correctly."""
-        patient = Patient.objects.create(first_name="John", last_name="Doe")
-        problem = Problem.objects.create(
-            patient=patient, wording="Test problem", order_number=1
-        )
-
         # Create multiple tests
         test_file1 = SimpleUploadedFile("doc1.pdf", b"content1")
         test_file2 = SimpleUploadedFile("doc2.pdf", b"content2")
 
-        test1 = Test.objects.create(problem=problem, document=test_file1)
-        test2 = Test.objects.create(problem=problem, document=test_file2)
+        test1 = Test.objects.create(problem=test_problem, document=test_file1)
+        test2 = Test.objects.create(problem=test_problem, document=test_file2)
 
         # Tests should be ordered by modified (descending) via TimeStampedModel
-        tests = Test.objects.filter(problem=problem)
+        tests = Test.objects.filter(problem=test_problem)
         assert tests.count() == 2
