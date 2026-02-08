@@ -131,14 +131,15 @@ class TestHistoryAntecedentsDetail:
             "patient_history_antecedents_add", kwargs={"pk": test_patient.pk}
         )
 
-    def test_history_antecedents_detail_success(
-        self, client_logged_in, test_patient, transactional_db
-    ):
+    def test_history_antecedents_detail_success(self, client_logged_in, transactional_db):
         """Test that patient with history loads."""
-        History.objects.create(
-            patient=test_patient, medical_intolerance="Test"
+        from medical.models import History, Patient
+
+        patient = Patient.objects.create(
+            first_name="John", last_name="Doe", last_name_optional="Smith"
         )
-        url = reverse("patient_history_antecedents", kwargs={"pk": test_patient.pk})
+        History.objects.create(patient=patient, medical_intolerance="Test")
+        url = reverse("patient_history_antecedents", kwargs={"pk": patient.pk})
         resp = client_logged_in.get(url)
         assert resp.status_code == 200
 

@@ -39,7 +39,7 @@ def test_problem(db, test_patient):
 
 
 @pytest.fixture
-def test_history(transactional_db, test_patient):
+def test_history(db, test_patient):
     """Create and return a test history."""
     return History.objects.create(
         patient=test_patient, medical_intolerance="Penicillin"
@@ -151,11 +151,15 @@ class TestHistoryViews:
         resp = client_logged_in.get(url)
         assert resp.status_code == 404
 
-    def test_history_antecedents_success(
-        self, client_logged_in, test_patient, test_history, transactional_db
-    ):
+    def test_history_antecedents_success(self, client_logged_in, transactional_db):
         """Test that patient with history loads."""
-        url = reverse("patient_history_antecedents", kwargs={"pk": test_patient.pk})
+        from medical.models import History, Patient
+
+        patient = Patient.objects.create(
+            first_name="John", last_name="Doe", gender="M"
+        )
+        History.objects.create(patient=patient, medical_intolerance="Penicillin")
+        url = reverse("patient_history_antecedents", kwargs={"pk": patient.pk})
         resp = client_logged_in.get(url)
         assert resp.status_code == 200
 
