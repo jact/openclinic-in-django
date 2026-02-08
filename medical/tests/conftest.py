@@ -10,7 +10,7 @@
 import pytest
 from django.contrib.auth import get_user_model
 
-from medical.models import Patient, Problem
+from medical.models import History, Patient, Problem
 
 User = get_user_model()
 
@@ -22,17 +22,19 @@ def enable_db_access(db):
 
 
 @pytest.fixture
-def client_logged_in(client):
+def client_logged_in(client, db):
     """Provide a logged-in client for tests."""
-    User.objects.create_user(username="testuser", password="testpass123")
-    client.login(username="testuser", password="testpass123")
+    user = User.objects.create_user(username="testuser", password="testpass123")
+    client.force_login(user)
     return client
 
 
 @pytest.fixture
 def test_patient(db):
-    """Create a test patient."""
-    return Patient.objects.create(first_name="John", last_name="Doe", gender="M")
+    """Create a test patient with all required fields."""
+    return Patient.objects.create(
+        first_name="John", last_name="Doe", gender="M", last_name_optional="Smith"
+    )
 
 
 @pytest.fixture
@@ -40,4 +42,12 @@ def test_problem(db, test_patient):
     """Create a test problem associated with test_patient."""
     return Problem.objects.create(
         patient=test_patient, wording="Test medical problem", order_number=1
+    )
+
+
+@pytest.fixture
+def test_history(db, test_patient):
+    """Create and return a test history associated with test_patient."""
+    return History.objects.create(
+        patient=test_patient, medical_intolerance="Penicillin"
     )

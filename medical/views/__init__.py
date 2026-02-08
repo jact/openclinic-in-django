@@ -19,6 +19,7 @@ from .history_views import (
     HistoryAntecedentsCreate,
     HistoryAntecedentsDetail,
     HistoryAntecedentsUpdate,
+    HistoryList,
 )
 
 # Patient views
@@ -38,7 +39,6 @@ from .patient_views import (
 
 # Problem views
 from .problem_views import (
-    HistoryList,
     ProblemConnections,
     ProblemCreate,
     ProblemDelete,

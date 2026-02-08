@@ -195,23 +195,5 @@ class ProblemConnections(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-class HistoryList(LoginRequiredMixin, AjaxListView):
-    """List of closed problems (history) for a patient."""
-
-    model = Problem
-    template_name = "history_list.html"
-    page_template = "includes/problem_list.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["patient"] = get_object_or_404(Patient, pk=self.kwargs["pk"])
-        return context
-
-    def get_queryset(self):
-        super().get_queryset()
-        # Optimizado: select_related para evitar consultas N+1
-        return (
-            Problem.closed.filter(patient__id=self.kwargs["pk"])
-            .select_related("patient", "doctor")
-            .order_by("-modified")
-        )
+# NOTE: HistoryList class has been moved to history_views.py
+# Import from there: from .history_views import HistoryList

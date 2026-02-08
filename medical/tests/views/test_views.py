@@ -1,49 +1,7 @@
 import pytest
-from django.contrib.auth import get_user_model
 from django.urls import reverse
 
-from medical.models import History, Patient, Problem
-
-
-@pytest.fixture(autouse=True)
-def autouse_db(db, django_user_model):
-    """Ensure a user exists for login."""
-    if not django_user_model.objects.filter(username="tester").exists():
-        django_user_model.objects.create_user(username="tester", password="pass123")
-    yield
-
-
-@pytest.fixture
-def client_logged_in(client):
-    """Return a logged-in client."""
-    User = get_user_model()
-    user = User.objects.get(username="tester")
-    client.force_login(user)
-    return client
-
-
-@pytest.fixture
-def test_patient(db):
-    """Create and return a test patient."""
-    return Patient.objects.create(
-        first_name="John", last_name="Doe", last_name_optional="Smith"
-    )
-
-
-@pytest.fixture
-def test_problem(db, test_patient):
-    """Create and return a test problem."""
-    return Problem.objects.create(
-        patient=test_patient, wording="Test medical problem", order_number=1
-    )
-
-
-@pytest.fixture
-def test_history(db, test_patient):
-    """Create and return a test history."""
-    return History.objects.create(
-        patient=test_patient, medical_intolerance="Penicillin"
-    )
+from medical.models import History, Patient
 
 
 class TestPatientRedirectDetail:
