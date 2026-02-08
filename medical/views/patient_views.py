@@ -73,6 +73,11 @@ class PatientDelete(
     success_message = _("Patient, %s, deleted!")
     success_url_name = "patient_list"
 
+    def get_success_url(self):
+        """Override to not pass arguments (patient_list has no args)."""
+        messages.success(self.request, self.success_message % self.object)
+        return reverse(self.success_url_name)
+
 
 class PatientList(LoginRequiredMixin, AjaxListView):
     model = Patient
