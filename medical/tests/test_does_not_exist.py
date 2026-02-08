@@ -131,9 +131,8 @@ class TestHistoryAntecedentsDetail:
             "patient_history_antecedents_add", kwargs={"pk": test_patient.pk}
         )
 
-    def test_history_antecedents_detail_success(
-        self, client_logged_in, transactional_db
-    ):
+    @pytest.mark.django_db(transaction=True)
+    def test_history_antecedents_detail_success(self, client_logged_in):
         """Test that patient with history loads."""
         from medical.models import History, Patient
 

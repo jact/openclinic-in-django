@@ -151,9 +151,8 @@ class TestHistoryViews:
         resp = client_logged_in.get(url)
         assert resp.status_code == 404
 
-    def test_history_antecedents_success(
-        self, client_logged_in, transactional_db
-    ):
+    @pytest.mark.django_db(transaction=True)
+    def test_history_antecedents_success(self, client_logged_in):
         """Test that patient with history loads."""
         from medical.models import History, Patient
 
