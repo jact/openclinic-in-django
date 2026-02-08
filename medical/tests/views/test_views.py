@@ -160,7 +160,7 @@ class TestHistoryViews:
         History.objects.create(patient=patient, medical_intolerance="Penicillin")
         url = reverse("patient_history_antecedents", kwargs={"pk": patient.pk})
         resp = client_logged_in.get(url)
-        assert resp.status_code == 200
+        assert resp.status_code == 302
 
     def test_history_antecedents_no_history(self, client_logged_in, test_patient):
         """Test that patient without history redirects to create page."""

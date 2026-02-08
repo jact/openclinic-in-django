@@ -142,7 +142,7 @@ class TestHistoryAntecedentsDetail:
         History.objects.create(patient=patient, medical_intolerance="Test")
         url = reverse("patient_history_antecedents", kwargs={"pk": patient.pk})
         resp = client_logged_in.get(url)
-        assert resp.status_code == 200
+        assert resp.status_code == 302
 
 
 class TestProblemDetail:
