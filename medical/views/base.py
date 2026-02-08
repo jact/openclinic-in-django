@@ -31,3 +31,50 @@ from django.views.generic import (
 from el_pagination.views import AjaxListView
 
 logger = logging.getLogger(__name__)
+
+
+class PatientContextMixin:
+    """Mixin to add patient to context based on pk in URL kwargs."""
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        from medical.models import Patient
+
+        context["patient"] = get_object_or_404(
+            Patient, pk=self.kwargs.get("pk") or self.object.patient.id
+        )
+        return context
+
+
+class SuccessMessageMixin:
+    """Mixin providing success message and redirect after form submission."""
+
+    success_message = ""
+    success_url_name = ""
+
+    def get_success_url(self):
+        messages.success(self.request, self.success_message % self.object)
+        return reverse(self.success_url_name, args=(self.object.id,))
+
+
+class DeleteConfirmationMixin:
+    """Mixin providing title and cancel_url for delete confirmation templates."""
+
+    title_prefix = ""
+    cancel_url_name = ""
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = f"{self.title_prefix}: {self.object}"
+        context["cancel_url"] = reverse(self.cancel_url_name, args=(self.object.id,))
+        return context
+
+
+class ProblemClosingMixin:
+    """Mixin handling problem closing logic in form_valid."""
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.closing_date = timezone.now() if form.cleaned_data["closed"] else None
+        instance.save()
+        return super().form_valid(form)

@@ -17,19 +17,22 @@ from ..models import Patient, Problem
 from .base import (
     AjaxListView,
     CreateView,
+    DeleteConfirmationMixin,
     DeleteView,
     DetailView,
     LoginRequiredMixin,
+    PatientContextMixin,
+    ProblemClosingMixin,
+    SuccessMessageMixin,
     UpdateView,
     _,
     get_object_or_404,
     messages,
     reverse,
-    timezone,
 )
 
 
-class ProblemCreate(LoginRequiredMixin, CreateView):
+class ProblemCreate(LoginRequiredMixin, ProblemClosingMixin, CreateView):
     model = Problem
     form_class = ProblemForm
     template_name = "problem_form.html"
@@ -41,15 +44,6 @@ class ProblemCreate(LoginRequiredMixin, CreateView):
             "order_number": Problem.get_last_order_number(patient_id) + 1,
         }
 
-    def form_valid(self, form):
-        instance = form.save(commit=False)
-        instance.closing_date = None
-        if form.cleaned_data["closed"]:
-            instance.closing_date = timezone.now()
-        self.object = instance
-
-        return super().form_valid(form)
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         patient = get_object_or_404(Patient, pk=self.kwargs["pk"])
@@ -60,19 +54,14 @@ class ProblemCreate(LoginRequiredMixin, CreateView):
         return reverse("problem_detail", args=(self.object.pk,))
 
 
-class ProblemUpdate(LoginRequiredMixin, UpdateView):
+class ProblemUpdate(
+    LoginRequiredMixin, ProblemClosingMixin, SuccessMessageMixin, UpdateView
+):
     model = Problem
     form_class = ProblemForm
     template_name = "problem_form.html"
-
-    def form_valid(self, form):
-        instance = form.save(commit=False)
-        instance.closing_date = None
-        if form.cleaned_data["closed"]:
-            instance.closing_date = timezone.now()
-        self.object = instance
-
-        return super().form_valid(form)
+    success_message = _("Medical problem, %s, updated!")
+    success_url_name = "problem_detail"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -83,10 +72,6 @@ class ProblemUpdate(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(Problem, id=self.kwargs["pk"])
-
-    def get_success_url(self):
-        messages.success(self.request, _("Medical problem, %s, updated!") % self.object)
-        return reverse("problem_detail", args=(self.object.pk,))
 
 
 class ProblemSearch(LoginRequiredMixin, AjaxListView):
@@ -114,15 +99,10 @@ class ProblemSearch(LoginRequiredMixin, AjaxListView):
         return None
 
 
-class ProblemList(LoginRequiredMixin, AjaxListView):
+class ProblemList(LoginRequiredMixin, PatientContextMixin, AjaxListView):
     model = Problem
     template_name = "problem_list.html"
     page_template = "includes/problem_list.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["patient"] = get_object_or_404(Patient, pk=self.kwargs["pk"])
-        return context
 
     def get_queryset(self):
         super().get_queryset()
@@ -154,39 +134,35 @@ class ProblemDetail(LoginRequiredMixin, DetailView):
         return context
 
 
-class ProblemDelete(LoginRequiredMixin, DeleteView):
+class ProblemDelete(
+    LoginRequiredMixin, DeleteConfirmationMixin, SuccessMessageMixin, DeleteView
+):
     model = Problem
     template_name = "object_confirm_delete.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = f"{_('Delete medical problem')}: {self.object}"
-        context["cancel_url"] = reverse("problem_detail", args=(self.object.id,))
-        return context
+    title_prefix = _("Delete medical problem")
+    cancel_url_name = "problem_detail"
+    success_message = _("Medical problem, %s, deleted!")
 
     def get_success_url(self):
-        messages.success(self.request, _("Medical problem, %s, deleted!") % self.object)
         return reverse("problem_list", args=(self.object.patient.id,))
 
 
-class ProblemConnections(LoginRequiredMixin, UpdateView):
+class ProblemConnections(
+    LoginRequiredMixin, PatientContextMixin, SuccessMessageMixin, UpdateView
+):
     model = Problem
     form_class = ProblemConnectionsForm
     template_name = "problem_connections.html"
+    success_message = _("Medical problem, %s, updated!")
+    success_url_name = "problem_connections"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        patient = get_object_or_404(Patient, pk=self.object.patient.id)
         context["problem"] = self.object
-        context["patient"] = patient
         return context
 
     def get_object(self, queryset=None):
         return get_object_or_404(Problem, id=self.kwargs["pk"])
-
-    def get_success_url(self):
-        messages.success(self.request, _("Medical problem, %s, updated!") % self.object)
-        return reverse("problem_connections", args=(self.object.id,))
 
     def form_valid(self, form):
         if self.kwargs["pk"] in form.cleaned_data["connections"]:

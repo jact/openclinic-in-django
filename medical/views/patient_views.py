@@ -17,12 +17,14 @@ from ..models import History, Patient, Problem
 from .base import (
     AjaxListView,
     CreateView,
+    DeleteConfirmationMixin,
     DeleteView,
     DetailView,
     ListView,
     LoginRequiredMixin,
     Q,
     RedirectView,
+    SuccessMessageMixin,
     UpdateView,
     _,
     get_object_or_404,
@@ -32,25 +34,25 @@ from .base import (
 )
 
 
-class PatientCreate(LoginRequiredMixin, CreateView):
+class PatientCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Patient
     form_class = PatientForm
     template_name = "patient_form.html"
+    success_message = _("Patient, %s, added!")
+    success_url_name = "patient_redirect_detail"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = _("New Patient")
         return context
 
-    def get_success_url(self):
-        messages.success(self.request, _("Patient, %s, added!") % self.object)
-        return reverse("patient_redirect_detail", args=(self.object.id,))
 
-
-class PatientUpdate(LoginRequiredMixin, UpdateView):
+class PatientUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Patient
     form_class = PatientForm
     template_name = "patient_form.html"
+    success_message = _("Patient, %s, updated!")
+    success_url_name = "patient_redirect_detail"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -60,26 +62,16 @@ class PatientUpdate(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         return get_object_or_404(Patient, id=self.kwargs["pk"])
 
-    def get_success_url(self):
-        messages.success(self.request, _("Patient, %s, updated!") % self.object)
-        return reverse("patient_redirect_detail", args=(self.object.id,))
 
-
-class PatientDelete(LoginRequiredMixin, DeleteView):
+class PatientDelete(
+    LoginRequiredMixin, DeleteConfirmationMixin, SuccessMessageMixin, DeleteView
+):
     model = Patient
     template_name = "object_confirm_delete.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = f"{_('Delete patient')}: {self.object}"
-        context["cancel_url"] = reverse(
-            "patient_redirect_detail", args=(self.object.id,)
-        )
-        return context
-
-    def get_success_url(self):
-        messages.success(self.request, _("Patient, %s, deleted!") % self.object)
-        return reverse("patient_list")
+    title_prefix = _("Delete patient")
+    cancel_url_name = "patient_redirect_detail"
+    success_message = _("Patient, %s, deleted!")
+    success_url_name = "patient_list"
 
 
 class PatientList(LoginRequiredMixin, AjaxListView):
