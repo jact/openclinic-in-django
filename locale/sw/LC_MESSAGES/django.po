@@ -1,0 +1,1084 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-04 18:28+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: medical/admin.py:35
+msgid "Personal info"
+msgstr "Maelezo ya kibinafsi"
+
+#: medical/admin.py:37
+msgid "Permissions"
+msgstr "Ruhusa"
+
+#: medical/admin.py:49
+msgid "Important dates"
+msgstr "Tarehe muhimu"
+
+#: medical/forms.py:56 medical/templates/includes/patient_detail.html:6
+msgid "Basic data"
+msgstr "Data ya msingi"
+
+#: medical/forms.py:68 medical/templates/includes/patient_detail.html:43
+msgid "Administrative data"
+msgstr "Data ya usimamizi"
+
+#: medical/forms.py:77 medical/templates/includes/patient_detail.html:76
+msgid "Extra data"
+msgstr "Data ya ziada"
+
+#: medical/forms.py:83 medical/forms.py:219
+#: medical/templates/problem_form.html:38
+msgid "Save"
+msgstr "Hifadhi"
+
+#: medical/forms.py:103 medical/forms.py:137
+msgid "Field"
+msgstr "Uwanja"
+
+#: medical/forms.py:106
+msgid "Last name"
+msgstr "Jina la ukoo"
+
+#: medical/forms.py:107
+msgid "First name"
+msgstr "Jina la kwanza"
+
+#: medical/forms.py:108
+msgid "Last name optional"
+msgstr "Jina la ukoo (hiari)"
+
+#: medical/forms.py:109
+msgid "Address"
+msgstr "Anwani"
+
+#: medical/forms.py:110
+msgid "Phone contact"
+msgstr "Mawasiliano ya simu"
+
+#: medical/forms.py:111
+msgid "Race"
+msgstr "Uasili"
+
+#: medical/forms.py:112
+msgid "Birth date"
+msgstr "Tarehe ya kuzaliwa"
+
+#: medical/forms.py:113
+msgid "Birth place"
+msgstr "Mahali pa kuzaliwa"
+
+#: medical/forms.py:114
+msgid "Decease date"
+msgstr "Tarehe ya kufariki"
+
+#: medical/forms.py:115
+msgid "Taxpayer Identification Number (TIN)"
+msgstr "Nambari ya Utambulisho wa Mlipakodi (TIN)"
+
+#: medical/forms.py:116
+msgid "Social Security Number (SSN)"
+msgstr "Nambari ya Usalama wa Jamii (SSN)"
+
+#: medical/forms.py:117
+msgid "Health card number"
+msgstr "Nambari ya kadi ya afya"
+
+#: medical/forms.py:118
+msgid "Insurance company"
+msgstr "Kampuni ya bima"
+
+#: medical/forms.py:125 medical/forms.py:151
+msgid "Value"
+msgstr "Thamani"
+
+#: medical/forms.py:125 medical/forms.py:151
+msgid "(empty = see all results)"
+msgstr "(tupu = ona matokeo yote)"
+
+#: medical/forms.py:140
+msgid "Wording"
+msgstr "Maneno"
+
+#: medical/forms.py:141
+msgid "Subjetive"
+msgstr "Yasiyo dhahiri (Subjective)"
+
+#: medical/forms.py:142
+msgid "Objetive"
+msgstr "Yaliyo dhahiri (Objective)"
+
+#: medical/forms.py:143
+msgid "Appreciation"
+msgstr "Tathmini"
+
+#: medical/forms.py:144
+msgid "Action Plan"
+msgstr "Mpango wa Hatua"
+
+#: medical/forms.py:145
+msgid "Prescription"
+msgstr "Cheti cha dawa"
+
+#: medical/forms.py:164
+msgid "Closed problem?"
+msgstr "Tatizo limefungwa?"
+
+#: medical/forms.py:197
+#: medical/templates/includes/history_antecedents_detail.html:6
+msgid "Personal antecedents"
+msgstr "Historia ya awali ya kibinafsi"
+
+#: medical/forms.py:212
+#: medical/templates/includes/history_antecedents_detail.html:57
+msgid "Family antecedents"
+msgstr "Historia ya awali ya kifamilia"
+
+#: medical/models/history.py:27
+#: medical/templates/includes/history_antecedents_detail.html:14
+msgid "birth and growth"
+msgstr "kuzaliwa na kukua"
+
+#: medical/models/history.py:30
+#: medical/templates/includes/history_antecedents_detail.html:18
+msgid "growth and sexuality"
+msgstr "kukua na ujinsia"
+
+#: medical/models/history.py:33
+#: medical/templates/includes/history_antecedents_detail.html:22
+msgid "feed"
+msgstr "chakula"
+
+#: medical/models/history.py:34
+#: medical/templates/includes/history_antecedents_detail.html:26
+msgid "habits"
+msgstr "tabia"
+
+#: medical/models/history.py:36
+#: medical/templates/includes/history_antecedents_detail.html:30
+msgid "peristaltic conditions"
+msgstr "hali ya utumbo"
+
+#: medical/models/history.py:39
+#: medical/templates/includes/history_antecedents_detail.html:34
+msgid "psychological conditions"
+msgstr "hali ya kisaikolojia"
+
+#: medical/models/history.py:43
+#: medical/templates/includes/history_antecedents_detail.html:38
+msgid "children complaint"
+msgstr "maradhi ya watoto"
+
+#: medical/models/history.py:46
+msgid "venereal disease"
+msgstr "ugonjwa wa zinaa"
+
+#: medical/models/history.py:49
+#: medical/templates/includes/history_antecedents_detail.html:46
+msgid "accidents and surgical operations"
+msgstr "ajali na upasuaji"
+
+#: medical/models/history.py:52
+#: medical/templates/includes/history_antecedents_detail.html:10
+msgid "medical intolerance"
+msgstr "kutovumilia kwa dawa"
+
+#: medical/models/history.py:55
+#: medical/templates/includes/history_antecedents_detail.html:50
+msgid "mental illness"
+msgstr "ugonjwa wa akili"
+
+#: medical/models/history.py:59
+#: medical/templates/includes/history_antecedents_detail.html:61
+msgid "parents status health"
+msgstr "hali ya afya ya wazazi"
+
+#: medical/models/history.py:62
+#: medical/templates/includes/history_antecedents_detail.html:65
+msgid "brothers status health"
+msgstr "hali ya afya ya ndugu"
+
+#: medical/models/history.py:65
+#: medical/templates/includes/history_antecedents_detail.html:69
+msgid "spouse and childs status health"
+msgstr "hali ya afya ya mwenzi na watoto"
+
+#: medical/models/history.py:68
+#: medical/templates/includes/history_antecedents_detail.html:73
+msgid "family illness"
+msgstr "ugonjwa wa familia"
+
+#: medical/models/patient.py:30
+msgid "Male"
+msgstr "Mwanaume"
+
+#: medical/models/patient.py:31
+msgid "Female"
+msgstr "Mwanamke"
+
+#: medical/models/patient.py:34
+#: medical/templates/patient_medical_report.html:13
+msgid "first name"
+msgstr "jina la kwanza"
+
+#: medical/models/patient.py:35
+#: medical/templates/patient_medical_report.html:15
+msgid "last name"
+msgstr "jina la ukoo"
+
+#: medical/models/patient.py:37 medical/models/staff.py:52
+#: medical/templates/patient_medical_report.html:18
+msgid "last name optional"
+msgstr "jina la ukoo (hiari)"
+
+#: medical/models/patient.py:40 medical/models/staff.py:55
+#: medical/templates/includes/patient_detail.html:47
+msgid "address"
+msgstr "anwani"
+
+#: medical/models/patient.py:42 medical/models/staff.py:57
+#: medical/templates/includes/patient_detail.html:51
+msgid "phone contact"
+msgstr "mawasiliano ya simu"
+
+#: medical/models/patient.py:50
+#: medical/templates/includes/patient_detail.html:18
+#: medical/templates/includes/patient_info.html:17
+msgid "gender"
+msgstr "jinsia"
+
+#: medical/models/patient.py:53
+#: medical/templates/includes/patient_detail.html:14
+msgid "race"
+msgstr "uasili"
+
+#: medical/models/patient.py:59
+#: medical/templates/includes/patient_detail.html:27
+msgid "birth date"
+msgstr "tarehe ya kuzaliwa"
+
+#: medical/models/patient.py:60 medical/models/patient.py:69
+msgid "yyyy"
+msgstr "yyyy"
+
+#: medical/models/patient.py:60 medical/models/patient.py:69
+msgid "mm"
+msgstr "mm"
+
+#: medical/models/patient.py:60 medical/models/patient.py:69
+msgid "dd"
+msgstr "dd"
+
+#: medical/models/patient.py:63
+#: medical/templates/includes/patient_detail.html:22
+msgid "birth place"
+msgstr "mahali pa kuzaliwa"
+
+#: medical/models/patient.py:68
+#: medical/templates/includes/patient_detail.html:29
+msgid "decease date"
+msgstr "tarehe ya kufariki"
+
+#: medical/models/patient.py:76 medical/models/staff.py:48
+#: medical/templates/includes/patient_detail.html:55
+msgid "taxpayer Identification Number (TIN)"
+msgstr "Nambari ya Utambulisho wa Mlipakodi (TIN)"
+
+#: medical/models/patient.py:82
+#: medical/templates/includes/patient_detail.html:59
+msgid "social Security Number (SSN)"
+msgstr "Nambari ya Usalama wa Jamii (SSN)"
+
+#: medical/models/patient.py:85
+#: medical/templates/includes/patient_detail.html:63
+msgid "health card number"
+msgstr "nambari ya kadi ya afya"
+
+#: medical/models/patient.py:89
+#: medical/templates/includes/patient_detail.html:80
+msgid "family situation"
+msgstr "hali ya kifamilia"
+
+#: medical/models/patient.py:92
+#: medical/templates/includes/patient_detail.html:84
+msgid "labour situation"
+msgstr "hali ya kazi"
+
+#: medical/models/patient.py:94
+#: medical/templates/includes/patient_detail.html:88
+msgid "education"
+msgstr "elimu"
+
+#: medical/models/patient.py:97
+#: medical/templates/includes/patient_detail.html:67
+msgid "insurance company"
+msgstr "kampuni ya bima"
+
+#: medical/models/patient.py:105
+#: medical/templates/includes/patient_detail.html:10
+msgid "doctor allocated by quota"
+msgstr "daktari aliyepangiwa"
+
+#: medical/models/patient.py:114
+#: medical/templates/history_antecedents_detail.html:7
+#: medical/templates/history_antecedents_form.html:7
+#: medical/templates/includes/problem_info.html:17
+#: medical/templates/patient_detail.html:7
+#: medical/templates/patient_medical_report.html:11
+#: medical/templates/patient_relatives.html:7
+#: medical/templates/patient_tests.html:7
+#: medical/templates/problem_connections.html:7
+#: medical/templates/problem_detail.html:7
+#: medical/templates/problem_tests.html:7
+#: templates/includes/toggle_login.html:6
+#: templates/includes/toggle_login.html:7
+msgid "Patient"
+msgstr "Mgonjwa"
+
+#: medical/models/patient.py:115
+msgid "Patients"
+msgstr "Wagonjwa"
+
+#: medical/models/patient.py:135
+msgid "Can not die before birth"
+msgstr "Hawezi kufa kabla ya kuzaliwa"
+
+#: medical/models/problem.py:36
+#: medical/templates/includes/problem_detail.html:6
+#: medical/templates/includes/problem_info.html:20
+msgid "order number"
+msgstr "nambari ya agizo"
+
+#: medical/models/problem.py:38
+#: medical/templates/includes/problem_detail.html:13
+#: medical/templates/includes/problem_info.html:26
+msgid "closing date"
+msgstr "tarehe ya kufunga"
+
+#: medical/models/problem.py:42
+#: medical/templates/includes/problem_detail.html:17
+msgid "meeting place"
+msgstr "mahali pa mkutano"
+
+#: medical/models/problem.py:45
+#: medical/templates/includes/problem_detail.html:31
+msgid "wording"
+msgstr "maneno"
+
+#: medical/models/problem.py:47
+#: medical/templates/includes/problem_detail.html:34
+msgid "subjetive"
+msgstr "yasiyo dhahiri (subjective)"
+
+#: medical/models/problem.py:48
+#: medical/templates/includes/problem_detail.html:38
+msgid "objetive"
+msgstr "yaliyo dhahiri (objective)"
+
+#: medical/models/problem.py:50
+#: medical/templates/includes/problem_detail.html:42
+msgid "appreciation"
+msgstr "tathmini"
+
+#: medical/models/problem.py:52
+#: medical/templates/includes/problem_detail.html:46
+msgid "action plan"
+msgstr "mpango wa hatua"
+
+#: medical/models/problem.py:54
+msgid "doctor's orders"
+msgstr "maagizo ya daktari"
+
+#: medical/models/problem.py:64
+#: medical/templates/includes/problem_detail.html:21
+msgid "attending physician"
+msgstr "daktari anayehudumu"
+
+#: medical/models/problem.py:77
+msgid "Medical Problem"
+msgstr "Tatizo la Matibabu"
+
+#: medical/models/problem.py:78
+msgid "Medical Problems"
+msgstr "Matatizo ya Matibabu"
+
+#: medical/models/staff.py:37
+msgid "Administrative"
+msgstr "Utawala"
+
+#: medical/models/staff.py:38
+msgid "Doctor"
+msgstr "Daktari"
+
+#: medical/models/staff.py:42
+msgid "collegiate number"
+msgstr "nambari ya usajili wa kitaalamu"
+
+#: medical/models/staff.py:61
+msgid "staff type"
+msgstr "aina ya mfanyakazi"
+
+#: medical/models/staff.py:78
+msgid "Collegiate number is required for doctor"
+msgstr "Nambari ya usajili wa kitaalamu inahitajika kwa daktari"
+
+#: medical/models/test.py:31 medical/templates/includes/test_info.html:17
+msgid "MIME type"
+msgstr "Aina ya MIME"
+
+#: medical/models/test.py:34 medical/templates/includes/test_info.html:15
+msgid "document"
+msgstr "hati"
+
+#: medical/templates/advanced_search.html:4
+#: medical/templates/advanced_search.html:13
+msgid "Advanced Search"
+msgstr "Utafutaji wa Juu"
+
+#: medical/templates/advanced_search.html:18
+msgid "Search Patient"
+msgstr "Tafuta Mgonjwa"
+
+#: medical/templates/advanced_search.html:23
+#: medical/templates/advanced_search.html:36
+#: templates/includes/toggle_login.html:10
+#: templates/includes/toggle_login.html:12
+msgid "Search"
+msgstr "Tafuta"
+
+#: medical/templates/advanced_search.html:31
+msgid "Search Patient by Medical Problem"
+msgstr "Tafuta Mgonjwa kwa Tatizo la Matibabu"
+
+#: medical/templates/advanced_search.html:44
+#: medical/templates/problem_list.html:24
+msgid "Results"
+msgstr "Matokeo"
+
+#: medical/templates/advanced_search.html:47
+#: medical/templates/history_list.html:27
+#: medical/templates/problem_list.html:27
+#, python-format
+msgid ""
+"\n"
+"            There is only one element.\n"
+"            "
+msgid_plural ""
+"\n"
+"            There are %(counter)s elements.\n"
+"            "
+msgstr[0] ""
+"\n"
+"            Kuna kipengele kimoja tu.\n"
+"            "
+msgstr[1] ""
+"\n"
+"            Kuna vipengele %(counter)s.\n"
+"            "
+
+#: medical/templates/history_antecedents_detail.html:4
+#: medical/templates/history_antecedents_detail.html:13
+#: medical/templates/history_list.html:20
+#: medical/templates/patient_medical_report.html:32
+msgid "Antecedents"
+msgstr "Historia ya awali"
+
+#: medical/templates/history_antecedents_detail.html:13
+#: medical/templates/includes/patient_actions.html:6
+#: medical/templates/includes/problem_actions.html:5
+#: medical/templates/includes/problem_actions.html:6
+msgid "Update"
+msgstr "Sasisha"
+
+#: medical/templates/history_antecedents_form.html:13
+#: medical/views/history_views.py:92 medical/views/history_views.py:116
+msgid "Update antecedents"
+msgstr "Sasisha historia ya awali"
+
+#: medical/templates/history_antecedents_form.html:17
+#: medical/templates/patient_form.html:23
+#: medical/templates/problem_form.html:27
+#, python-format
+msgid "Please correct the error %(form.errors|pluralize)s below."
+msgstr "Tafadhali rekebisha kosa %(form.errors|pluralize)s hapa chini."
+
+#: medical/templates/history_antecedents_form.html:21
+#: medical/templates/patient_form.html:27
+#: medical/templates/problem_form.html:31
+msgid "Fields with * are required."
+msgstr "Sehemu zenye * zinahitajika."
+
+#: medical/templates/history_list.html:4 medical/templates/history_list.html:13
+#: medical/templates/includes/patient_actions.html:27
+#: medical/templates/includes/patient_actions.html:28
+msgid "Clinic history"
+msgstr "Historia ya kliniki"
+
+#: medical/templates/history_list.html:23
+#: medical/templates/patient_medical_report.html:36
+msgid "Closed medical problems"
+msgstr "Matatizo ya matibabu yaliyofungwa"
+
+#: medical/templates/history_list.html:36
+#: medical/templates/patient_medical_report.html:42
+msgid "No closed medical problems defined for this patient."
+msgstr "Hakuna matatizo ya matibabu yaliyofungwa yaliyoainishwa kwa mgonjwa huyu."
+
+#: medical/templates/includes/history_antecedents_detail.html:42
+msgid "veneral disease"
+msgstr "ugonjwa wa zinaa"
+
+#: medical/templates/includes/patient_actions.html:5
+msgid "Update social data"
+msgstr "Sasisha data ya kijamii"
+
+#: medical/templates/includes/patient_actions.html:10
+#: medical/templates/includes/patient_actions.html:11
+#: medical/templates/patient_relatives.html:4
+#: medical/templates/patient_relatives.html:16
+msgid "Relatives"
+msgstr "Ndugu"
+
+#: medical/templates/includes/patient_actions.html:16
+#: medical/templates/includes/patient_actions.html:17
+#: medical/templates/problem_list.html:4 medical/templates/problem_list.html:13
+msgid "Medical problems report"
+msgstr "Ripoti ya matatizo ya matibabu"
+
+#: medical/templates/includes/patient_actions.html:22
+#: medical/templates/includes/patient_actions.html:23
+#: medical/templates/includes/problem_actions.html:10
+#: medical/templates/includes/problem_actions.html:11
+#: medical/templates/patient_tests.html:4
+#: medical/templates/patient_tests.html:13
+#: medical/templates/problem_tests.html:19 templates/info/welcome.html:31
+msgid "Medical tests"
+msgstr "Vipimo vya matibabu"
+
+#: medical/templates/includes/patient_actions.html:32
+#: medical/templates/includes/patient_actions.html:33
+msgid "Print medical report"
+msgstr "Chapa ripoti ya matibabu"
+
+#: medical/templates/includes/patient_actions.html:37
+#: medical/templates/includes/patient_actions.html:38
+#: medical/views/patient_views.py:68
+msgid "Delete patient"
+msgstr "Futa mgonjwa"
+
+#: medical/templates/includes/patient_detail.html:26
+#: medical/templates/includes/patient_info.html:21
+msgid "Age"
+msgstr "Umri"
+
+#: medical/templates/includes/patient_list.html:10
+msgid "No patients found."
+msgstr "Hakuna wagonjwa waliopatikana."
+
+#: medical/templates/includes/problem_actions.html:16
+#: medical/templates/includes/problem_actions.html:17
+#: medical/templates/problem_connections.html:22
+msgid "Connections"
+msgstr "Uunganisho"
+
+#: medical/templates/includes/problem_actions.html:22
+#: medical/templates/includes/problem_actions.html:23
+#: medical/views/problem_views.py:140
+msgid "Delete medical problem"
+msgstr "Futa tatizo la matibabu"
+
+#: medical/templates/includes/problem_detail.html:8
+#: medical/templates/includes/problem_info.html:24
+msgid "opening date"
+msgstr "tarehe ya kufungua"
+
+#: medical/templates/includes/problem_detail.html:10
+#: medical/templates/includes/problem_info.html:22
+msgid "last update"
+msgstr "sasisho la mwisho"
+
+#: medical/templates/includes/problem_detail.html:50
+msgid "Doctor's orders"
+msgstr "Maagizo ya daktari"
+
+#: medical/templates/includes/problem_list.html:10
+#: medical/templates/patient_medical_report.html:29
+msgid "No medical problems found."
+msgstr "Hakuna matatizo ya matibabu yaliyoainishwa."
+
+#: medical/templates/includes/test_actions.html:5
+msgid "View"
+msgstr "Onyesha"
+
+#: medical/templates/includes/test_actions.html:8
+msgid "Delete test"
+msgstr "Futa kipimo"
+
+#: medical/templates/includes/test_info.html:14
+msgid "created"
+msgstr "imeundwa"
+
+#: medical/templates/includes/test_info.html:20
+#: medical/templates/problem_connections.html:13
+#: medical/templates/problem_detail.html:13
+#: medical/templates/problem_tests.html:13
+msgid "Medical problem"
+msgstr "Tatizo la matibabu"
+
+#: medical/templates/object_confirm_delete.html:11
+msgid "Are you sure you want to delete this element?"
+msgstr "Je, una uhakika unataka kufuta kipengele hiki?"
+
+#: medical/templates/object_confirm_delete.html:13
+msgid "Delete"
+msgstr "Futa"
+
+#: medical/templates/object_confirm_delete.html:13
+msgid "or"
+msgstr "au"
+
+#: medical/templates/object_confirm_delete.html:14
+msgid "cancel"
+msgstr "ghairi"
+
+#: medical/templates/patient_medical_report.html:23
+msgid "Medical problems"
+msgstr "Matatizo ya matibabu"
+
+#: medical/templates/patient_relatives.html:22
+msgid "Add relatives to patient"
+msgstr "Ongeza ndugu kwa mgonjwa"
+
+#: medical/templates/patient_tests.html:19
+msgid "No medical tests defined for this patient."
+msgstr "Hakuna vipimo vya matibabu vilivyoainishwa kwa mgonjwa huyu."
+
+#: medical/templates/problem_connections.html:4
+msgid "Medical problem connections"
+msgstr "Uunganisho wa matatizo ya matibabu"
+
+#: medical/templates/problem_connections.html:27
+msgid "Add connections to medical problem"
+msgstr "Ongeza uunganisho kwa tatizo la matibabu"
+
+#: medical/templates/problem_list.html:20
+msgid "Add medical problem"
+msgstr "Ongeza tatizo la matibabu"
+
+#: medical/templates/problem_tests.html:4
+#: medical/templates/problem_tests.html:32
+msgid "Add medical test"
+msgstr "Ongeza kipimo cha matibabu"
+
+#: medical/templates/problem_tests.html:25
+msgid "No medical tests defined for this medical problem."
+msgstr "Hakuna vipimo vya matibabu vilivyoainishwa kwa tatizo hili la matibabu."
+
+#: medical/templates/problem_tests.html:37
+msgid "Add test to medical problem"
+msgstr "Ongeza kipimo kwa tatizo la matibabu"
+
+#: medical/views/history_views.py:98 medical/views/history_views.py:128
+msgid "Antecedents have been updated!"
+msgstr "Historia ya awali imesasishwa!"
+
+#: medical/views/patient_views.py:41
+#, python-format
+msgid "Patient, %s, added!"
+msgstr "Mgonjwa, %s, ameongezwa!"
+
+#: medical/views/patient_views.py:46 templates/includes/toggle_login.html:14
+#: templates/includes/toggle_login.html:16
+msgid "New Patient"
+msgstr "Mgonjwa Mpya"
+
+#: medical/views/patient_views.py:54 medical/views/patient_views.py:149
+#, python-format
+msgid "Patient, %s, updated!"
+msgstr "Mgonjwa, %s, amesasishwa!"
+
+#: medical/views/patient_views.py:59
+msgid "Update patient social data"
+msgstr "Sasisha data ya kijamii ya mgonjwa"
+
+#: medical/views/patient_views.py:70
+#, python-format
+msgid "Patient, %s, deleted!"
+msgstr "Mgonjwa, %s, amefutwa!"
+
+#: medical/views/problem_views.py:50
+msgid "New medical problem"
+msgstr "Tatizo jipya la matibabu"
+
+#: medical/views/problem_views.py:63 medical/views/problem_views.py:154
+#, python-format
+msgid "Medical problem, %s, updated!"
+msgstr "Tatizo la matibabu, %s, limesasishwa!"
+
+#: medical/views/problem_views.py:69
+msgid "Update medical problem"
+msgstr "Sasisha tatizo la matibabu"
+
+#: medical/views/problem_views.py:142
+#, python-format
+msgid "Medical problem, %s, deleted!"
+msgstr "Tatizo la matibabu, %s, limefutwa!"
+
+#: medical/views/test_views.py:49
+#, python-format
+msgid "Medical test, %s, added!"
+msgstr "Kipimo cha matibabu, %s, kimeongezwa!"
+
+#: medical/views/test_views.py:60
+msgid "Delete medical test"
+msgstr "Futa kipimo cha matibabu"
+
+#: medical/views/test_views.py:67
+#, python-format
+msgid "Medical test, %s, deleted!"
+msgstr "Kipimo cha matibabu, %s, kimefutwa!"
+
+#: openclinic/settings/base.py:58
+msgid "English"
+msgstr "Kiingereza"
+
+#: openclinic/settings/base.py:59
+msgid "Spanish"
+msgstr "Kihispania"
+
+#: openclinic/settings/base.py:60
+msgid "French"
+msgstr "Kifaransa"
+
+#: openclinic/settings/base.py:61
+msgid "Portuguese"
+msgstr "Kireno"
+
+#: openclinic/settings/base.py:62
+msgid "Swahili"
+msgstr "Kiswahili"
+
+#: templates/base.html:20
+msgid ""
+"OpenClinic is an easy to use, open source, medical records system written in "
+"Django"
+msgstr "OpenClinic ni mfumo wa rekodi za matibabu wa chanzo huria na rahisi kutumia ulioandikwa kwa Django"
+
+#: templates/base.html:46
+msgid "Toggle navigation"
+msgstr "Badilisha urambazaji"
+
+#: templates/base.html:59
+msgid "Info"
+msgstr "Maelezo"
+
+#: templates/base.html:62 templates/info/welcome.html:4
+msgid "Welcome"
+msgstr "Karibu"
+
+#: templates/base.html:63 templates/info/readme.html:4
+#: templates/info/readme.html:7
+msgid "Readme"
+msgstr "Soma Mimi"
+
+#: templates/base.html:64 templates/info/install.html:4
+#: templates/info/install.html:7
+msgid "Install Instructions"
+msgstr "Maelekezo ya Usakinishaji"
+
+#: templates/base.html:65 templates/info/license.html:4
+#: templates/info/license.html:7 templates/info/readme.html:78
+msgid "License"
+msgstr "Leseni"
+
+#: templates/base.html:74
+msgid "Clinic hours"
+msgstr "Saa za kliniki"
+
+#: templates/base.html:75
+msgid "Clinic address"
+msgstr "Anwani ya kliniki"
+
+#: templates/base.html:76
+msgid "Clinic phone"
+msgstr "Simu ya kliniki"
+
+#: templates/base.html:80 templates/info/readme.html:22
+#: templates/info/welcome.html:20
+msgid "Medical Records"
+msgstr "Rekodi za Matibabu"
+
+#: templates/includes/footer.html:13 templates/includes/footer.html:14
+msgid "Downloads"
+msgstr "Upakuaji"
+
+#: templates/includes/footer.html:16 templates/includes/footer.html:17
+msgid "Report Issues"
+msgstr "Ripoti Matatizo"
+
+#: templates/includes/footer.html:22
+msgid "OpenClinic Logo thanks to Coresis"
+msgstr "Nembo ya OpenClinic asante kwa Coresis"
+
+#: templates/includes/toggle_login.html:28 templates/info/readme.html:38
+#: templates/info/welcome.html:43
+msgid "Admin"
+msgstr "Wasimamizi"
+
+#: templates/includes/toggle_login.html:30
+msgid "Password change"
+msgstr "Badilisha nenosiri"
+
+#: templates/includes/toggle_login.html:35
+msgid "Logout"
+msgstr "Ondoka"
+
+#: templates/includes/toggle_login.html:43
+msgid "Username"
+msgstr "Jina la mtumiaji"
+
+#: templates/includes/toggle_login.html:44
+msgid "Password"
+msgstr "Nenosiri"
+
+#: templates/includes/toggle_login.html:45 templates/login.html:4
+#: templates/login.html:9 templates/login.html:18
+msgid "Login"
+msgstr "Ingia"
+
+#: templates/info/install.html:10
+msgid "Python 3.5+ is a requirement."
+msgstr "Python 3.5+ ni sharti."
+
+#: templates/info/install.html:13
+msgid ""
+"Download project from <a href=\"https://github.com/jact/openclinic-in-django/"
+"\">GitHub</a> and decompress file."
+msgstr "Pakua maradi kutoka <a href=\"https://github.com/jact/openclinic-in-django/\">GitHub</a> na ufungue faili."
+
+#: templates/info/install.html:17
+msgid "Execute these commands in a terminal from project directory:"
+msgstr "Tekeleza amri hizi kwenye terminal kutoka kwa saraka ya mradi:"
+
+#: templates/info/install.html:29
+msgid ""
+"Access your new <a href=\"/\">clinic system</a>. Enter <code><kbd>admin</"
+"kbd></code> for both, the login and password whenever you are prompted to "
+"sign on."
+msgstr "Fikia <a href=\"/\">mfumo wako mpya wa kliniki</a>. Ingiza <code><kbd>admin</kbd></code> kwa jina la mtumiaji na nenosiri wakati wowote unapoombwa kuingia."
+
+#: templates/info/install.html:33
+msgid "It's advisable to change the admin user's password."
+msgstr "Inashauriwa kubadilisha nenosiri la mtumiaji wa wasimamizi."
+
+#: templates/info/readme.html:9
+msgid "Welcome to OpenClinic!"
+msgstr "Karibu OpenClinic!"
+
+#: templates/info/readme.html:11
+msgid ""
+"First of all, thanks a lot to download this software, I hope that you can "
+"enjoy it."
+msgstr "Kwanza kabisa, asante sana kwa kupakua programu hii, natumai utaifurahia."
+
+#: templates/info/readme.html:13
+msgid ""
+"OpenClinic is free software, released under GNU GPL Licence version 3.0 (see "
+"<a href=\"/info/license\">LICENSE</a> file for details)."
+msgstr "OpenClinic ni programu huria, iliyotolewa chini ya GNU GPL Leseni toleo la 3.0 (ona faili ya <a href=\"/info/license\">LICENSE</a> kwa maelezo)."
+
+#: templates/info/readme.html:15 templates/info/readme.html:127
+msgid "Introduction"
+msgstr "Utangulizi"
+
+#: templates/info/readme.html:17
+msgid ""
+"OpenClinic is an easy to use, open source, medical records system written in "
+"Django."
+msgstr "OpenClinic ni mfumo wa rekodi za matibabu wa chanzo huria na rahisi kutumia ulioandikwa kwa Django."
+
+#: templates/info/readme.html:17
+msgid ""
+"It has been mainly thougth for private clinics, surgeries and private "
+"doctors."
+msgstr "Imefikiriwa zaidi kwa kliniki za kibinafsi, upasuaji na madaktari wa kibinafsi."
+
+#: templates/info/readme.html:17
+msgid "It is platform independent and it has multilanguage architecture."
+msgstr "Haidhaminiwi na jukwaa lolote na ina usanifu wa lugha nyingi."
+
+#: templates/info/readme.html:19
+msgid "Currently OpenClinic has the following sections:"
+msgstr "Kwa sasa OpenClinic ina sehemu zifuatazo:"
+
+#: templates/info/readme.html:23 templates/info/welcome.html:25
+msgid "Use this section to manage your patient's medical records."
+msgstr "Tumia sehemu hii kudhibiti rekodi za matibabu za wagonjwa wako."
+
+#: templates/info/readme.html:25 templates/info/welcome.html:27
+msgid "Patient's Administration:"
+msgstr "Usimamizi wa Wagonjwa:"
+
+#: templates/info/readme.html:28 templates/info/welcome.html:30
+msgid "Search, new, delete, edit"
+msgstr "Tafuta, mpya, futa, hariri"
+
+#: templates/info/readme.html:30
+msgid "Social Data"
+msgstr "Data ya Kijamii"
+
+#: templates/info/readme.html:32 templates/info/welcome.html:32
+msgid "Clinic History"
+msgstr "Historia ya Kliniki"
+
+#: templates/info/readme.html:34 templates/info/welcome.html:33
+msgid "Problem Reports"
+msgstr "Ripoti za Matatizo"
+
+#: templates/info/readme.html:39 templates/info/welcome.html:48
+msgid "Use this section to manage administrative settings."
+msgstr "Tumia sehemu hii kudhibiti mipangilio ya utawala."
+
+#: templates/info/readme.html:42 templates/info/welcome.html:51
+msgid "Staff members"
+msgstr "Wafanyakazi"
+
+#: templates/info/readme.html:44
+msgid "System Users"
+msgstr "Watumiaji wa Mfumo"
+
+#: templates/info/readme.html:49 templates/info/readme.html:129
+msgid "Requirements"
+msgstr "Mahitaji"
+
+#: templates/info/readme.html:61
+msgid "a web server prepared to execute Django code"
+msgstr "seva ya wavuti iliyoandaliwa kutekeleza nambari ya Django"
+
+#: templates/info/readme.html:65
+msgid "and, of course, a web browser (with enabled JavaScript)"
+msgstr "na, bila shaka, kivinjari cha wavuti (kilicho na JavaScript inayoweza kutumika)"
+
+#: templates/info/readme.html:69
+msgid ""
+"For more details, see <a href=\"/info/install\">Install instructions</a>."
+msgstr "Kwa maelezo zaidi, ona <a href=\"/info/install\">Maelekezo ya Usakinishaji</a>."
+
+#: templates/info/readme.html:71 templates/info/readme.html:131
+msgid "Features"
+msgstr "Sifa"
+
+#: templates/info/readme.html:74
+msgid "Environment: Web Environment"
+msgstr "Mazingira: Mazingira ya Wavuti"
+
+#: templates/info/readme.html:76
+msgid "Intended Audience: Education, Healthcare industry"
+msgstr "Hadhira Inayolengwa: Elimu, Sekta ya afya"
+
+#: templates/info/readme.html:80
+msgid "Natural Language: English, Spanish"
+msgstr "Lugha ya Asili: Kiingereza, Kihispania"
+
+#: templates/info/readme.html:82
+msgid "Operating System: OS Independent"
+msgstr "Mfumo wa Uendeshaji: Haukubaliani na OS yoyote"
+
+#: templates/info/readme.html:84
+msgid "Programming Language: Python"
+msgstr "Lugha ya Programu: Python"
+
+#: templates/info/readme.html:86
+msgid "Topic: Dynamic Content"
+msgstr "Mada: Maudhui Yenye Nguvu"
+
+#: templates/info/readme.html:89 templates/info/readme.html:133
+msgid "Multilingual Support"
+msgstr "Usaidizi wa Lugha Nyingi"
+
+#: templates/info/readme.html:91
+msgid ""
+"OpenClinic offers multilingual support, so anyone who wants to contribute a "
+"language can create a new .po file (portable object) and enjoy his/her own "
+"language. Every language that it send to me will be included in the next "
+"release."
+msgstr "OpenClinic inatoa usaidizi wa lugha nyingi, kwa hivyo yeyote anayetaka kuchangia lugha anaweza kuunda faili mpya ya .po (portable object) na kufurahia lugha yake mwenyewe. Kila lugha inayotumwa kwangu itajumuishwa katika toleo linalofuata."
+
+#: templates/info/readme.html:93 templates/info/readme.html:135
+msgid "Download"
+msgstr "Pakua"
+
+#: templates/info/readme.html:95
+msgid ""
+"You can get the newest version at <a href=\"https://github.com/jact/"
+"openclinic-in-django\">GitHub</a>."
+msgstr "Unaweza kupata toleo jipya zaidi kwenye <a href=\"https://github.com/jact/openclinic-in-django\">GitHub</a>."
+
+#: templates/info/readme.html:97 templates/info/readme.html:137
+msgid "Developers Information"
+msgstr "Maelezo ya Watayarishaji"
+
+#: templates/info/readme.html:102
+msgid "principal developer of OpenClinic project"
+msgstr "mtayarishaji mkuu wa mradi wa OpenClinic"
+
+#: templates/info/readme.html:104
+msgid "person in charge of OpenClinic's maintenance service since autumn 2002"
+msgstr "mtu anayehusika na huduma ya matengenezo ya OpenClinic tangu vuli ya 2002"
+
+#: templates/info/readme.html:106 templates/info/readme.html:112
+msgid "person in charge of the project"
+msgstr "mtu anayehusika na mradi"
+
+#: templates/info/readme.html:115 templates/info/readme.html:139
+msgid "Farewell"
+msgstr "Kwaheri"
+
+#: templates/info/readme.html:117
+msgid ""
+"Please, enjoy OpenClinic and remember that this is <a href=\"http://"
+"www.gnu.org/licenses/old-licenses/gpl-3.0.en.html\">free GPL software</a>."
+msgstr "Tafadhali, furahia OpenClinic na ukumbuke kuwa hii ni <a href=\"http://www.gnu.org/licenses/old-licenses/gpl-3.0.en.html\">programu huria ya GPL</a>."
+
+#: templates/info/readme.html:119
+msgid ""
+"OpenClinic isn't perfect, but your <a href=\"https://github.com/jact/"
+"openclinic-in-django/issues\">suggestions, feedback and bug reports</a> can "
+"help us to have a very well done medical records system!"
+msgstr "OpenClinic sio kamili, lakini <a href=\"https://github.com/jact/openclinic-in-django/issues\">mapendekezo yako, maoni na ripoti za hitilafu</a> zinaweza kutusaidia kuwa na mfumo wa rekodi za matibabu uliofanywa vizuri sana!"
+
+#: templates/info/readme.html:124
+msgid "Internal contents"
+msgstr "Maudhui ya ndani"
+
+#: templates/info/welcome.html:8
+msgid "Welcome to OpenClinic"
+msgstr "Karibu OpenClinic"
+
+#: templates/info/welcome.html:10
+msgid "OpenClinic is an easy to use, open source, medical records system."
+msgstr "OpenClinic ni mfumo wa rekodi za matibabu wa chanzo huria na rahisi kutumia."
+
+#: templates/info/welcome.html:12
+msgid ""
+"When you select any of the following sections you will be prompted to login."
+msgstr "Unapochagua sehemu yoyote ifuatayo utaombwa kuingia."
+
+#: templates/info/welcome.html:52
+msgid "System users"
+msgstr "Watumiaji wa mfumo"

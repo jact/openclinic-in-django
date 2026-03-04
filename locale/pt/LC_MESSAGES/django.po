@@ -1,0 +1,1084 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-04 18:28+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: medical/admin.py:35
+msgid "Personal info"
+msgstr "Informações pessoais"
+
+#: medical/admin.py:37
+msgid "Permissions"
+msgstr "Permissões"
+
+#: medical/admin.py:49
+msgid "Important dates"
+msgstr "Datas importantes"
+
+#: medical/forms.py:56 medical/templates/includes/patient_detail.html:6
+msgid "Basic data"
+msgstr "Dados básicos"
+
+#: medical/forms.py:68 medical/templates/includes/patient_detail.html:43
+msgid "Administrative data"
+msgstr "Dados administrativos"
+
+#: medical/forms.py:77 medical/templates/includes/patient_detail.html:76
+msgid "Extra data"
+msgstr "Dados extras"
+
+#: medical/forms.py:83 medical/forms.py:219
+#: medical/templates/problem_form.html:38
+msgid "Save"
+msgstr "Guardar"
+
+#: medical/forms.py:103 medical/forms.py:137
+msgid "Field"
+msgstr "Campo"
+
+#: medical/forms.py:106
+msgid "Last name"
+msgstr "Apelido"
+
+#: medical/forms.py:107
+msgid "First name"
+msgstr "Nome próprio"
+
+#: medical/forms.py:108
+msgid "Last name optional"
+msgstr "Apelido opcional"
+
+#: medical/forms.py:109
+msgid "Address"
+msgstr "Endereço"
+
+#: medical/forms.py:110
+msgid "Phone contact"
+msgstr "Contacto telefónico"
+
+#: medical/forms.py:111
+msgid "Race"
+msgstr "Raça"
+
+#: medical/forms.py:112
+msgid "Birth date"
+msgstr "Data de nascimento"
+
+#: medical/forms.py:113
+msgid "Birth place"
+msgstr "Naturalidade"
+
+#: medical/forms.py:114
+msgid "Decease date"
+msgstr "Data de falecimento"
+
+#: medical/forms.py:115
+msgid "Taxpayer Identification Number (TIN)"
+msgstr "Número de Identificação Fiscal (NIF)"
+
+#: medical/forms.py:116
+msgid "Social Security Number (SSN)"
+msgstr "Número de Segurança Social"
+
+#: medical/forms.py:117
+msgid "Health card number"
+msgstr "Número do cartão de saúde"
+
+#: medical/forms.py:118
+msgid "Insurance company"
+msgstr "Seguradora"
+
+#: medical/forms.py:125 medical/forms.py:151
+msgid "Value"
+msgstr "Valor"
+
+#: medical/forms.py:125 medical/forms.py:151
+msgid "(empty = see all results)"
+msgstr "(vazio = ver todos os resultados)"
+
+#: medical/forms.py:140
+msgid "Wording"
+msgstr "Redação"
+
+#: medical/forms.py:141
+msgid "Subjetive"
+msgstr "Subjetivo"
+
+#: medical/forms.py:142
+msgid "Objetive"
+msgstr "Objetivo"
+
+#: medical/forms.py:143
+msgid "Appreciation"
+msgstr "Apreciação"
+
+#: medical/forms.py:144
+msgid "Action Plan"
+msgstr "Plano de Acção"
+
+#: medical/forms.py:145
+msgid "Prescription"
+msgstr "Receita"
+
+#: medical/forms.py:164
+msgid "Closed problem?"
+msgstr "Problema encerrado?"
+
+#: medical/forms.py:197
+#: medical/templates/includes/history_antecedents_detail.html:6
+msgid "Personal antecedents"
+msgstr "Antecedentes pessoais"
+
+#: medical/forms.py:212
+#: medical/templates/includes/history_antecedents_detail.html:57
+msgid "Family antecedents"
+msgstr "Antecedentes familiares"
+
+#: medical/models/history.py:27
+#: medical/templates/includes/history_antecedents_detail.html:14
+msgid "birth and growth"
+msgstr "nascimeento e crescimento"
+
+#: medical/models/history.py:30
+#: medical/templates/includes/history_antecedents_detail.html:18
+msgid "growth and sexuality"
+msgstr "crescimento e sexualidade"
+
+#: medical/models/history.py:33
+#: medical/templates/includes/history_antecedents_detail.html:22
+msgid "feed"
+msgstr "alimentação"
+
+#: medical/models/history.py:34
+#: medical/templates/includes/history_antecedents_detail.html:26
+msgid "habits"
+msgstr "hábitos"
+
+#: medical/models/history.py:36
+#: medical/templates/includes/history_antecedents_detail.html:30
+msgid "peristaltic conditions"
+msgstr "condições peristálticas"
+
+#: medical/models/history.py:39
+#: medical/templates/includes/history_antecedents_detail.html:34
+msgid "psychological conditions"
+msgstr "condições psicológicas"
+
+#: medical/models/history.py:43
+#: medical/templates/includes/history_antecedents_detail.html:38
+msgid "children complaint"
+msgstr "doenças infantis"
+
+#: medical/models/history.py:46
+msgid "venereal disease"
+msgstr "doença venérea"
+
+#: medical/models/history.py:49
+#: medical/templates/includes/history_antecedents_detail.html:46
+msgid "accidents and surgical operations"
+msgstr "acidentes e operações cirúrgicas"
+
+#: medical/models/history.py:52
+#: medical/templates/includes/history_antecedents_detail.html:10
+msgid "medical intolerance"
+msgstr "intolerância médica"
+
+#: medical/models/history.py:55
+#: medical/templates/includes/history_antecedents_detail.html:50
+msgid "mental illness"
+msgstr "doença mental"
+
+#: medical/models/history.py:59
+#: medical/templates/includes/history_antecedents_detail.html:61
+msgid "parents status health"
+msgstr "estado de saúde dos pais"
+
+#: medical/models/history.py:62
+#: medical/templates/includes/history_antecedents_detail.html:65
+msgid "brothers status health"
+msgstr "estado de saúde dos irmãos"
+
+#: medical/models/history.py:65
+#: medical/templates/includes/history_antecedents_detail.html:69
+msgid "spouse and childs status health"
+msgstr "estado de saúde do cônjuge e filhos"
+
+#: medical/models/history.py:68
+#: medical/templates/includes/history_antecedents_detail.html:73
+msgid "family illness"
+msgstr "doença de família"
+
+#: medical/models/patient.py:30
+msgid "Male"
+msgstr "Masculino"
+
+#: medical/models/patient.py:31
+msgid "Female"
+msgstr "Feminino"
+
+#: medical/models/patient.py:34
+#: medical/templates/patient_medical_report.html:13
+msgid "first name"
+msgstr "nome próprio"
+
+#: medical/models/patient.py:35
+#: medical/templates/patient_medical_report.html:15
+msgid "last name"
+msgstr "apelido"
+
+#: medical/models/patient.py:37 medical/models/staff.py:52
+#: medical/templates/patient_medical_report.html:18
+msgid "last name optional"
+msgstr "apelido opcional"
+
+#: medical/models/patient.py:40 medical/models/staff.py:55
+#: medical/templates/includes/patient_detail.html:47
+msgid "address"
+msgstr "endereço"
+
+#: medical/models/patient.py:42 medical/models/staff.py:57
+#: medical/templates/includes/patient_detail.html:51
+msgid "phone contact"
+msgstr "contacto telefónico"
+
+#: medical/models/patient.py:50
+#: medical/templates/includes/patient_detail.html:18
+#: medical/templates/includes/patient_info.html:17
+msgid "gender"
+msgstr "sexo"
+
+#: medical/models/patient.py:53
+#: medical/templates/includes/patient_detail.html:14
+msgid "race"
+msgstr "raça"
+
+#: medical/models/patient.py:59
+#: medical/templates/includes/patient_detail.html:27
+msgid "birth date"
+msgstr "data de nascimento"
+
+#: medical/models/patient.py:60 medical/models/patient.py:69
+msgid "yyyy"
+msgstr "aaaa"
+
+#: medical/models/patient.py:60 medical/models/patient.py:69
+msgid "mm"
+msgstr "mm"
+
+#: medical/models/patient.py:60 medical/models/patient.py:69
+msgid "dd"
+msgstr "dd"
+
+#: medical/models/patient.py:63
+#: medical/templates/includes/patient_detail.html:22
+msgid "birth place"
+msgstr "naturalidade"
+
+#: medical/models/patient.py:68
+#: medical/templates/includes/patient_detail.html:29
+msgid "decease date"
+msgstr "data de falecimento"
+
+#: medical/models/patient.py:76 medical/models/staff.py:48
+#: medical/templates/includes/patient_detail.html:55
+msgid "taxpayer Identification Number (TIN)"
+msgstr "Número de Identificação Fiscal (NIF)"
+
+#: medical/models/patient.py:82
+#: medical/templates/includes/patient_detail.html:59
+msgid "social Security Number (SSN)"
+msgstr "Número de Segurança Social"
+
+#: medical/models/patient.py:85
+#: medical/templates/includes/patient_detail.html:63
+msgid "health card number"
+msgstr "número do cartão de saúde"
+
+#: medical/models/patient.py:89
+#: medical/templates/includes/patient_detail.html:80
+msgid "family situation"
+msgstr "situação familiar"
+
+#: medical/models/patient.py:92
+#: medical/templates/includes/patient_detail.html:84
+msgid "labour situation"
+msgstr "situação laboral"
+
+#: medical/models/patient.py:94
+#: medical/templates/includes/patient_detail.html:88
+msgid "education"
+msgstr "escolaridade"
+
+#: medical/models/patient.py:97
+#: medical/templates/includes/patient_detail.html:67
+msgid "insurance company"
+msgstr "seguradora"
+
+#: medical/models/patient.py:105
+#: medical/templates/includes/patient_detail.html:10
+msgid "doctor allocated by quota"
+msgstr "médico de família"
+
+#: medical/models/patient.py:114
+#: medical/templates/history_antecedents_detail.html:7
+#: medical/templates/history_antecedents_form.html:7
+#: medical/templates/includes/problem_info.html:17
+#: medical/templates/patient_detail.html:7
+#: medical/templates/patient_medical_report.html:11
+#: medical/templates/patient_relatives.html:7
+#: medical/templates/patient_tests.html:7
+#: medical/templates/problem_connections.html:7
+#: medical/templates/problem_detail.html:7
+#: medical/templates/problem_tests.html:7
+#: templates/includes/toggle_login.html:6
+#: templates/includes/toggle_login.html:7
+msgid "Patient"
+msgstr "Doente"
+
+#: medical/models/patient.py:115
+msgid "Patients"
+msgstr "Doentes"
+
+#: medical/models/patient.py:135
+msgid "Can not die before birth"
+msgstr "Não pode falecer antes de nascer"
+
+#: medical/models/problem.py:36
+#: medical/templates/includes/problem_detail.html:6
+#: medical/templates/includes/problem_info.html:20
+msgid "order number"
+msgstr "número de ordem"
+
+#: medical/models/problem.py:38
+#: medical/templates/includes/problem_detail.html:13
+#: medical/templates/includes/problem_info.html:26
+msgid "closing date"
+msgstr "data de encerramento"
+
+#: medical/models/problem.py:42
+#: medical/templates/includes/problem_detail.html:17
+msgid "meeting place"
+msgstr "local de consulta"
+
+#: medical/models/problem.py:45
+#: medical/templates/includes/problem_detail.html:31
+msgid "wording"
+msgstr "redacção"
+
+#: medical/models/problem.py:47
+#: medical/templates/includes/problem_detail.html:34
+msgid "subjetive"
+msgstr "subjetivo"
+
+#: medical/models/problem.py:48
+#: medical/templates/includes/problem_detail.html:38
+msgid "objetive"
+msgstr "objetivo"
+
+#: medical/models/problem.py:50
+#: medical/templates/includes/problem_detail.html:42
+msgid "appreciation"
+msgstr "apreciação"
+
+#: medical/models/problem.py:52
+#: medical/templates/includes/problem_detail.html:46
+msgid "action plan"
+msgstr "plano de acção"
+
+#: medical/models/problem.py:54
+msgid "doctor's orders"
+msgstr "ordens do médico"
+
+#: medical/models/problem.py:64
+#: medical/templates/includes/problem_detail.html:21
+msgid "attending physician"
+msgstr "médico assistente"
+
+#: medical/models/problem.py:77
+msgid "Medical Problem"
+msgstr "Problema Médico"
+
+#: medical/models/problem.py:78
+msgid "Medical Problems"
+msgstr "Problemas Médicos"
+
+#: medical/models/staff.py:37
+msgid "Administrative"
+msgstr "Administrativo"
+
+#: medical/models/staff.py:38
+msgid "Doctor"
+msgstr "Médico"
+
+#: medical/models/staff.py:42
+msgid "collegiate number"
+msgstr "número de cédula profissional"
+
+#: medical/models/staff.py:61
+msgid "staff type"
+msgstr "tipo de pessoal"
+
+#: medical/models/staff.py:78
+msgid "Collegiate number is required for doctor"
+msgstr "Número de cédula profissional é obrigatório para médico"
+
+#: medical/models/test.py:31 medical/templates/includes/test_info.html:17
+msgid "MIME type"
+msgstr "Tipo MIME"
+
+#: medical/models/test.py:34 medical/templates/includes/test_info.html:15
+msgid "document"
+msgstr "documento"
+
+#: medical/templates/advanced_search.html:4
+#: medical/templates/advanced_search.html:13
+msgid "Advanced Search"
+msgstr "Pesquisa Avançada"
+
+#: medical/templates/advanced_search.html:18
+msgid "Search Patient"
+msgstr "Pesquisar Doente"
+
+#: medical/templates/advanced_search.html:23
+#: medical/templates/advanced_search.html:36
+#: templates/includes/toggle_login.html:10
+#: templates/includes/toggle_login.html:12
+msgid "Search"
+msgstr "Pesquisar"
+
+#: medical/templates/advanced_search.html:31
+msgid "Search Patient by Medical Problem"
+msgstr "Pesquisar Doente por Problema Médico"
+
+#: medical/templates/advanced_search.html:44
+#: medical/templates/problem_list.html:24
+msgid "Results"
+msgstr "Resultados"
+
+#: medical/templates/advanced_search.html:47
+#: medical/templates/history_list.html:27
+#: medical/templates/problem_list.html:27
+#, python-format
+msgid ""
+"\n"
+"            There is only one element.\n"
+"            "
+msgid_plural ""
+"\n"
+"            There are %(counter)s elements.\n"
+"            "
+msgstr[0] ""
+"\n"
+"            Existe apenas um elemento.\n"
+"            "
+msgstr[1] ""
+"\n"
+"            Existem %(counter)s elementos.\n"
+"            "
+
+#: medical/templates/history_antecedents_detail.html:4
+#: medical/templates/history_antecedents_detail.html:13
+#: medical/templates/history_list.html:20
+#: medical/templates/patient_medical_report.html:32
+msgid "Antecedents"
+msgstr "Antecedentes"
+
+#: medical/templates/history_antecedents_detail.html:13
+#: medical/templates/includes/patient_actions.html:6
+#: medical/templates/includes/problem_actions.html:5
+#: medical/templates/includes/problem_actions.html:6
+msgid "Update"
+msgstr "Actualizar"
+
+#: medical/templates/history_antecedents_form.html:13
+#: medical/views/history_views.py:92 medical/views/history_views.py:116
+msgid "Update antecedents"
+msgstr "Actualizar antecedentes"
+
+#: medical/templates/history_antecedents_form.html:17
+#: medical/templates/patient_form.html:23
+#: medical/templates/problem_form.html:27
+#, python-format
+msgid "Please correct the error %(form.errors|pluralize)s below."
+msgstr "Por favor corrija o(s) erro(s) %(form.errors|pluralize)s abaixo."
+
+#: medical/templates/history_antecedents_form.html:21
+#: medical/templates/patient_form.html:27
+#: medical/templates/problem_form.html:31
+msgid "Fields with * are required."
+msgstr "Campos com * são obrigatórios."
+
+#: medical/templates/history_list.html:4 medical/templates/history_list.html:13
+#: medical/templates/includes/patient_actions.html:27
+#: medical/templates/includes/patient_actions.html:28
+msgid "Clinic history"
+msgstr "Historial clínico"
+
+#: medical/templates/history_list.html:23
+#: medical/templates/patient_medical_report.html:36
+msgid "Closed medical problems"
+msgstr "Problemas médicos encerrados"
+
+#: medical/templates/history_list.html:36
+#: medical/templates/patient_medical_report.html:42
+msgid "No closed medical problems defined for this patient."
+msgstr "Nenhum problema médico encerrado definido para este doente."
+
+#: medical/templates/includes/history_antecedents_detail.html:42
+msgid "veneral disease"
+msgstr "doença venérea"
+
+#: medical/templates/includes/patient_actions.html:5
+msgid "Update social data"
+msgstr "Actualizar dados sociais"
+
+#: medical/templates/includes/patient_actions.html:10
+#: medical/templates/includes/patient_actions.html:11
+#: medical/templates/patient_relatives.html:4
+#: medical/templates/patient_relatives.html:16
+msgid "Relatives"
+msgstr "Familiares"
+
+#: medical/templates/includes/patient_actions.html:16
+#: medical/templates/includes/patient_actions.html:17
+#: medical/templates/problem_list.html:4 medical/templates/problem_list.html:13
+msgid "Medical problems report"
+msgstr "Relatório de problemas médicos"
+
+#: medical/templates/includes/patient_actions.html:22
+#: medical/templates/includes/patient_actions.html:23
+#: medical/templates/includes/problem_actions.html:10
+#: medical/templates/includes/problem_actions.html:11
+#: medical/templates/patient_tests.html:4
+#: medical/templates/patient_tests.html:13
+#: medical/templates/problem_tests.html:19 templates/info/welcome.html:31
+msgid "Medical tests"
+msgstr "Testes médicos"
+
+#: medical/templates/includes/patient_actions.html:32
+#: medical/templates/includes/patient_actions.html:33
+msgid "Print medical report"
+msgstr "Imprimir relatório médico"
+
+#: medical/templates/includes/patient_actions.html:37
+#: medical/templates/includes/patient_actions.html:38
+#: medical/views/patient_views.py:68
+msgid "Delete patient"
+msgstr "Apagar doente"
+
+#: medical/templates/includes/patient_detail.html:26
+#: medical/templates/includes/patient_info.html:21
+msgid "Age"
+msgstr "Idade"
+
+#: medical/templates/includes/patient_list.html:10
+msgid "No patients found."
+msgstr "Nenhum doente encontrado."
+
+#: medical/templates/includes/problem_actions.html:16
+#: medical/templates/includes/problem_actions.html:17
+#: medical/templates/problem_connections.html:22
+msgid "Connections"
+msgstr "Ligações"
+
+#: medical/templates/includes/problem_actions.html:22
+#: medical/templates/includes/problem_actions.html:23
+#: medical/views/problem_views.py:140
+msgid "Delete medical problem"
+msgstr "Apagar problema médico"
+
+#: medical/templates/includes/problem_detail.html:8
+#: medical/templates/includes/problem_info.html:24
+msgid "opening date"
+msgstr "data de abertura"
+
+#: medical/templates/includes/problem_detail.html:10
+#: medical/templates/includes/problem_info.html:22
+msgid "last update"
+msgstr "última actualização"
+
+#: medical/templates/includes/problem_detail.html:50
+msgid "Doctor's orders"
+msgstr "Ordens do médico"
+
+#: medical/templates/includes/problem_list.html:10
+#: medical/templates/patient_medical_report.html:29
+msgid "No medical problems found."
+msgstr "Nenhum problema médico encontrado."
+
+#: medical/templates/includes/test_actions.html:5
+msgid "View"
+msgstr "Ver"
+
+#: medical/templates/includes/test_actions.html:8
+msgid "Delete test"
+msgstr "Eliminar teste"
+
+#: medical/templates/includes/test_info.html:14
+msgid "created"
+msgstr "criado"
+
+#: medical/templates/includes/test_info.html:20
+#: medical/templates/problem_connections.html:13
+#: medical/templates/problem_detail.html:13
+#: medical/templates/problem_tests.html:13
+msgid "Medical problem"
+msgstr "Problema médico"
+
+#: medical/templates/object_confirm_delete.html:11
+msgid "Are you sure you want to delete this element?"
+msgstr "Tem certeza de que deseja apagar este elemento?"
+
+#: medical/templates/object_confirm_delete.html:13
+msgid "Delete"
+msgstr "Apagar"
+
+#: medical/templates/object_confirm_delete.html:13
+msgid "or"
+msgstr "ou"
+
+#: medical/templates/object_confirm_delete.html:14
+msgid "cancel"
+msgstr "cancelar"
+
+#: medical/templates/patient_medical_report.html:23
+msgid "Medical problems"
+msgstr "Problemas médicos"
+
+#: medical/templates/patient_relatives.html:22
+msgid "Add relatives to patient"
+msgstr "Adicionar familiares ao doente"
+
+#: medical/templates/patient_tests.html:19
+msgid "No medical tests defined for this patient."
+msgstr "Nenhum teste médico definido para este doente."
+
+#: medical/templates/problem_connections.html:4
+msgid "Medical problem connections"
+msgstr "Ligações de problemas médicos"
+
+#: medical/templates/problem_connections.html:27
+msgid "Add connections to medical problem"
+msgstr "Adicionar ligações ao problema médico"
+
+#: medical/templates/problem_list.html:20
+msgid "Add medical problem"
+msgstr "Adicionar problema médico"
+
+#: medical/templates/problem_tests.html:4
+#: medical/templates/problem_tests.html:32
+msgid "Add medical test"
+msgstr "Adicionar teste médico"
+
+#: medical/templates/problem_tests.html:25
+msgid "No medical tests defined for this medical problem."
+msgstr "Nenhum teste médico definido para este problema médico."
+
+#: medical/templates/problem_tests.html:37
+msgid "Add test to medical problem"
+msgstr "Adicionar teste ao problema médico"
+
+#: medical/views/history_views.py:98 medical/views/history_views.py:128
+msgid "Antecedents have been updated!"
+msgstr "Antecedentes actualizados!"
+
+#: medical/views/patient_views.py:41
+#, python-format
+msgid "Patient, %s, added!"
+msgstr "Doente, %s, adicionado!"
+
+#: medical/views/patient_views.py:46 templates/includes/toggle_login.html:14
+#: templates/includes/toggle_login.html:16
+msgid "New Patient"
+msgstr "Novo Doente"
+
+#: medical/views/patient_views.py:54 medical/views/patient_views.py:149
+#, python-format
+msgid "Patient, %s, updated!"
+msgstr "Doente, %s, actualizado!"
+
+#: medical/views/patient_views.py:59
+msgid "Update patient social data"
+msgstr "Actualizar dados sociais do doente"
+
+#: medical/views/patient_views.py:70
+#, python-format
+msgid "Patient, %s, deleted!"
+msgstr "Doente, %s, apagado!"
+
+#: medical/views/problem_views.py:50
+msgid "New medical problem"
+msgstr "Novo problema médico"
+
+#: medical/views/problem_views.py:63 medical/views/problem_views.py:154
+#, python-format
+msgid "Medical problem, %s, updated!"
+msgstr "Problema médico, %s, actualizado!"
+
+#: medical/views/problem_views.py:69
+msgid "Update medical problem"
+msgstr "Actualizar problema médico"
+
+#: medical/views/problem_views.py:142
+#, python-format
+msgid "Medical problem, %s, deleted!"
+msgstr "Problema médico, %s, apagado!"
+
+#: medical/views/test_views.py:49
+#, python-format
+msgid "Medical test, %s, added!"
+msgstr "Teste médico, %s, adicionado!"
+
+#: medical/views/test_views.py:60
+msgid "Delete medical test"
+msgstr "Eliminar teste médico"
+
+#: medical/views/test_views.py:67
+#, python-format
+msgid "Medical test, %s, deleted!"
+msgstr "Teste médico, %s, apagado!"
+
+#: openclinic/settings/base.py:58
+msgid "English"
+msgstr "Inglês"
+
+#: openclinic/settings/base.py:59
+msgid "Spanish"
+msgstr "Espanhol"
+
+#: openclinic/settings/base.py:60
+msgid "French"
+msgstr "Francês"
+
+#: openclinic/settings/base.py:61
+msgid "Portuguese"
+msgstr "Português"
+
+#: openclinic/settings/base.py:62
+msgid "Swahili"
+msgstr "Suajili"
+
+#: templates/base.html:20
+msgid ""
+"OpenClinic is an easy to use, open source, medical records system written in "
+"Django"
+msgstr "OpenClinic é um sistema de registos médicos de código aberto e fácil de usar, escrito em Django"
+
+#: templates/base.html:46
+msgid "Toggle navigation"
+msgstr "Alternar navegação"
+
+#: templates/base.html:59
+msgid "Info"
+msgstr "Informação"
+
+#: templates/base.html:62 templates/info/welcome.html:4
+msgid "Welcome"
+msgstr "Bem-vindo"
+
+#: templates/base.html:63 templates/info/readme.html:4
+#: templates/info/readme.html:7
+msgid "Readme"
+msgstr "Leia-me"
+
+#: templates/base.html:64 templates/info/install.html:4
+#: templates/info/install.html:7
+msgid "Install Instructions"
+msgstr "Instruções de Instalação"
+
+#: templates/base.html:65 templates/info/license.html:4
+#: templates/info/license.html:7 templates/info/readme.html:78
+msgid "License"
+msgstr "Licença"
+
+#: templates/base.html:74
+msgid "Clinic hours"
+msgstr "Horário da clínica"
+
+#: templates/base.html:75
+msgid "Clinic address"
+msgstr "Endereço da clínica"
+
+#: templates/base.html:76
+msgid "Clinic phone"
+msgstr "Telefone da clínica"
+
+#: templates/base.html:80 templates/info/readme.html:22
+#: templates/info/welcome.html:20
+msgid "Medical Records"
+msgstr "Registos Médicos"
+
+#: templates/includes/footer.html:13 templates/includes/footer.html:14
+msgid "Downloads"
+msgstr "Descarregamentos"
+
+#: templates/includes/footer.html:16 templates/includes/footer.html:17
+msgid "Report Issues"
+msgstr "Relatar Problemas"
+
+#: templates/includes/footer.html:22
+msgid "OpenClinic Logo thanks to Coresis"
+msgstr "Logótipo OpenClinic graças a Coresis"
+
+#: templates/includes/toggle_login.html:28 templates/info/readme.html:38
+#: templates/info/welcome.html:43
+msgid "Admin"
+msgstr "Administração"
+
+#: templates/includes/toggle_login.html:30
+msgid "Password change"
+msgstr "Alterar palavra-passe"
+
+#: templates/includes/toggle_login.html:35
+msgid "Logout"
+msgstr "Sair"
+
+#: templates/includes/toggle_login.html:43
+msgid "Username"
+msgstr "Nome de utilizador"
+
+#: templates/includes/toggle_login.html:44
+msgid "Password"
+msgstr "Palavra-passe"
+
+#: templates/includes/toggle_login.html:45 templates/login.html:4
+#: templates/login.html:9 templates/login.html:18
+msgid "Login"
+msgstr "Entrar"
+
+#: templates/info/install.html:10
+msgid "Python 3.5+ is a requirement."
+msgstr "Python 3.5+ é um requisito."
+
+#: templates/info/install.html:13
+msgid ""
+"Download project from <a href=\"https://github.com/jact/openclinic-in-django/"
+"\">GitHub</a> and decompress file."
+msgstr "Descarregue o projecto do <a href=\"https://github.com/jact/openclinic-in-django/\">GitHub</a> e descompacte o ficheiro."
+
+#: templates/info/install.html:17
+msgid "Execute these commands in a terminal from project directory:"
+msgstr "Execute estes comandos num terminal a partir do directório do projecto:"
+
+#: templates/info/install.html:29
+msgid ""
+"Access your new <a href=\"/\">clinic system</a>. Enter <code><kbd>admin</"
+"kbd></code> for both, the login and password whenever you are prompted to "
+"sign on."
+msgstr "Aceda ao seu novo <a href=\"/\">sistema clínico</a>. Introduza <code><kbd>admin</kbd></code> tanto para o login como para a palavra-passe sempre que lhe for solicitado que inicie a sessão."
+
+#: templates/info/install.html:33
+msgid "It's advisable to change the admin user's password."
+msgstr "É recomendável alterar a palavra-passe do utilizador admin."
+
+#: templates/info/readme.html:9
+msgid "Welcome to OpenClinic!"
+msgstr "Bem-vindo ao OpenClinic!"
+
+#: templates/info/readme.html:11
+msgid ""
+"First of all, thanks a lot to download this software, I hope that you can "
+"enjoy it."
+msgstr "Antes de mais, muito obrigado por descarregar este software, espero que possa desfrutar dele."
+
+#: templates/info/readme.html:13
+msgid ""
+"OpenClinic is free software, released under GNU GPL Licence version 3.0 (see "
+"<a href=\"/info/license\">LICENSE</a> file for details)."
+msgstr "O OpenClinic é um software livre, lançado sob a Licença GNU GPL versão 3.0 (veja o ficheiro <a href=\"/info/license\">LICENSE</a> para mais detalhes)."
+
+#: templates/info/readme.html:15 templates/info/readme.html:127
+msgid "Introduction"
+msgstr "Introdução"
+
+#: templates/info/readme.html:17
+msgid ""
+"OpenClinic is an easy to use, open source, medical records system written in "
+"Django."
+msgstr "O OpenClinic é um sistema de registos médicos de código aberto e fácil de usar, escrito em Django."
+
+#: templates/info/readme.html:17
+msgid ""
+"It has been mainly thougth for private clinics, surgeries and private "
+"doctors."
+msgstr "Foi pensado principalmente para clínicas privadas, consultórios e médicos particulares."
+
+#: templates/info/readme.html:17
+msgid "It is platform independent and it has multilanguage architecture."
+msgstr "É independente da plataforma e possui uma arquitectura multilingue."
+
+#: templates/info/readme.html:19
+msgid "Currently OpenClinic has the following sections:"
+msgstr "Actualmente, o OpenClinic possui as seguintes secções:"
+
+#: templates/info/readme.html:23 templates/info/welcome.html:25
+msgid "Use this section to manage your patient's medical records."
+msgstr "Utilize esta secção para gerir os registos médicos dos seus doentes."
+
+#: templates/info/readme.html:25 templates/info/welcome.html:27
+msgid "Patient's Administration:"
+msgstr "Administração de Doentes:"
+
+#: templates/info/readme.html:28 templates/info/welcome.html:30
+msgid "Search, new, delete, edit"
+msgstr "Pesquisar, novo, apagar, editar"
+
+#: templates/info/readme.html:30
+msgid "Social Data"
+msgstr "Dados Sociais"
+
+#: templates/info/readme.html:32 templates/info/welcome.html:32
+msgid "Clinic History"
+msgstr "Historial Clínico"
+
+#: templates/info/readme.html:34 templates/info/welcome.html:33
+msgid "Problem Reports"
+msgstr "Relatórios de Problemas"
+
+#: templates/info/readme.html:39 templates/info/welcome.html:48
+msgid "Use this section to manage administrative settings."
+msgstr "Utilize esta secção para gerir definições administrativas."
+
+#: templates/info/readme.html:42 templates/info/welcome.html:51
+msgid "Staff members"
+msgstr "Membros do pessoal"
+
+#: templates/info/readme.html:44
+msgid "System Users"
+msgstr "Utilizadores do Sistema"
+
+#: templates/info/readme.html:49 templates/info/readme.html:129
+msgid "Requirements"
+msgstr "Requisitos"
+
+#: templates/info/readme.html:61
+msgid "a web server prepared to execute Django code"
+msgstr "um servidor web preparado para executar código Django"
+
+#: templates/info/readme.html:65
+msgid "and, of course, a web browser (with enabled JavaScript)"
+msgstr "e, claro, um navegador web (com JavaScript activado)"
+
+#: templates/info/readme.html:69
+msgid ""
+"For more details, see <a href=\"/info/install\">Install instructions</a>."
+msgstr "Para mais detalhes, veja as <a href=\"/info/install\">Instruções de instalação</a>."
+
+#: templates/info/readme.html:71 templates/info/readme.html:131
+msgid "Features"
+msgstr "Funcionalidades"
+
+#: templates/info/readme.html:74
+msgid "Environment: Web Environment"
+msgstr "Ambiente: Ambiente Web"
+
+#: templates/info/readme.html:76
+msgid "Intended Audience: Education, Healthcare industry"
+msgstr "Público-alvo: Educação, Indústria de cuidados de saúde"
+
+#: templates/info/readme.html:80
+msgid "Natural Language: English, Spanish"
+msgstr "Linguagem Natural: Inglês, Espanhol"
+
+#: templates/info/readme.html:82
+msgid "Operating System: OS Independent"
+msgstr "Sistema Operativo: Independente do SO"
+
+#: templates/info/readme.html:84
+msgid "Programming Language: Python"
+msgstr "Linguagem de Programação: Python"
+
+#: templates/info/readme.html:86
+msgid "Topic: Dynamic Content"
+msgstr "Tópico: Conteúdo Dinâmico"
+
+#: templates/info/readme.html:89 templates/info/readme.html:133
+msgid "Multilingual Support"
+msgstr "Suporte Multilingue"
+
+#: templates/info/readme.html:91
+msgid ""
+"OpenClinic offers multilingual support, so anyone who wants to contribute a "
+"language can create a new .po file (portable object) and enjoy his/her own "
+"language. Every language that it send to me will be included in the next "
+"release."
+msgstr "O OpenClinic oferece suporte multilingue, pelo que qualquer pessoa que pretenda contribuir com uma língua pode criar um novo ficheiro .po (portable object) e desfrutar da sua própria língua. Todas as línguas que me forem enviadas serão incluídas na próxima versão."
+
+#: templates/info/readme.html:93 templates/info/readme.html:135
+msgid "Download"
+msgstr "Descarregar"
+
+#: templates/info/readme.html:95
+msgid ""
+"You can get the newest version at <a href=\"https://github.com/jact/"
+"openclinic-in-django\">GitHub</a>."
+msgstr "Pode obter a versão mais recente no <a href=\"https://github.com/jact/openclinic-in-django\">GitHub</a>."
+
+#: templates/info/readme.html:97 templates/info/readme.html:137
+msgid "Developers Information"
+msgstr "Informações para Programadores"
+
+#: templates/info/readme.html:102
+msgid "principal developer of OpenClinic project"
+msgstr "programador principal do projecto OpenClinic"
+
+#: templates/info/readme.html:104
+msgid "person in charge of OpenClinic's maintenance service since autumn 2002"
+msgstr "responsável pelo serviço de manutenção do OpenClinic desde o Outono de 2002"
+
+#: templates/info/readme.html:106 templates/info/readme.html:112
+msgid "person in charge of the project"
+msgstr "responsável pelo projecto"
+
+#: templates/info/readme.html:115 templates/info/readme.html:139
+msgid "Farewell"
+msgstr "Despedida"
+
+#: templates/info/readme.html:117
+msgid ""
+"Please, enjoy OpenClinic and remember that this is <a href=\"http://"
+"www.gnu.org/licenses/old-licenses/gpl-3.0.en.html\">free GPL software</a>."
+msgstr "Por favor, desfrute do OpenClinic e lembre-se de que este é um <a href=\"http://www.gnu.org/licenses/old-licenses/gpl-3.0.en.html\">software livre GPL</a>."
+
+#: templates/info/readme.html:119
+msgid ""
+"OpenClinic isn't perfect, but your <a href=\"https://github.com/jact/"
+"openclinic-in-django/issues\">suggestions, feedback and bug reports</a> can "
+"help us to have a very well done medical records system!"
+msgstr "O OpenClinic não é perfeito, mas as suas <a href=\"https://github.com/jact/openclinic-in-django/issues\">sugestões, feedback e relatórios de erros</a> podem ajudar-nos a ter um sistema de registos médicos muito bem feito!"
+
+#: templates/info/readme.html:124
+msgid "Internal contents"
+msgstr "Conteúdos internos"
+
+#: templates/info/welcome.html:8
+msgid "Welcome to OpenClinic"
+msgstr "Bem-vindo ao OpenClinic"
+
+#: templates/info/welcome.html:10
+msgid "OpenClinic is an easy to use, open source, medical records system."
+msgstr "O OpenClinic é um sistema de registos médicos de código aberto e fácil de usar."
+
+#: templates/info/welcome.html:12
+msgid ""
+"When you select any of the following sections you will be prompted to login."
+msgstr "Quando seleccionar qualquer uma das seguintes secções, ser-lhe-á solicitado que inicie sessão."
+
+#: templates/info/welcome.html:52
+msgid "System users"
+msgstr "Utilizadores do sistema"
