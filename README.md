@@ -18,6 +18,19 @@ OpenClinic is an open-source medical records system built with Django. Manage pa
 - **Document Management**: Attach medical tests and documents
 - **Multi-Doctor Support**: Assign patients to healthcare staff
 - **Security-First**: Built with Django security best practices
+- **Internationalization**: Full support for multiple languages with automatic detection
+
+## Supported Languages
+
+The application automatically detects the user's language based on browser settings:
+
+- **English** (Default)
+- **Spanish** (Español)
+- **French** (Français)
+- **Portuguese** (Português)
+- **Swahili** (Kiswahili)
+
+See [docs/explanation/i18n.md](docs/explanation/i18n.md) for more details on how automatic detection works.
 
 ## Quick Start
 
@@ -77,6 +90,7 @@ Comprehensive documentation following the [Diátaxis Framework](https://diataxis
 | **How-To Guides** | Problem-solving steps | [docs/how-to/](docs/how-to/install.md) |
 | **Reference** | Technical documentation | [docs/reference/](docs/reference/architecture.md) |
 | **Explanations** | Conceptual guides | [docs/explanation/](docs/explanation/security.md) |
+| **i18n** | Language support and detection | [docs/explanation/i18n.md](docs/explanation/i18n.md) |
 
 ### Quick Links
 
@@ -187,4 +201,4 @@ See [COPYING](COPYING) for full license text.
 
 ## Contributors
 
-https://github.com/jact/openclinic-in-django/graphs/contributors
+<https://github.com/jact/openclinic-in-django/graphs/contributors>
