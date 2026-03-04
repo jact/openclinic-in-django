@@ -120,7 +120,10 @@ class Patient(TimeStampedModel):
         ]
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} {self.last_name_optional}"
+        parts = [self.first_name, self.last_name]
+        if self.last_name_optional:
+            parts.append(self.last_name_optional)
+        return " ".join(parts)
 
     def clean(self):
         super().clean()

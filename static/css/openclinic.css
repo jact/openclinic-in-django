@@ -103,7 +103,6 @@ article li {
     helvetica, arial, sans-serif;
 }
 
-footer *,
 h1,
 h2,
 h3,
@@ -113,6 +112,10 @@ h4 {
   letter-spacing: 0.025em;
   font-weight: 700;
   color: var(--color-text);
+}
+
+footer * {
+  font-family: "Russo One", system-ui, sans-serif;
 }
 
 header * {
@@ -339,7 +342,9 @@ article li {
 .form-control {
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-border);
-  padding: 0.625rem 0.75rem;
+  padding: 6px 12px;
+  height: 36px;
+  line-height: 1.5;
   transition: border-color 0.2s, box-shadow 0.2s;
   background-color: var(--color-surface);
   color: var(--color-text);
@@ -354,19 +359,41 @@ article li {
 /* Patient actions - in rows and centered */
 .patient-actions {
   list-style-type: none;
-  font-size: 1rem;
+  font-size: 1.25rem;
   margin: var(--space-md) 0;
   padding: 0;
   text-align: center;
   display: flex;
   justify-content: center;
-  gap: var(--space-sm);
+  gap: var(--space-md);
   flex-wrap: wrap;
 }
 
 .patient-actions li {
   display: inline-block;
   padding: 0;
+}
+
+.patient-actions li a:not(.btn) {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--color-primary-dark);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.patient-actions li a:not(.btn):hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.patient-actions li a.btn {
+  font-size: 0.875rem;
+  padding: 6px 12px;
+  vertical-align: middle;
 }
 
 /* Main container */
