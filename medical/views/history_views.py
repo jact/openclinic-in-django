@@ -38,7 +38,7 @@ class HistoryList(LoginRequiredMixin, AjaxListView):
 
     def get_queryset(self):
         super().get_queryset()
-        # Optimizado: select_related para evitar consultas N+1
+        # Optimized: select_related to avoid N+1 queries
         return (
             Problem.closed.filter(patient__id=self.kwargs["pk"])
             .select_related("patient", "doctor")
@@ -119,7 +119,7 @@ class HistoryAntecedentsUpdate(LoginRequiredMixin, UpdateView):
         return context
 
     def get_object(self, queryset=None):
-        # Optimizado: select_related para cargar patient
+        # Optimized: select_related to load patient
         return History.objects.select_related("patient").get(
             patient__id=self.kwargs["pk"]
         )

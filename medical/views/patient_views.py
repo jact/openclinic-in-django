@@ -59,9 +59,6 @@ class PatientUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         context["title"] = f"{self.object} ({_('Update patient social data')})"
         return context
 
-    def get_object(self, queryset=None):
-        return get_object_or_404(Patient, id=self.kwargs["pk"])
-
 
 class PatientDelete(
     LoginRequiredMixin, DeleteConfirmationMixin, SuccessMessageMixin, DeleteView
@@ -81,6 +78,7 @@ class PatientDelete(
 
 class PatientList(LoginRequiredMixin, AjaxListView):
     model = Patient
+    queryset = Patient.objects.select_related("doctor_assigned")
     template_name = "patient_search.html"
     page_template = "includes/patient_list.html"
 
@@ -137,25 +135,15 @@ class PatientDetail(LoginRequiredMixin, DetailView):
     context_object_name = "patient"
     template_name = "patient_detail.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        patient = get_object_or_404(Patient, pk=self.kwargs["pk"])
-        context["patient"] = patient
-        return context
+    def get_queryset(self):
+        # Optimized: select_related with doctor_assigned to avoid N+1
+        return super().get_queryset().select_related("doctor_assigned")
 
 
 class PatientRelatives(LoginRequiredMixin, UpdateView):
     model = Patient
     form_class = PatientRelativesForm
     template_name = "patient_relatives.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["patient"] = self.object
-        return context
-
-    def get_object(self, queryset=None):
-        return get_object_or_404(Patient, id=self.kwargs["pk"])
 
     def get_success_url(self):
         messages.success(self.request, _("Patient, %s, updated!") % self.object)
@@ -181,7 +169,7 @@ class PatientMedicalReport(LoginRequiredMixin, DetailView):
 
         context["patient"] = patient
         context["history"] = history
-        # Optimizado: select_related reduce consultas N+1 al acceder a doctor
+        # Optimized: select_related reduces N+1 queries when accessing doctor
         context["problem_list"] = (
             Problem.opened.filter(patient__id=self.kwargs["pk"])
             .select_related("doctor")
@@ -209,7 +197,7 @@ class PatientTests(LoginRequiredMixin, ListView):
         super().get_queryset()
         from ..models import Test
 
-        # Optimizado: select_related reduce consultas al acceder a problem y patient
+        # Optimized: select_related reduces queries when accessing problem and patient
         return Test.objects.filter(
             problem__patient__id=self.kwargs["pk"]
         ).select_related("problem", "problem__patient")

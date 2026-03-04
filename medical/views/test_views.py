@@ -32,11 +32,11 @@ class ProblemTests(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Optimizado: select_related carga patient en una sola consulta
+        # Optimized: select_related loads patient in a single query
         problem = get_object_or_404(
             Problem.objects.select_related("patient"), pk=self.kwargs["pk"]
         )
-        # Optimizado: select_related para tests
+        # Optimized: select_related for tests
         tests = Test.objects.filter(problem=problem).select_related("problem")
 
         context["problem"] = problem

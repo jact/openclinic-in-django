@@ -70,12 +70,10 @@ class ProblemUpdate(
         )
         return context
 
-    def get_object(self, queryset=None):
-        return get_object_or_404(Problem, id=self.kwargs["pk"])
-
 
 class ProblemSearch(LoginRequiredMixin, AjaxListView):
     model = Problem
+    queryset = Problem.objects.select_related("patient", "last_doctor_assigned")
     template_name = "problem_search.html"
     page_template = "includes/problem_list.html"
 
@@ -106,7 +104,7 @@ class ProblemList(LoginRequiredMixin, PatientContextMixin, AjaxListView):
 
     def get_queryset(self):
         super().get_queryset()
-        # Optimizado: select_related para evitar consultas N+1
+        # Optimized: select_related to avoid N+1 queries
         return (
             Problem.opened.filter(patient__id=self.kwargs["pk"])
             .select_related("patient", "doctor")
@@ -120,7 +118,7 @@ class ProblemDetail(LoginRequiredMixin, DetailView):
     context_object_name = "problem"
 
     def get_object(self, queryset=None):
-        # Optimizado: select_related carga patient en una sola consulta
+        # Optimized: select_related loads patient in a single query
         return get_object_or_404(
             Problem.objects.select_related("patient"), pk=self.kwargs.get("pk", None)
         )
@@ -155,14 +153,6 @@ class ProblemConnections(
     template_name = "problem_connections.html"
     success_message = _("Medical problem, %s, updated!")
     success_url_name = "problem_connections"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["problem"] = self.object
-        return context
-
-    def get_object(self, queryset=None):
-        return get_object_or_404(Problem, id=self.kwargs["pk"])
 
     def form_valid(self, form):
         if self.kwargs["pk"] in form.cleaned_data["connections"]:
