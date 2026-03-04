@@ -1,25 +1,24 @@
 {% load i18n %}
 
 {% if user.is_authenticated %}
-    <div class="col-sm-1 col-md-1">
-        <form action="{% url 'patient_search' %}" method="get" class="navbar-form navbar-left" role="search">
-            <div class="input-group">
-                <label for="search-patient" class="sr-only">{% trans 'Patient' %}:</label>
-                <input type="text" id="search-patient" name="q" size="15" placeholder="{% trans 'Patient' %}" class="input-sm" title="{% trans 'Patient' %}" />
+    <form action="{% url 'patient_search' %}" method="get" class="navbar-form navbar-left" role="search">
+        <div class="input-group">
+            <label for="search-patient" class="sr-only">{% trans 'Patient' %}:</label>
+            <input type="text" id="search-patient" name="q" size="15" placeholder="{% trans 'Patient' %}" title="{% trans 'Patient' %}" />
 
-                <div class="input-group-btn">
-                    <button class="btn btn-default btn-sm" type="submit" title="{% trans 'Search' %}">
-                        <span class="fa fa-search"></span>
-                        <span class="sr-only">{% trans 'Search' %}</span>
-                    </button>
-                    <a href="{% url 'patient_add' %}" class="btn btn-default btn-sm" type="submit" title="{% trans 'New Patient' %}">
-                        <span class="fa fa-plus-square"></span>
-                        <span class="sr-only">{% trans 'New Patient' %}</span>
-                    </a>
-                </div>
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit" title="{% trans 'Search' %}">
+                    <span class="fa fa-search"></span>
+                    <span class="sr-only">{% trans 'Search' %}</span>
+                </button>
+                <a href="{% url 'patient_add' %}" class="btn btn-default" title="{% trans 'New Patient' %}">
+                    <span class="fa fa-plus-square"></span>
+                    <span class="sr-only">{% trans 'New Patient' %}</span>
+                </a>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
+
 
     <ul class="nav navbar-nav navbar-right navbar-user">
         <li class="dropdown">
@@ -29,7 +28,12 @@
                     <li><a href="{% url 'admin:index' %}"><span class="fa fa-gears"></span> {% trans 'Admin' %}</a></li>
                 {% endif %}
                 <li><a href="{% url 'admin:password_change' %}"><i class="fa fa-gear"></i> {% trans 'Password change' %}</a></li>
-                <li><a href="{% url 'openclinic_logout' %}"><i class="fa fa-power-off"></i> {% trans 'Logout' %}</a></li>
+                <li>
+                    <form id="logout-form" action="{% url 'openclinic_logout' %}" method="post" style="display:none;">
+                        {% csrf_token %}
+                    </form>
+                    <a href="#" onclick="document.getElementById('logout-form').submit(); return false;"><i class="fa fa-power-off"></i> {% trans 'Logout' %}</a>
+                </li>
             </ul>
         </li>
     </ul>

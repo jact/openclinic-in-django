@@ -1,128 +1,539 @@
+/* OpenClinic - Design Overrides
+ * Palette, typography, and spacing changes only
+ * Without modifying the original HTML
+ */
+
+/* ========================================
+   1. CSS CUSTOM PROPERTIES (for reference only)
+   ======================================== */
+
+:root {
+  /* HSL Palette for better control */
+  --h-primary: 192;
+  --s-primary: 52%;
+  --l-primary: 37%;
+
+  --color-primary: hsl(var(--h-primary), var(--s-primary), var(--l-primary));
+  --color-primary-dark: hsl(var(--h-primary), var(--s-primary), 30%);
+  --color-primary-light: hsl(var(--h-primary), var(--s-primary), 95%);
+
+  /* Neutrals */
+  --color-bg: hsl(210, 20%, 98%);
+  --color-surface: hsl(0, 0%, 100%);
+  --color-text: hsl(210, 24%, 16%);
+  --color-text-muted: hsl(210, 10%, 45%);
+  --color-border: hsl(210, 14%, 89%);
+
+  /* Semantic */
+  --color-success: hsl(145, 63%, 42%);
+  --color-error: hsl(5, 63%, 46%);
+  --color-warning: hsl(35, 90%, 50%);
+  --color-info: hsl(200, 65%, 45%);
+
+  /* Spacing (4px system: 1rem = 16px) */
+  --space-xs: 0.25rem; /* 4px */
+  --space-sm: 0.5rem; /* 8px */
+  --space-md: 1rem; /* 16px */
+  --space-lg: 1.5rem; /* 24px */
+  --space-xl: 2rem; /* 32px */
+
+  /* Depth */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+}
+
+/* ========================================
+   2. TYPOGRAPHY - System, more legible
+   ======================================== */
+
+/* Remove external fonts, use system fonts */
 @font-face {
-    font-family: 'Russo One';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Russo One'), local('RussoOne-Regular'), url('../fonts/Russo_One/RussoOne-Regular.ttf') format('truetype');
+  font-family: "Russo One";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local("Russo One"),
+    local("RussoOne-Regular"),
+    url("../fonts/Russo_One/RussoOne-Regular.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: 'Ruda';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Ruda'), local('Ruda-Regular'), url('../fonts/Ruda/Ruda-Regular.ttf') format('truetype');
+  font-family: "Ruda";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local("Ruda"),
+    local("Ruda-Regular"),
+    url("../fonts/Ruda/Ruda-Regular.ttf") format("truetype");
 }
 
-article p, article li {
-    font-family: 'Ruda', "lucida sans unicode", "Trebuchet MS", trebuchet, verdana, helvetica, arial, sans-serif;
+/* More legible body */
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 16px; /* Base 16px for accessibility */
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-header *, footer *, h1, h2, h3, h4 {
-    font-family: 'Russo One', "Trebuchet MS", serif;
+html {
+  position: relative;
+  min-height: 100%;
 }
 
-pre {
-    font-family: "Lucida Sans Typewriter", "Courier New", monospace;
+body {
+  margin-bottom: 220px; /* Sticky footer */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.navbar-brand {
-    background-image: url('../img/openclinic-1.png');
-    width: 291px;
-    height: 58px;
+/* System fonts for better performance and readability */
+article p,
+article li {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  font-family:
+    "Ruda", "lucida sans unicode", "Trebuchet MS", trebuchet, verdana,
+    helvetica, arial, sans-serif;
 }
 
-#clinic_info {
-    clear: both;
+footer *,
+h1,
+h2,
+h3,
+h4 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Russo One", system-ui, sans-serif;
+  letter-spacing: 0.025em;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+header * {
+  font-family: "Russo One", system-ui, sans-serif;
+}
+
+h1 { font-size: 2.25rem; margin-bottom: var(--space-lg); }
+h2 { font-size: 1.875rem; margin-bottom: var(--space-md); }
+h3 { font-size: 1.5rem; margin-bottom: var(--space-sm); }
+h4 { font-size: 1.25rem; margin-bottom: var(--space-xs); }
+
+/* ========================================
+   3. COLOR PALETTE
+   ======================================== */
+
+/* Footer - maintain original sticky footer */
+footer {
+  margin-top: auto;
+  width: 100%;
+  background: hsl(210, 24%, 16%); /* Dark neutral */
+  color: hsl(210, 20%, 95%);
+  padding: var(--space-xl) 0;
 }
 
 footer * {
-    text-align: center;
-}
-
-article {
-    margin-top: 1em;
-}
-
-footer {
-    background: #377CA8;
-    color: #fff;
-    padding-top: 2em;
+  text-align: center;
 }
 
 footer a {
-    background: inherit;
-    color: #F7EED4;
+  color: #bdc3c7;
 }
 
 footer a:hover {
-    color: #dadada;
+  color: #ffffff;
 }
 
-html, body {
-    background: #F0F5FA;
-    color: #000;
-    font-size: 12pt;
+/* Navbar brand with logo */
+.navbar-brand {
+  background-image: url("../img/openclinic-1.png");
+  width: 291px;
+  height: 58px;
+  text-indent: -9999px;
+  background-repeat: no-repeat;
 }
 
-#skip_navigation, hr {
-    display: none;
-    visibility: hidden;
+/* Navbar - Dark, clean, modern */
+header.navbar.navbar-inverse {
+  background-color: #1a1a1a !important;
+  background-image: none !important;
+  border-bottom: 1px solid #333 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  padding: 0;
+  border-top: none;
+  min-height: 66px;
 }
 
-.jumbotron {
-    background-color: transparent !important;
+/* ALL links inside the navbar must be white */
+header.navbar-inverse .navbar-nav > li > a {
+  color: #ffffff !important;
+  font-weight: 600;
+  padding: 22px 15px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  text-shadow: none !important;
+  line-height: 22px;
 }
 
-article nav .list-group-item a {
-    display: block;
+/* Icons and text inside links */
+header.navbar-inverse .navbar-nav > li > a .fa,
+header.navbar-inverse .navbar-nav > li > a .caret,
+header.navbar-inverse .navbar-nav > li > a span:not(.sr-only),
+header.navbar-inverse .navbar-nav > li > a i {
+  color: #ffffff !important;
 }
 
-article section form {
-    margin-bottom: 2em;
+/* Caret arrows */
+header.navbar-inverse .navbar-nav > li > a .caret {
+  border-top-color: #ffffff !important;
+  border-bottom-color: #ffffff !important;
 }
 
+/* Hover and active states */
+header.navbar-inverse .navbar-nav > li > a:hover,
+header.navbar-inverse .navbar-nav > li > a:focus,
+header.navbar-inverse .navbar-nav > .active > a,
+header.navbar-inverse .navbar-nav > .active > a:hover,
+header.navbar-inverse .navbar-nav > .active > a:focus,
+header.navbar-inverse .navbar-nav > .open > a,
+header.navbar-inverse .navbar-nav > .open > a:hover,
+header.navbar-inverse .navbar-nav > .open > a:focus {
+  color: #80d4f0 !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Right-side user dropdown + links */
+header.navbar-inverse .navbar-right > li > a,
+header.navbar-inverse .navbar-right > li > a i,
+header.navbar-inverse .navbar-right > li > a .caret {
+  color: #ffffff !important;
+  border-top-color: #ffffff !important;
+  border-bottom-color: #ffffff !important;
+}
+
+/* Navbar brand logo */
+header.navbar-inverse .navbar-brand {
+  display: flex !important;
+  align-items: center;
+  height: 66px;
+  padding: 4px 15px;
+}
+
+/* Toggle button for mobile */
+header.navbar-inverse .navbar-toggle {
+  border-color: #555 !important;
+}
+header.navbar-inverse .navbar-toggle .icon-bar {
+  background-color: #ffffff !important;
+}
+
+/* Search bar in navbar */
+header.navbar-inverse .navbar-form {
+  border: none;
+  box-shadow: none;
+  margin-top: 17px;
+  margin-bottom: 17px;
+}
+
+header.navbar-inverse .navbar-form input#search-patient {
+  background: #ffffff;
+  border: 1px solid #555;
+  border-radius: 4px 0 0 4px;
+  height: 30px;
+  padding: 5px 8px;
+  width: 150px;
+  font-size: 13px;
+  color: #333;
+}
+
+header.navbar-inverse .navbar-form .input-group-btn .btn {
+  height: 30px;
+  padding: 4px 10px;
+  border-radius: 0;
+  border: 1px solid #555;
+  background: #f0f0f0;
+  color: #333;
+  font-size: 13px;
+}
+
+header.navbar-inverse .navbar-form .input-group-btn a.btn:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+
+/* Dropdown menus - Clean themed look */
+.dropdown-menu {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-xs) 0;
+  margin-top: calc(var(--space-xs) + 2px);
+}
+
+.dropdown-menu > li > a {
+  padding: var(--space-sm) var(--space-md);
+  color: var(--color-text);
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.dropdown-menu > li > a:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+/* Labels - better contrast and spacing */
+.label {
+  padding: 0.2rem 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.025em;
+  border-radius: var(--radius-sm);
+}
+
+.label-danger {
+  background-color: var(--color-error);
+}
+
+.label-success {
+  background-color: var(--color-success);
+}
+
+.label-warning {
+  background-color: var(--color-warning);
+  color: hsl(210, 24%, 10%); /* Ensure readability on yellow */
+}
+
+.label-info {
+  background-color: var(--color-info);
+}
+
+/* ========================================
+   4. SPACING AND LAYOUT
+   ======================================== */
+
+article {
+  margin-top: 1.5em;
+}
+
+article p,
+article li {
+  margin-bottom: 1em;
+}
+
+/* Forms */
 .form-md {
-    width: 400px;
+  max-width: 500px;
 }
 
-.endless_container {
-    margin: 1em 0 2em;
+.form-group {
+  margin-bottom: var(--space-lg);
 }
 
+.form-control {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  padding: 0.625rem 0.75rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+  outline: none;
+}
+
+/* Patient actions - in rows and centered */
 .patient-actions {
-    list-style-type: none;
-    font-size: 140%;
-    margin: 0;
-    padding: 0;
+  list-style-type: none;
+  font-size: 1rem;
+  margin: var(--space-md) 0;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
 }
 
 .patient-actions li {
-    display: inline;
-    padding: 0 10px;
+  display: inline-block;
+  padding: 0;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-    position: relative;
-    min-height: 100%;
-}
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 220px;
-}
-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 220px;
-}
-
-
-/* Custom page CSS
--------------------------------------------------- */
-/* Not required for template or sticky footer method. */
-
+/* Main container */
 body > .container {
-    padding: 60px 15px 0;
+  padding: calc(var(--space-xl) * 2) var(--space-md) 0;
+  max-width: 1000px; /* Improve readability of long lines */
+}
+
+/* ========================================
+   5. IMPROVED COMPONENTS
+   ======================================== */
+
+/* Panels */
+.panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-lg);
+  overflow: hidden;
+}
+
+.panel-heading {
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-sm) var(--space-md);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* Tables */
+.table {
+  font-size: 0.875rem;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  margin-bottom: var(--space-lg);
+  border: 1px solid var(--color-border);
+}
+
+.table th {
+  background: var(--color-bg);
+  padding: var(--space-sm) var(--space-md);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.table td {
+  padding: var(--space-sm) var(--space-md);
+  vertical-align: middle;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table-hover tbody tr:hover {
+  background-color: var(--color-primary-light);
+}
+
+.panel-body {
+  padding: var(--space-md);
+}
+
+/* Buttons */
+.btn {
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Alerts */
+.alert {
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  border: 1px solid transparent;
+}
+
+.alert-success {
+  background-color: hsl(145, 63%, 96%);
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.alert-danger {
+  background-color: hsl(5, 63%, 97%);
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+/* ========================================
+   6. ACCESSIBILITY IMPROVEMENTS
+   ======================================== */
+
+/* Focus states */
+a:focus,
+.btn:focus,
+.form-control:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ========================================
+   7. RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+
+  .patient-actions {
+    font-size: 100%;
+  }
+
+  .patient-actions li {
+    display: inline-block;
+    padding: 5px 10px;
+  }
+}
+
+/* ========================================
+   8. PRINT
+   ======================================== */
+
+@media print {
+  footer {
+    display: none;
+  }
+
+  article {
+    margin-top: 0;
+  }
 }
