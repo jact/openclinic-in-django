@@ -25,6 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     libc-dev \
     libpq-dev \
+    gettext \
     && rm -rf /var/lib/apt/lists/*
 
 # Set Python environment
@@ -46,6 +47,7 @@ RUN pip install --target=/install .
 # Create static directory and collect static files (for production)
 RUN mkdir -p /src/staticcollected && \
     DJANGO_SETTINGS_MODULE=openclinic.settings.production \
+    python manage.py compilemessages && \
     python manage.py collectstatic --noinput \
     --settings=openclinic.settings.production
 

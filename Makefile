@@ -65,7 +65,7 @@ install-all:
 	pip install -e ".[development,testing,linting,security]"
 
 # Development
-dev:
+dev: compilemessages
 	python manage.py runserver --settings=openclinic.settings.development
 
 # Testing
@@ -202,7 +202,6 @@ logs-security:
 	else \
 		echo "Security log file not found."; \
 	fi
-# ============================================================
 # CI/CD Targets (Local Testing)
 # ============================================================
 
