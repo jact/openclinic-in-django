@@ -118,10 +118,10 @@ collectstatic:
 
 # Internationalization
 makemessages:
-	python manage.py makemessages --settings=openclinic.settings.development --locale=es
+	python manage.py makemessages --settings=openclinic.settings.development
 
 compilemessages:
-	python manage.py compilemessages --settings=openclinic.settings.development --locale=es
+	python manage.py compilemessages --settings=openclinic.settings.development
 
 # Cleaning
 clean:
