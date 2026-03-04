@@ -356,6 +356,64 @@ article li {
   outline: none;
 }
 
+/* Fieldset — Card-like sections in forms */
+fieldset {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0;
+  margin: 0 0 var(--space-lg) 0;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+fieldset legend {
+  background-color: var(--color-bg);
+  border-bottom: 2px solid var(--color-primary);
+  padding: var(--space-sm) var(--space-md);
+  margin: 0;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  letter-spacing: 0.02em;
+  float: none;
+}
+
+fieldset .form-group {
+  padding: var(--space-sm) var(--space-md);
+  margin: 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+fieldset .form-group:last-child {
+  border-bottom: none;
+}
+
+fieldset .form-group label,
+fieldset .form-group .control-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+fieldset .form-group .form-control {
+  max-width: 500px;
+}
+
+fieldset .form-group textarea.form-control {
+  max-width: 100%;
+  min-height: 80px;
+}
+
+/* Form submit actions */
+.form-actions {
+  padding: var(--space-md) 0;
+}
+
 /* Patient actions - in rows and centered */
 .patient-actions {
   list-style-type: none;
@@ -406,7 +464,7 @@ body > .container {
    5. IMPROVED COMPONENTS
    ======================================== */
 
-/* Panels */
+/* Panels — Modern data card design */
 .panel {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -418,10 +476,53 @@ body > .container {
 
 .panel-heading {
   background-color: var(--color-bg);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 2px solid var(--color-primary);
   padding: var(--space-sm) var(--space-md);
   font-weight: 600;
   color: var(--color-text);
+}
+
+.panel-title {
+  font-size: 1rem;
+  margin: 0;
+  letter-spacing: 0.02em;
+  color: var(--color-primary-dark);
+}
+
+.panel-body {
+  padding: 0;
+}
+
+/* Key-value rows inside panel body */
+.panel-body > p {
+  margin: 0;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.panel-body > p:last-child {
+  border-bottom: none;
+}
+
+.panel-body > p:nth-child(even) {
+  background-color: var(--color-bg);
+}
+
+.panel-body > p > strong {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+/* Panel footer — clean action bar */
+.panel-footer {
+  background-color: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-sm) var(--space-md);
 }
 
 /* Tables */
@@ -460,10 +561,6 @@ body > .container {
 
 .table-hover tbody tr:hover {
   background-color: var(--color-primary-light);
-}
-
-.panel-body {
-  padding: var(--space-md);
 }
 
 /* Buttons */
