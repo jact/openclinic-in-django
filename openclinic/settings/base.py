@@ -20,6 +20,8 @@ __license__ = "GPLv3"
 
 import os
 
+from django.utils.translation import gettext_lazy as _
+
 from .endless_conf import *
 from .openclinic_conf import *
 
@@ -51,6 +53,12 @@ LANGUAGE_CODE = "en-us"
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+LANGUAGES = (
+    ("en", _("English")),
+    ("es", _("Spanish")),
+    ("fr", _("French")),
+)
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 
